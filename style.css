@@ -104,13 +104,21 @@ ul {
 
 /* Hero Section */
 .hero {
-    height: 100vh;
-    /* Fallback */
-    min-height: 100dvh;
+    min-height: 100vh;
     display: flex;
     align-items: center;
+    justify-content: center;
+    padding-top: 80px;
     position: relative;
     overflow: hidden;
+}
+
+.hero-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 4rem;
+    width: 100%;
 }
 
 /* Background Glow Effect */
@@ -127,7 +135,64 @@ ul {
 }
 
 .hero-content {
-    max-width: 800px;
+    flex: 1;
+    max-width: 600px;
+}
+
+.hero-image {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+}
+
+.avatar-img {
+    width: 320px;
+    height: 320px;
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: 0 0 40px rgba(0, 173, 216, 0.3);
+    border: 4px solid rgba(255, 255, 255, 0.1);
+    animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(0px);
+    }
+
+    50% {
+        transform: translateY(-20px);
+    }
+
+    100% {
+        transform: translateY(0px);
+    }
+}
+
+@media (max-width: 968px) {
+    .hero-container {
+        flex-direction: column-reverse;
+        text-align: center;
+        gap: 3rem;
+    }
+
+    .hero-content {
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .cta-buttons {
+        justify-content: center;
+    }
+
+    .avatar-img {
+        width: 240px;
+        height: 240px;
+    }
 }
 
 .subtitle {
@@ -260,12 +325,39 @@ ul {
     background: var(--bg-secondary);
     border: 1px solid var(--glass-border);
     border-radius: 16px;
-    padding: 2.5rem;
+    overflow: hidden;
+    /* Changed from padding to overflow hidden for image */
     transition: all var(--transition-speed);
     position: relative;
-    overflow: hidden;
     display: flex;
     flex-direction: column;
+    height: 100%;
+}
+
+.project-image-container {
+    width: 100%;
+    height: 220px;
+    overflow: hidden;
+    position: relative;
+    border-bottom: 1px solid var(--glass-border);
+}
+
+.project-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.project-card:hover .project-img {
+    transform: scale(1.1);
+}
+
+.project-content {
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
 }
 
 .project-card:hover {
