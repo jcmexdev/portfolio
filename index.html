@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Senior Software Engineer Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+        integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body>
+    <header class="header">
+        <nav class="navbar">
+            <a href="#" class="logo">Sr<span class="highlight">Engineer</span><span class="dot">.</span></a>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-links" id="nav-links">
+                <li><a href="#hero" data-i18n="nav_home">Home</a></li>
+                <li><a href="#expertise" data-i18n="nav_expertise">Expertise</a></li>
+                <li><a href="#experience" data-i18n="nav_experience">Experience</a></li>
+                <li><a href="#projects" data-i18n="nav_projects">Projects</a></li>
+                <li><a href="#contact" data-i18n="nav_contact">Contact</a></li>
+                <li>
+                    <div class="lang-dropdown">
+                        <button id="lang-btn" class="lang-btn" aria-label="Select Language">
+                            <span id="current-flag">🇺🇸</span> <svg class="arrow-icon"
+                                xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="M6 9l6 6 6-6" />
+                            </svg>
+                        </button>
+                        <ul class="lang-menu" id="lang-menu">
+                            <li data-lang="en">🇺🇸 English</li>
+                            <li data-lang="es">🇲🇽 Español</li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="hero" class="hero">
+            <div class="container hero-container">
+                <div class="hero-content">
+                    <span class="subtitle" data-i18n="hero_subtitle">Senior Software Engineer</span>
+                    <h1 class="title" data-i18n="hero_title">Architecting <span class="highlight">Resilient</span>
+                        Distributed Systems</h1>
+                    <p class="description" data-i18n="hero_desc">
+                        Specialized in designing and implementing high-concurrency systems with <strong>Go</strong>.
+                        Transforming complex requirements into scalable, efficient, and maintainable architectures.
+                    </p>
+                    <div class="cta-buttons">
+                        <a href="#projects" class="btn primary" data-i18n="btn_projects">View Architectures</a>
+                        <a href="#contact" class="btn secondary" data-i18n="btn_contact">Let's Talk</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="expertise" class="section">
+            <div class="container">
+                <h2 class="section-title" data-i18n="sect_expertise">Core Expertise</h2>
+                <div class="skills-grid">
+                    <div class="skill-card">
+                        <i class="fas fa-cubes"></i>
+                        <h3 data-i18n="exp_system_design">System Design</h3>
+                        <p data-i18n="exp_system_design_desc">Microservices, Event-Driven Architecture, CQRS.</p>
+                    </div>
+                    <div class="skill-card">
+                        <i class="fab fa-golang"></i>
+                        <h3 data-i18n="exp_golang">Golang Expert</h3>
+                        <p data-i18n="exp_golang_desc">Concurrency patterns, performance tuning, memory management.</p>
+                    </div>
+                    <div class="skill-card">
+                        <i class="fas fa-server"></i>
+                        <h3 data-i18n="exp_infra">Infrastructure</h3>
+                        <p data-i18n="exp_infra_desc">Kubernetes, Docker, Terraform, AWS/GCP.</p>
+                    </div>
+                    <div class="skill-card">
+                        <i class="fas fa-database"></i>
+                        <h3 data-i18n="exp_data">Data Consistency</h3>
+                        <p data-i18n="exp_data_desc">Distributed Transactions (Saga), PostgreSQL, Redis, Kafka.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Experience Section (Timeline) -->
+        <section id="experience" class="section">
+            <div class="container">
+                <h2 class="section-title" data-i18n="sect_experience">Trayectoria Profesional</h2>
+                <div class="timeline">
+
+                    <!-- Item 1: Mercado Libre -->
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-date" data-i18n="date_mercadolibre">May 2025 - Presente</div>
+                        <div class="timeline-content">
+                            <h3 data-i18n="role_mercadolibre">Senior Software Engineer</h3>
+                            <span class="company">Mercado Libre</span>
+                            <p class="timeline-desc" data-i18n="desc_mercadolibre">
+                                Optimización crítica en sistemas de pagos de alto volumen ($400M MXN diarios).
+                                Reduje el tiempo de ejecución en un <strong>75%</strong> y mejoré la observabilidad de
+                                transacciones distribuidas.
+                            </p>
+                            <div class="tech-tags">
+                                <span>Go</span>
+                                <span>High Performance</span>
+                                <span>Fintech</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Item 2: DEUNA -->
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-date" data-i18n="date_deuna">Abr 2024 - May 2025</div>
+                        <div class="timeline-content">
+                            <h3 data-i18n="role_deuna">Technical Lead</h3>
+                            <span class="company">DEUNA</span>
+                            <p class="timeline-desc" data-i18n="desc_deuna">
+                                Lideré la implementación de pagos asíncronos y secuenciales para asegurar consistencia.
+                                Resolví integraciones críticas con Apple Pay y Kushki, y automaticé entornos de
+                                desarrollo con Docker.
+                            </p>
+                            <div class="tech-tags">
+                                <span>Go</span>
+                                <span>Payments</span>
+                                <span>Leadership</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Item 3: 99minutos (Tech Lead) -->
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-date" data-i18n="date_99_lead">Ene 2023 - Abr 2024</div>
+                        <div class="timeline-content">
+                            <h3 data-i18n="role_99_lead">Technical Lead</h3>
+                            <span class="company">99minutos.com</span>
+                            <p class="timeline-desc" data-i18n="desc_99_lead">
+                                Gestión estratégica y crecimiento del equipo técnico. Diseño de arquitectura en GCP
+                                enfocada en escalabilidad logística.
+                            </p>
+                            <div class="tech-tags">
+                                <span>GCP</span>
+                                <span>Team Management</span>
+                                <span>Strategy</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Item 4: 99minutos (Senior) -->
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-date" data-i18n="date_99_senior">Ago 2021 - Mar 2023</div>
+                        <div class="timeline-content">
+                            <h3 data-i18n="role_99_senior">Senior Software Engineer</h3>
+                            <span class="company">99minutos.com</span>
+                            <p class="timeline-desc" data-i18n="desc_99_senior">
+                                Desarrollo de servicios core para logística de última milla. Implementación de
+                                microservicios robustos en Go.
+                            </p>
+                            <div class="tech-tags">
+                                <span>Go</span>
+                                <span>Microservices</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <section id="projects" class="section">
+            <div class="container">
+                <h2 class="section-title" data-i18n="sect_projects">Arquitectura & Proyectos</h2>
+                <p class="section-subtitle" data-i18n="sect_projects_sub">Implementaciones de referencia y resoluciones
+                    de problemas complejos.</p>
+                <div class="projects-grid">
+
+                    <!-- Feature Project: Saga Pattern -->
+                    <article class="project-card featured">
+                        <div class="project-content">
+                            <div class="project-header">
+                                <span class="project-tag">Distributed Systems</span>
+                                <span class="project-tag">Go</span>
+                            </div>
+                            <h3 class="project-title" data-i18n="proj_saga_title">Orchestration-Based Saga Pattern</h3>
+                            <p class="project-desc" data-i18n="proj_saga_desc">
+                                Diseño e implementación de un orquestador para manejar transacciones distribuidas en un
+                                entorno de microservicios financieros.
+                                <strong>Challenge:</strong> Asegurar consistencia eventual sin bloqueo de recursos en
+                                bases de datos distribuidas.
+                            </p>
+                            <div class="tech-stack-mini">
+                                <span><i class="fas fa-check"></i> RabbitMQ Streams</span>
+                                <span><i class="fas fa-check"></i> Idempotency Keys</span>
+                                <span><i class="fas fa-check"></i> Failover Recovery</span>
+                            </div>
+                            <div class="project-links">
+                                <a href="#" class="btn-link"><i class="fab fa-github"></i> Ver Arquitectura</a>
+                                <a href="#" class="btn-link"><i class="fas fa-book"></i> Case Study</a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Feature Project: High Performance API -->
+                    <article class="project-card">
+                        <div class="project-content">
+                            <div class="project-header">
+                                <span class="project-tag">High Performance</span>
+                            </div>
+                            <h3 class="project-title" data-i18n="proj_payment_title">High-Throughput Payment Gateway
+                            </h3>
+                            <p class="project-desc" data-i18n="proj_payment_desc">
+                                Gateway de pagos capaz de manejar <strong>10k+ RPS</strong> con latencia sub-100ms.
+                                Implementado con Go routines y optimización de garbage collection.
+                            </p>
+                            <div class="tech-stack-mini">
+                                <span>gRPC</span>
+                                <span>Redis Cluster</span>
+                                <span>Prometheus</span>
+                            </div>
+                            <div class="project-links">
+                                <a href="#" class="btn-link"><i class="fab fa-github"></i> Código</a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Feature Project: Scaling -->
+                    <article class="project-card">
+                        <div class="project-content">
+                            <div class="project-header">
+                                <span class="project-tag">DevOps</span>
+                            </div>
+                            <h3 class="project-title" data-i18n="proj_k8s_title">K8s Autoscaler Controller</h3>
+                            <p class="project-desc" data-i18n="proj_k8s_desc">
+                                Custom Controller para Kubernetes que escala pods basado en métricas de latencia de cola
+                                personalizadas, reduciendo costos de infraestructura en un 30%.
+                            </p>
+                            <div class="tech-stack-mini">
+                                <span>Go Client-go</span>
+                                <span>Kubernetes API</span>
+                            </div>
+                            <div class="project-links">
+                                <a href="#" class="btn-link"><i class="fab fa-github"></i> Código</a>
+                            </div>
+                        </div>
+                    </article>
+
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="section">
+            <div class="container tac">
+                <h2 class="section-title" data-i18n="sect_contact">Let's Talk Architecture?</h2>
+                <p data-i18n="contact_desc">Available for technical leadership roles and distributed systems consulting.
+                </p>
+                <div class="social-links">
+                    <a href="https://www.linkedin.com/in/juan-carlos-garcia-esquivel" title="LinkedIn"><i
+                            class="fab fa-linkedin"></i></a>
+                    <a href="https://github.com/jcmexdev" title="GitHub"><i class="fab fa-github"></i></a>
+                    <a href="mailto:email@example.com" title="Email"><i class="fas fa-envelope"></i></a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p data-i18n="footer_text">&copy; 2024 Senior Software Engineer Portfolio. Built with Go patterns in mind.
+            </p>
+        </div>
+    </footer>
+    <script src="script.js"></script>
+</body>
+
+</html>
