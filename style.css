@@ -286,11 +286,50 @@ ul {
 }
 
 .skill-card {
-    background: var(--glass-bg);
-    border: 1px solid var(--glass-border);
-    padding: 2rem;
-    border-radius: 12px;
-    transition: transform var(--transition-speed);
+    background: rgba(26, 26, 26, 0.4);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 2.5rem 2rem;
+    border-radius: 16px;
+    transition: all 0.4s ease;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    /* Critical for containing reflection */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.skill-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, var(--accent-color), var(--accent-secondary));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s ease;
+}
+
+/* Subtle gradient overlay on hover (Reflection) */
+.skill-card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, transparent 40%, rgba(255, 255, 255, 0.05) 50%, transparent 60%);
+    transform: translateX(-100%);
+    transition: transform 0.6s;
+}
+
+.skill-card:hover::after {
+    transform: translateX(100%);
 }
 
 .skill-card:hover {
@@ -298,10 +337,55 @@ ul {
     border-color: var(--accent-color);
 }
 
+.skill-card:hover::before {
+    transform: scaleX(1);
+}
+
+.icon-box {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.03);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem auto;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.4s ease;
+    animation: floatIcon 4s ease-in-out infinite;
+}
+
+@keyframes floatIcon {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
 .skill-card i {
-    font-size: 2.5rem;
+    font-size: 2rem;
+    color: var(--text-secondary);
+    transition: all 0.4s ease;
+    margin-bottom: 0;
+}
+
+.skill-card:hover .icon-box {
+    background: rgba(0, 173, 216, 0.1);
+    border-color: var(--accent-color);
+    box-shadow: 0 0 20px rgba(0, 173, 216, 0.4);
+    animation-play-state: paused;
+    /* Pause float on hover */
+    transform: scale(1.1);
+}
+
+.skill-card:hover i {
     color: var(--accent-color);
-    margin-bottom: 1.5rem;
+    transform: rotateY(180deg);
 }
 
 .skill-card h3 {
