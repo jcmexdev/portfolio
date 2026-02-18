@@ -46,6 +46,11 @@
                         </ul>
                     </div>
                 </li>
+                <li>
+                    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                        <span class="toggle-icon">🌙</span>
+                    </button>
+                </li>
             </ul>
         </nav>
     </header>
@@ -74,6 +79,43 @@
                         <div class="floating-icon icon-go"><i class="fa-brands fa-golang"></i></div>
                         <div class="floating-icon icon-cloud"><i class="fa-solid fa-cloud"></i></div>
                         <img src="assets/images/avatar.png" alt="Senior Software Engineer Avatar" class="avatar-img">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Impact Metrics Section -->
+        <section id="metrics" class="metrics-section">
+            <div class="container">
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <div class="metric-value">
+                            <span class="metric-number" data-target="75" data-suffix="%">0</span>
+                        </div>
+                        <div class="metric-label">Latency Reduction</div>
+                        <div class="metric-sub">Payment systems at Mercado Libre</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value">
+                            <span class="metric-prefix">$</span><span class="metric-number" data-target="400"
+                                data-suffix="M">0</span>
+                        </div>
+                        <div class="metric-label">MXN Processed Daily</div>
+                        <div class="metric-sub">High-volume transaction systems</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value">
+                            <span class="metric-number" data-target="10" data-suffix="k+">0</span>
+                        </div>
+                        <div class="metric-label">Requests Per Second</div>
+                        <div class="metric-sub">Peak throughput handled</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value">
+                            <span class="metric-number" data-target="5" data-suffix="+">0</span>
+                        </div>
+                        <div class="metric-label">Years of Experience</div>
+                        <div class="metric-sub">Senior-level engineering</div>
                     </div>
                 </div>
             </div>
@@ -490,6 +532,26 @@
 
     <script src="script.js"></script>
     <script>
+        // ── Theme Toggle ───────────────────────────────────────────
+        const themeToggle = document.getElementById('themeToggle');
+        const toggleIcon = themeToggle.querySelector('.toggle-icon');
+
+        function applyTheme(isLight) {
+            document.body.classList.toggle('light-mode', isLight);
+            toggleIcon.textContent = isLight ? '☀️' : '🌙';
+        }
+
+        // Load saved preference (or system preference)
+        const savedTheme = localStorage.getItem('theme');
+        const prefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
+        applyTheme(savedTheme ? savedTheme === 'light' : prefersLight);
+
+        themeToggle.addEventListener('click', () => {
+            const isLight = !document.body.classList.contains('light-mode');
+            applyTheme(isLight);
+            localStorage.setItem('theme', isLight ? 'light' : 'dark');
+        });
+
         // ── Custom Cursor ──────────────────────────────────────────
         const dot = document.getElementById('cursorDot');
         const outline = document.getElementById('cursorOutline');
@@ -592,6 +654,37 @@ Currently at <span class="info">Mercado Libre</span> optimizing payment systems 
         overlay.addEventListener('click', e => { if (e.target === overlay) closeTerminal(); });
         document.addEventListener('keydown', e => { if (e.key === 'Escape') closeTerminal(); });
         input.addEventListener('keydown', handleInput);
+
+        // ── Animated Counters ──────────────────────────────────────
+        function easeOutQuart(t) { return 1 - Math.pow(1 - t, 4); }
+
+        function animateCounter(el) {
+            const target = parseInt(el.dataset.target, 10);
+            const suffix = el.dataset.suffix || '';
+            const duration = 1800;
+            const start = performance.now();
+
+            function step(now) {
+                const elapsed = now - start;
+                const progress = Math.min(elapsed / duration, 1);
+                const value = Math.round(easeOutQuart(progress) * target);
+                el.textContent = value + suffix;
+                if (progress < 1) requestAnimationFrame(step);
+                else el.closest('.metric-card').classList.add('counted');
+            }
+            requestAnimationFrame(step);
+        }
+
+        const metricObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) return;
+                entry.target.querySelectorAll('.metric-number').forEach(animateCounter);
+                metricObserver.unobserve(entry.target);
+            });
+        }, { threshold: 0.4 });
+
+        const metricsSection = document.getElementById('metrics');
+        if (metricsSection) metricObserver.observe(metricsSection);
     </script>
 </body>
 
