@@ -377,6 +377,35 @@
 
                 </div>
             </div>
+            </div>
+            </div>
+        </section>
+
+        <!-- Engineering Philosophy Section -->
+        <section id="philosophy" class="section alt-bg">
+            <div class="container">
+                <h2 class="section-title" data-i18n="sect_philosophy">Engineering Philosophy</h2>
+                <div class="philosophy-grid">
+                    <div class="philosophy-card">
+                        <div class="philo-icon"><i class="fas fa-drafting-compass"></i></div>
+                        <h3 data-i18n="philo_simple_title">Simplicity Over Complexity</h3>
+                        <p data-i18n="philo_simple_desc">Writing code that is easy to read, test, and maintain is harder
+                            than writing complex code. I strive for elegant simplicity.</p>
+                    </div>
+                    <div class="philosophy-card">
+                        <div class="philo-icon"><i class="fas fa-network-wired"></i></div>
+                        <h3 data-i18n="philo_scale_title">Built for Scale</h3>
+                        <p data-i18n="philo_scale_desc">Systems should be designed to handle growth gracefully. I focus
+                            on stateless architectures and idempotency.</p>
+                    </div>
+                    <div class="philosophy-card">
+                        <div class="philo-icon"><i class="fas fa-users-cog"></i></div>
+                        <h3 data-i18n="philo_mentor_title">Mentorship & Culture</h3>
+                        <p data-i18n="philo_mentor_desc">Technology is built by people. I believe in fostering a culture
+                            of knowledge sharing and psychological safety.</p>
+                    </div>
+                </div>
+            </div>
         </section>
 
         <section id="contact" class="section">
@@ -395,11 +424,175 @@
     </main>
 
     <footer class="footer">
-        <div class="container">
-            <p data-i18n="footer_text">Made with ❤️ by jcmexdev</p>
+        <div class="container footer-container">
+            <div class="footer-col">
+                <a href="#" class="logo footer-logo">Sr<span class="highlight">Engineer</span><span
+                        class="dot">.</span></a>
+                <p class="footer-desc" data-i18n="footer_desc">
+                    Senior Software Engineer focused on distributed systems and high-concurrency architectures.
+                </p>
+            </div>
+            <div class="footer-col">
+                <h4 data-i18n="footer_links">Quick Links</h4>
+                <ul class="footer-links">
+                    <li><a href="#hero" data-i18n="nav_home">Home</a></li>
+                    <li><a href="#projects" data-i18n="nav_projects">Projects</a></li>
+                    <li><a href="#contact" data-i18n="nav_contact">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4 data-i18n="footer_social">Connect</h4>
+                <div class="social-links footer-socials">
+                    <a href="https://www.linkedin.com/in/juan-carlos-garcia-esquivel" title="LinkedIn"><i
+                            class="fab fa-linkedin"></i></a>
+                    <a href="https://github.com/jcmexdev" title="GitHub"><i class="fab fa-github"></i></a>
+                    <a href="mailto:email@example.com" title="Email"><i class="fas fa-envelope"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p data-i18n="footer_copy">&copy; 2026 Juan Carlos Garcia. All rights reserved.</p>
         </div>
     </footer>
+    <!-- Custom Cursor -->
+    <div class="cursor-dot" id="cursorDot"></div>
+    <div class="cursor-outline" id="cursorOutline"></div>
+
+    <!-- Terminal Trigger Button -->
+    <div class="terminal-trigger" id="terminalTrigger" title="Open Terminal">
+        <i class="fas fa-terminal"></i>
+        <span class="tt">&gt;_ open terminal</span>
+    </div>
+
+    <!-- Terminal Overlay & Window -->
+    <div class="terminal-overlay" id="terminalOverlay">
+        <div class="terminal-window">
+            <div class="terminal-header">
+                <div class="terminal-buttons">
+                    <span class="close-btn" id="terminalClose"></span>
+                    <span class="minimize-btn"></span>
+                    <span class="maximize-btn"></span>
+                </div>
+                <span class="terminal-title">jcmexdev — portfolio — bash</span>
+            </div>
+            <div class="terminal-body" id="terminalBody">
+                <div class="output system">Welcome to jcmexdev's portfolio terminal v2.0</div>
+                <div class="output system">Type <span class="cmd">help</span> to see available commands.</div>
+                <br>
+                <div class="input-line">
+                    <span class="prompt">jcmexdev@portfolio:~$</span>
+                    <input type="text" id="terminalInput" autofocus autocomplete="off" spellcheck="false"
+                        placeholder="type a command...">
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="script.js"></script>
+    <script>
+        // ── Custom Cursor ──────────────────────────────────────────
+        const dot = document.getElementById('cursorDot');
+        const outline = document.getElementById('cursorOutline');
+        if (window.matchMedia('(pointer: fine)').matches) {
+            document.body.style.cursor = 'none';
+            let outlineX = 0, outlineY = 0;
+            window.addEventListener('mousemove', e => {
+                dot.style.left = e.clientX + 'px';
+                dot.style.top = e.clientY + 'px';
+                outlineX += (e.clientX - outlineX) * 0.15;
+                outlineY += (e.clientY - outlineY) * 0.15;
+                outline.style.left = outlineX + 'px';
+                outline.style.top = outlineY + 'px';
+            });
+            document.querySelectorAll('a, button, .skill-card, .project-card, .philosophy-card, .terminal-trigger').forEach(el => {
+                el.addEventListener('mouseenter', () => outline.classList.add('hover'));
+                el.addEventListener('mouseleave', () => outline.classList.remove('hover'));
+            });
+        } else {
+            dot.style.display = 'none';
+            outline.style.display = 'none';
+        }
+
+        // ── Terminal Logic ─────────────────────────────────────────
+        const trigger = document.getElementById('terminalTrigger');
+        const overlay = document.getElementById('terminalOverlay');
+        const closeBtn = document.getElementById('terminalClose');
+        const body = document.getElementById('terminalBody');
+        const input = document.getElementById('terminalInput');
+
+        const commands = {
+            help: () => `<span class="info">Available commands:</span><br>
+&nbsp; <span class="cmd">about</span>      — Who am I<br>
+&nbsp; <span class="cmd">skills</span>     — Core tech stack<br>
+&nbsp; <span class="cmd">experience</span> — Work history<br>
+&nbsp; <span class="cmd">contact</span>    — How to reach me<br>
+&nbsp; <span class="cmd">clear</span>      — Clear terminal`,
+            about: () => `<span class="success">Juan Carlos Garcia</span> — Senior Software Engineer<br>
+Specialized in distributed systems, high-concurrency backends and event-driven architectures.<br>
+Currently at <span class="info">Mercado Libre</span> optimizing payment systems at scale.`,
+            skills: () => `<span class="info">Core Stack:</span><br>
+&nbsp; ⚡ <span class="success">Go</span> — Primary language (concurrency, performance)<br>
+&nbsp; 🐇 <span class="success">RabbitMQ</span> — Event-driven messaging<br>
+&nbsp; ☁️  <span class="success">AWS</span> — Lambda, ECS, EC2<br>
+&nbsp; 🐘 <span class="success">PostgreSQL</span> + <span class="success">Redis</span> — Data layer<br>
+&nbsp; 🐳 <span class="success">Docker</span> + CI/CD pipelines`,
+            experience: () => `<span class="info">Work History:</span><br>
+&nbsp; 2025–now  <span class="success">Mercado Libre</span> — Senior SWE<br>
+&nbsp; 2024–2025 <span class="success">DEUNA</span> — Technical Lead<br>
+&nbsp; 2023–2024 <span class="success">99minutos</span> — Technical Lead<br>
+&nbsp; 2021–2023 <span class="success">99minutos</span> — Senior SWE`,
+            contact: () => `<span class="info">Reach me at:</span><br>
+&nbsp; 🔗 <a href="https://www.linkedin.com/in/juan-carlos-garcia-esquivel" target="_blank" class="info">LinkedIn</a><br>
+&nbsp; 🐙 <a href="https://github.com/jcmexdev" target="_blank" class="info">GitHub</a><br>
+&nbsp; 📧 <a href="mailto:email@example.com" class="info">email@example.com</a>`,
+            clear: () => { clearTerminal(); return null; }
+        };
+
+        function openTerminal() { overlay.classList.add('active'); setTimeout(() => input.focus(), 300); }
+        function closeTerminal() { overlay.classList.remove('active'); }
+
+        function clearTerminal() {
+            body.innerHTML = `<div class="input-line">
+                <span class="prompt">jcmexdev@portfolio:~$</span>
+                <input type="text" id="terminalInput" autofocus autocomplete="off" spellcheck="false" placeholder="type a command...">
+            </div>`;
+            document.getElementById('terminalInput').addEventListener('keydown', handleInput);
+            document.getElementById('terminalInput').focus();
+        }
+
+        function printOutput(html) {
+            const inputLine = body.querySelector('.input-line');
+            const out = document.createElement('div');
+            out.className = 'output';
+            out.innerHTML = html;
+            body.insertBefore(out, inputLine);
+            body.scrollTop = body.scrollHeight;
+        }
+
+        function handleInput(e) {
+            if (e.key !== 'Enter') return;
+            const cmd = e.target.value.trim().toLowerCase();
+            if (!cmd) return;
+
+            // Echo the command
+            printOutput(`<span class="prompt">jcmexdev@portfolio:~$</span> ${cmd}`);
+            e.target.value = '';
+
+            if (commands[cmd]) {
+                const result = commands[cmd]();
+                if (result) printOutput(result);
+            } else {
+                printOutput(`<span class="error">command not found: ${cmd}</span> — try <span class="cmd">help</span>`);
+            }
+            body.scrollTop = body.scrollHeight;
+        }
+
+        trigger.addEventListener('click', openTerminal);
+        closeBtn.addEventListener('click', closeTerminal);
+        overlay.addEventListener('click', e => { if (e.target === overlay) closeTerminal(); });
+        document.addEventListener('keydown', e => { if (e.key === 'Escape') closeTerminal(); });
+        input.addEventListener('keydown', handleInput);
+    </script>
 </body>
 
 </html>

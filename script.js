@@ -42,11 +42,21 @@ const translations = {
         "proj_inventory_desc": "ACID-compliant inventory system with optimistic locking to handle high concurrency without overselling.",
         "sect_contact": "Let's Talk Architecture?",
         "contact_desc": "Available for technical leadership roles and distributed systems consulting.",
-        "footer_text": "Made with ❤️ by jcmexdev",
         "date_mercadolibre": "May 2025 - Present",
         "date_deuna": "Apr 2024 - May 2025",
         "date_99_lead": "Jan 2023 - Apr 2024",
-        "date_99_senior": "Aug 2021 - Mar 2023"
+        "date_99_senior": "Aug 2021 - Mar 2023",
+        "sect_philosophy": "Engineering Philosophy",
+        "philo_simple_title": "Simplicity Over Complexity",
+        "philo_simple_desc": "Writing code that is easy to read, test, and maintain is harder than writing complex code. I strive for elegant simplicity.",
+        "philo_scale_title": "Built for Scale",
+        "philo_scale_desc": "Systems should be designed to handle growth gracefully. I focus on stateless architectures and idempotency.",
+        "philo_mentor_title": "Mentorship & Culture",
+        "philo_mentor_desc": "Technology is built by people. I believe in fostering a culture of knowledge sharing and psychological safety.",
+        "footer_desc": "Senior Software Engineer focused on distributed systems and high-concurrency architectures.",
+        "footer_links": "Quick Links",
+        "footer_social": "Connect",
+        "footer_copy": "&copy; 2026 Juan Carlos Garcia. All rights reserved."
     },
     "es": {
         "nav_home": "Inicio",
@@ -91,11 +101,21 @@ const translations = {
         "proj_inventory_desc": "Sistema de inventario compatible con ACID y bloqueo optimista para manejar alta concurrencia sin sobreventas.",
         "sect_contact": "¿Hablamos de Arquitectura?",
         "contact_desc": "Disponible para roles de liderazgo técnico y consultoría en sistemas distribuidos.",
-        "footer_text": "Made with ❤️ by jcmexdev",
         "date_mercadolibre": "May 2025 - Presente",
         "date_deuna": "Abr 2024 - May 2025",
         "date_99_lead": "Ene 2023 - Abr 2024",
-        "date_99_senior": "Ago 2021 - Mar 2023"
+        "date_99_senior": "Ago 2021 - Mar 2023",
+        "sect_philosophy": "Filosofía de Ingeniería",
+        "philo_simple_title": "Simplicidad sobre Complejidad",
+        "philo_simple_desc": "Escribir código fácil de leer, probar y mantener es más difícil que escribir código complejo. Busco la simplicidad elegante.",
+        "philo_scale_title": "Construido para Escalar",
+        "philo_scale_desc": "Los sistemas deben diseñarse para manejar el crecimiento con gracia. Me enfoco en arquitecturas stateless e idempotencia.",
+        "philo_mentor_title": "Mentoría y Cultura",
+        "philo_mentor_desc": "La tecnología es construida por personas. Creo en fomentar una cultura de intercambio de conocimientos y seguridad psicológica.",
+        "footer_desc": "Ingeniero de Software Senior enfocado en sistemas distribuidos y arquitecturas de alta concurrencia.",
+        "footer_links": "Enlaces Rápidos",
+        "footer_social": "Conectar",
+        "footer_copy": "&copy; 2026 Juan Carlos Garcia. Reservados todos los derechos."
     }
 };
 
