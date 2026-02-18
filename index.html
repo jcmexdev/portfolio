@@ -84,75 +84,157 @@
             </div>
         </section>
 
-        <!-- Impact Metrics Section -->
-        <section id="metrics" class="metrics-section">
+        <!-- =============================================
+             Core Expertise + Impact Metrics (Unified Module)
+             ============================================= -->
+        <section id="expertise" class="section expertise-module">
             <div class="container">
-                <div class="metrics-grid">
-                    <div class="metric-card">
-                        <div class="metric-value">
-                            <span class="metric-number" data-target="75" data-suffix="%">0</span>
-                        </div>
-                        <div class="metric-label">Latency Reduction</div>
-                        <div class="metric-sub">Payment systems at Mercado Libre</div>
-                    </div>
-                    <div class="metric-card">
-                        <div class="metric-value">
-                            <span class="metric-prefix">$</span><span class="metric-number" data-target="400"
-                                data-suffix="M">0</span>
-                        </div>
-                        <div class="metric-label">MXN Processed Daily</div>
-                        <div class="metric-sub">High-volume transaction systems</div>
-                    </div>
-                    <div class="metric-card">
-                        <div class="metric-value">
-                            <span class="metric-number" data-target="10" data-suffix="k+">0</span>
-                        </div>
-                        <div class="metric-label">Requests Per Second</div>
-                        <div class="metric-sub">Peak throughput handled</div>
-                    </div>
-                    <div class="metric-card">
-                        <div class="metric-value">
-                            <span class="metric-number" data-target="5" data-suffix="+">0</span>
-                        </div>
-                        <div class="metric-label">Years of Experience</div>
-                        <div class="metric-sub">Senior-level engineering</div>
-                    </div>
-                </div>
-            </div>
-        </section>
 
-        <section id="expertise" class="section">
-            <div class="container">
-                <h2 class="section-title" data-i18n="sect_expertise">Core Expertise</h2>
+                <!-- Section Header -->
+                <div class="expertise-header">
+                    <span class="expertise-eyebrow">What I bring to the table</span>
+                    <h2 class="section-title" data-i18n="sect_expertise">Core Expertise</h2>
+                    <p class="section-subtitle" data-i18n="sect_expertise_sub">Engineering excellence across the full
+                        backend stack — from system design to production observability.</p>
+                </div>
+
+                <!-- Skill Cards Grid -->
                 <div class="skills-grid">
                     <div class="skill-card">
-                        <i class="fas fa-cubes"></i>
+                        <div class="skill-icon-wrap">
+                            <i class="fas fa-cubes"></i>
+                        </div>
                         <h3 data-i18n="exp_system_design">System Design</h3>
                         <p data-i18n="exp_system_design_desc">Microservices, Event-Driven Architecture, CQRS.</p>
                     </div>
                     <div class="skill-card">
-                        <i class="fab fa-golang"></i>
+                        <div class="skill-icon-wrap">
+                            <i class="fab fa-golang"></i>
+                        </div>
                         <h3 data-i18n="exp_golang">Golang Expert</h3>
                         <p data-i18n="exp_golang_desc">Concurrency patterns, performance tuning, memory management.</p>
                     </div>
                     <div class="skill-card">
-                        <i class="fas fa-server"></i>
+                        <div class="skill-icon-wrap">
+                            <i class="fas fa-server"></i>
+                        </div>
                         <h3 data-i18n="exp_infra">Infrastructure</h3>
                         <p data-i18n="exp_infra_desc">AWS (EC2, ECS, Lambda), GCP, Docker, CI/CD Pipelines.</p>
                     </div>
                     <div class="skill-card">
-                        <i class="fas fa-database"></i>
+                        <div class="skill-icon-wrap">
+                            <i class="fas fa-database"></i>
+                        </div>
                         <h3 data-i18n="exp_data">Data Consistency</h3>
                         <p data-i18n="exp_data_desc">Distributed Transactions (Saga), PostgreSQL, Redis, RabbitMQ.</p>
                     </div>
                 </div>
-            </div>
+
+                <!-- ── Impact Dashboard ─────────────────────────── -->
+                <div class="impact-dashboard" id="impactDashboard">
+                    <div class="dashboard-header">
+                        <span class="dashboard-label">Impact at Scale</span>
+                        <div class="dashboard-divider"></div>
+                    </div>
+
+                    <div class="dashboard-grid">
+
+                        <!-- Metric 1: Latency Reduction -->
+                        <div class="dashboard-card" id="metric-latency">
+                            <div class="dashboard-card-inner">
+                                <div class="arc-chart-wrap">
+                                    <svg class="arc-chart" viewBox="0 0 100 60" aria-hidden="true">
+                                        <path class="arc-track" d="M 10 55 A 40 40 0 0 1 90 55" />
+                                        <path class="arc-fill" id="arc-latency" d="M 10 55 A 40 40 0 0 1 90 55"
+                                            stroke-dasharray="0 126" data-target-pct="75" />
+                                    </svg>
+                                    <div class="arc-value">
+                                        <span class="metric-number" data-target="75" data-suffix="%">0%</span>
+                                    </div>
+                                </div>
+                                <div class="dashboard-card-info">
+                                    <p class="dashboard-metric-label">Latency Reduction</p>
+                                    <p class="dashboard-metric-sub">Payment systems at Mercado Libre</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Metric 2: MXN Processed -->
+                        <div class="dashboard-card" id="metric-volume">
+                            <div class="dashboard-card-inner">
+                                <div class="arc-chart-wrap">
+                                    <svg class="arc-chart" viewBox="0 0 100 60" aria-hidden="true">
+                                        <path class="arc-track" d="M 10 55 A 40 40 0 0 1 90 55" />
+                                        <path class="arc-fill" id="arc-volume" d="M 10 55 A 40 40 0 0 1 90 55"
+                                            stroke-dasharray="0 126" data-target-pct="80" />
+                                    </svg>
+                                    <div class="arc-value">
+                                        <span class="metric-prefix">$</span><span class="metric-number"
+                                            data-target="400" data-suffix="M">0M</span>
+                                    </div>
+                                </div>
+                                <div class="dashboard-card-info">
+                                    <p class="dashboard-metric-label">MXN Processed Daily</p>
+                                    <p class="dashboard-metric-sub">High-volume transaction systems</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Metric 3: RPS -->
+                        <div class="dashboard-card" id="metric-rps">
+                            <div class="dashboard-card-inner">
+                                <div class="arc-chart-wrap">
+                                    <svg class="arc-chart" viewBox="0 0 100 60" aria-hidden="true">
+                                        <path class="arc-track" d="M 10 55 A 40 40 0 0 1 90 55" />
+                                        <path class="arc-fill" id="arc-rps" d="M 10 55 A 40 40 0 0 1 90 55"
+                                            stroke-dasharray="0 126" data-target-pct="90" />
+                                    </svg>
+                                    <div class="arc-value">
+                                        <span class="metric-number" data-target="10" data-suffix="k+">0k+</span>
+                                    </div>
+                                </div>
+                                <div class="dashboard-card-info">
+                                    <p class="dashboard-metric-label">Requests Per Second</p>
+                                    <p class="dashboard-metric-sub">Peak throughput handled</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Metric 4: Years -->
+                        <div class="dashboard-card" id="metric-years">
+                            <div class="dashboard-card-inner">
+                                <div class="arc-chart-wrap">
+                                    <svg class="arc-chart" viewBox="0 0 100 60" aria-hidden="true">
+                                        <path class="arc-track" d="M 10 55 A 40 40 0 0 1 90 55" />
+                                        <path class="arc-fill" id="arc-years" d="M 10 55 A 40 40 0 0 1 90 55"
+                                            stroke-dasharray="0 126" data-target-pct="50" />
+                                    </svg>
+                                    <div class="arc-value">
+                                        <span class="metric-number" data-target="5" data-suffix="+">0+</span>
+                                    </div>
+                                </div>
+                                <div class="dashboard-card-info">
+                                    <p class="dashboard-metric-label">Years of Experience</p>
+                                    <p class="dashboard-metric-sub">Senior-level engineering</p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div><!-- /.dashboard-grid -->
+                </div><!-- /.impact-dashboard -->
+
+            </div><!-- /.container -->
         </section>
 
         <!-- Experience Section (Timeline) -->
         <section id="experience" class="section">
             <div class="container">
-                <h2 class="section-title" data-i18n="sect_experience">Trayectoria Profesional</h2>
+                <div class="section-header">
+                    <span class="section-eyebrow" data-i18n="eyebrow_experience">Professional Journey</span>
+                    <h2 class="section-title" data-i18n="sect_experience">Professional Experience</h2>
+                    <p class="section-subtitle" data-i18n="sect_experience_sub">A track record of high-impact
+                        engineering at scale — from fintech to logistics.</p>
+                </div>
                 <div class="timeline">
 
                     <!-- Item 1: Mercado Libre -->
@@ -174,9 +256,6 @@
                                 <span>High Concurrency</span>
                                 <span>Distributed Systems</span>
                                 <span>New Relic</span>
-                            </div>
-                            <div class="tech-tags">
-                                <span>Go</span>
                                 <span>High Performance</span>
                                 <span>Fintech</span>
                             </div>
@@ -202,9 +281,6 @@
                                 <span>AWS</span>
                                 <span>Docker</span>
                                 <span>PostgreSQL</span>
-                            </div>
-                            <div class="tech-tags">
-                                <span>Go</span>
                                 <span>Payments</span>
                                 <span>Leadership</span>
                             </div>
@@ -229,10 +305,6 @@
                                 <span>Kubernetes</span>
                                 <span>Microservices</span>
                                 <span>Team Leadership</span>
-                            </div>
-                            <div class="tech-tags">
-                                <span>GCP</span>
-                                <span>Team Management</span>
                                 <span>Strategy</span>
                             </div>
                         </div>
@@ -256,9 +328,6 @@
                                 <span>GRPC</span>
                                 <span>MongoDB</span>
                                 <span>Redis</span>
-                            </div>
-                            <div class="tech-tags">
-                                <span>Go</span>
                                 <span>Microservices</span>
                             </div>
                         </div>
@@ -270,9 +339,12 @@
 
         <section id="projects" class="section">
             <div class="container">
-                <h2 class="section-title" data-i18n="sect_projects">Arquitectura & Proyectos</h2>
-                <p class="section-subtitle" data-i18n="sect_projects_sub">Implementaciones de referencia y resoluciones
-                    de problemas complejos.</p>
+                <div class="section-header">
+                    <span class="section-eyebrow" data-i18n="eyebrow_projects">Selected Work</span>
+                    <h2 class="section-title" data-i18n="sect_projects">Architecture &amp; Projects</h2>
+                    <p class="section-subtitle" data-i18n="sect_projects_sub">Reference implementations and complex
+                        problem resolutions at production scale.</p>
+                </div>
                 <div class="projects-grid">
 
                     <!-- Feature Project: Saga Pattern -->
@@ -299,7 +371,7 @@
                                 <span><i class="fas fa-check"></i> Failover Recovery</span>
                             </div>
                             <div class="project-links">
-                                <a href="#" class="btn-link"><i class="fab fa-github"></i> Ver Arquitectura</a>
+                                <a href="#" class="btn-link"><i class="fab fa-github"></i> View Architecture</a>
                                 <a href="#" class="btn-link"><i class="fas fa-book"></i> Case Study</a>
                             </div>
                         </div>
@@ -327,7 +399,7 @@
                                 <span>Prometheus</span>
                             </div>
                             <div class="project-links">
-                                <a href="#" class="btn-link"><i class="fab fa-github"></i> Código</a>
+                                <a href="#" class="btn-link"><i class="fab fa-github"></i> Source Code</a>
                             </div>
                         </div>
                     </article>
@@ -356,7 +428,7 @@
                                 <span>Terraform</span>
                             </div>
                             <div class="project-links">
-                                <a href="#" class="btn-link"><i class="fab fa-github"></i> Código</a>
+                                <a href="#" class="btn-link"><i class="fab fa-github"></i> Source Code</a>
                             </div>
                         </div>
                     </article>
@@ -384,7 +456,7 @@
                                 <span>Go</span>
                             </div>
                             <div class="project-links">
-                                <a href="#" class="btn-link"><i class="fab fa-github"></i> Código</a>
+                                <a href="#" class="btn-link"><i class="fab fa-github"></i> Source Code</a>
                             </div>
                         </div>
                     </article>
@@ -412,37 +484,46 @@
                                 <span>Concurrency</span>
                             </div>
                             <div class="project-links">
-                                <a href="#" class="btn-link"><i class="fab fa-github"></i> Código</a>
+                                <a href="#" class="btn-link"><i class="fab fa-github"></i> Source Code</a>
                             </div>
                         </div>
                     </article>
 
                 </div>
             </div>
-            </div>
-            </div>
         </section>
 
         <!-- Engineering Philosophy Section -->
         <section id="philosophy" class="section alt-bg">
             <div class="container">
-                <h2 class="section-title" data-i18n="sect_philosophy">Engineering Philosophy</h2>
+                <div class="section-header">
+                    <span class="section-eyebrow" data-i18n="eyebrow_philosophy">Design Principles</span>
+                    <h2 class="section-title" data-i18n="sect_philosophy">Engineering Philosophy</h2>
+                    <p class="section-subtitle" data-i18n="sect_philosophy_sub">The values and principles that guide
+                        every technical decision I make.</p>
+                </div>
                 <div class="philosophy-grid">
                     <div class="philosophy-card">
-                        <div class="philo-icon"><i class="fas fa-drafting-compass"></i></div>
+                        <div class="skill-icon-wrap">
+                            <i class="fas fa-drafting-compass"></i>
+                        </div>
                         <h3 data-i18n="philo_simple_title">Simplicity Over Complexity</h3>
                         <p data-i18n="philo_simple_desc">Writing code that is easy to read, test, and maintain is harder
                             than writing complex code. I strive for elegant simplicity.</p>
                     </div>
                     <div class="philosophy-card">
-                        <div class="philo-icon"><i class="fas fa-network-wired"></i></div>
+                        <div class="skill-icon-wrap">
+                            <i class="fas fa-network-wired"></i>
+                        </div>
                         <h3 data-i18n="philo_scale_title">Built for Scale</h3>
                         <p data-i18n="philo_scale_desc">Systems should be designed to handle growth gracefully. I focus
                             on stateless architectures and idempotency.</p>
                     </div>
                     <div class="philosophy-card">
-                        <div class="philo-icon"><i class="fas fa-users-cog"></i></div>
-                        <h3 data-i18n="philo_mentor_title">Mentorship & Culture</h3>
+                        <div class="skill-icon-wrap">
+                            <i class="fas fa-users-cog"></i>
+                        </div>
+                        <h3 data-i18n="philo_mentor_title">Mentorship &amp; Culture</h3>
                         <p data-i18n="philo_mentor_desc">Technology is built by people. I believe in fostering a culture
                             of knowledge sharing and psychological safety.</p>
                     </div>
@@ -655,36 +736,62 @@ Currently at <span class="info">Mercado Libre</span> optimizing payment systems 
         document.addEventListener('keydown', e => { if (e.key === 'Escape') closeTerminal(); });
         input.addEventListener('keydown', handleInput);
 
-        // ── Animated Counters ──────────────────────────────────────
+        // ── Animated Counters + SVG Arc Charts ────────────────────
+        // Pure easeOutQuart — no external libraries
         function easeOutQuart(t) { return 1 - Math.pow(1 - t, 4); }
 
+        /**
+         * Animates a numeric counter element and its paired SVG arc gauge.
+         * @param {HTMLElement} el  - The .metric-number span
+         */
         function animateCounter(el) {
             const target = parseInt(el.dataset.target, 10);
             const suffix = el.dataset.suffix || '';
             const duration = 1800;
             const start = performance.now();
 
+            // Find the paired SVG arc fill path (sibling inside .arc-chart-wrap)
+            const wrap = el.closest('.arc-chart-wrap');
+            const arcFill = wrap ? wrap.querySelector('.arc-fill') : null;
+            // Total arc length for a half-circle of radius 40 ≈ π * 40 ≈ 125.66
+            const ARC_LEN = 125.66;
+            const targetPct = arcFill ? parseFloat(arcFill.dataset.targetPct) / 100 : 0;
+
             function step(now) {
                 const elapsed = now - start;
                 const progress = Math.min(elapsed / duration, 1);
-                const value = Math.round(easeOutQuart(progress) * target);
-                el.textContent = value + suffix;
-                if (progress < 1) requestAnimationFrame(step);
-                else el.closest('.metric-card').classList.add('counted');
+                const eased = easeOutQuart(progress);
+
+                // Update counter text
+                el.textContent = Math.round(eased * target) + suffix;
+
+                // Animate SVG arc via stroke-dasharray
+                if (arcFill) {
+                    const filled = eased * targetPct * ARC_LEN;
+                    arcFill.setAttribute('stroke-dasharray', `${filled} ${ARC_LEN}`);
+                }
+
+                if (progress < 1) {
+                    requestAnimationFrame(step);
+                } else {
+                    // Final glow pulse on the parent card
+                    el.closest('.dashboard-card') && el.closest('.dashboard-card').classList.add('counted');
+                }
             }
             requestAnimationFrame(step);
         }
 
-        const metricObserver = new IntersectionObserver((entries) => {
+        // Observe the unified Impact Dashboard panel
+        const dashboardObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (!entry.isIntersecting) return;
                 entry.target.querySelectorAll('.metric-number').forEach(animateCounter);
-                metricObserver.unobserve(entry.target);
+                dashboardObserver.unobserve(entry.target);
             });
-        }, { threshold: 0.4 });
+        }, { threshold: 0.3 });
 
-        const metricsSection = document.getElementById('metrics');
-        if (metricsSection) metricObserver.observe(metricsSection);
+        const impactDashboard = document.getElementById('impactDashboard');
+        if (impactDashboard) dashboardObserver.observe(impactDashboard);
     </script>
 </body>
 

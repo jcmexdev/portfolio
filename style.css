@@ -37,7 +37,8 @@ body.light-mode .header {
 body.light-mode .skill-card,
 body.light-mode .project-card,
 body.light-mode .philosophy-card,
-body.light-mode .timeline-content {
+body.light-mode .timeline-content,
+body.light-mode .dashboard-card {
     background: #ffffff;
     border-color: rgba(0, 0, 0, 0.08);
     box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
@@ -64,12 +65,8 @@ body.light-mode .footer-bottom {
     color: #9ca3af;
 }
 
-body.light-mode .metrics-section {
-    background: linear-gradient(180deg, #f4f6f9 0%, rgba(0, 173, 216, 0.06) 50%, #f4f6f9 100%);
-}
-
 body.light-mode .alt-bg {
-    background-color: #edf0f5;
+    background: linear-gradient(180deg, #f4f6f9 0%, rgba(0, 173, 216, 0.05) 50%, #f4f6f9 100%);
 }
 
 /* ── Theme Toggle Button ────────────────────────── */
@@ -415,6 +412,7 @@ ul {
 .title .highlight {
     background: linear-gradient(90deg, var(--accent-color), var(--accent-secondary));
     -webkit-background-clip: text;
+    background-clip: text;
     -webkit-text-fill-color: transparent;
 }
 
@@ -475,6 +473,34 @@ ul {
     color: var(--text-secondary);
     margin-bottom: 3rem;
     font-size: 1.1rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* ── Unified Section Header ─────────────────────── */
+.section-header {
+    text-align: center;
+    margin-bottom: 3.5rem;
+}
+
+.section-eyebrow {
+    display: block;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--accent-color);
+    margin-bottom: 0.6rem;
+    opacity: 0.85;
+}
+
+.section-header .section-title {
+    margin-bottom: 0.75rem;
+}
+
+.section-header .section-subtitle {
+    margin-bottom: 0;
 }
 
 /* Skills/Expertise */
@@ -494,13 +520,17 @@ ul {
     text-align: center;
     position: relative;
     overflow: hidden;
-    /* Critical for containing reflection */
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 }
 
+/* =========================================
+   Skill Card — Pseudo-elements & States
+   ========================================= */
+
+/* Top gradient bar (reveals on hover) */
 .skill-card::before {
     content: '';
     position: absolute;
@@ -514,7 +544,7 @@ ul {
     transition: transform 0.4s ease;
 }
 
-/* Subtle gradient overlay on hover (Reflection) */
+/* Reflection sweep on hover */
 .skill-card::after {
     content: '';
     position: absolute;
@@ -540,18 +570,38 @@ ul {
     transform: scaleX(1);
 }
 
-.icon-box {
-    width: 70px;
-    height: 70px;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.03);
+/* =========================================
+   Skill Card — Icon Wrapper
+   Shared token: --card-radius, --card-shadow
+   ========================================= */
+.skill-icon-wrap {
+    width: 64px;
+    height: 64px;
+    border-radius: 16px;
+    background: rgba(0, 173, 216, 0.06);
+    border: 1px solid rgba(0, 173, 216, 0.15);
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 0 auto 1.5rem auto;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    margin: 0 auto 1.25rem;
     transition: all 0.4s ease;
-    animation: floatIcon 4s ease-in-out infinite;
+}
+
+.skill-card:hover .skill-icon-wrap {
+    background: rgba(0, 173, 216, 0.15);
+    border-color: var(--accent-color);
+    box-shadow: 0 0 20px rgba(0, 173, 216, 0.35);
+    transform: translateY(-4px) scale(1.05);
+}
+
+.skill-card i {
+    font-size: 1.75rem;
+    color: var(--accent-color);
+    transition: transform 0.4s ease;
+}
+
+.skill-card:hover i {
+    transform: rotateY(180deg);
 }
 
 @keyframes floatIcon {
@@ -566,35 +616,16 @@ ul {
     }
 }
 
-.skill-card i {
-    font-size: 2rem;
-    color: var(--text-secondary);
-    transition: all 0.4s ease;
-    margin-bottom: 0;
-}
-
-.skill-card:hover .icon-box {
-    background: rgba(0, 173, 216, 0.1);
-    border-color: var(--accent-color);
-    box-shadow: 0 0 20px rgba(0, 173, 216, 0.4);
-    animation-play-state: paused;
-    /* Pause float on hover */
-    transform: scale(1.1);
-}
-
-.skill-card:hover i {
-    color: var(--accent-color);
-    transform: rotateY(180deg);
-}
-
 .skill-card h3 {
-    margin-bottom: 1rem;
-    font-size: 1.25rem;
+    margin-bottom: 0.75rem;
+    font-size: 1.2rem;
+    color: var(--text-primary);
 }
 
 .skill-card p {
     color: var(--text-secondary);
-    font-size: 0.95rem;
+    font-size: 0.92rem;
+    line-height: 1.55;
 }
 
 /* Projects */
@@ -984,7 +1015,7 @@ ul {
 
 .tech-tags {
     display: flex;
-    gap: 0.8rem;
+    gap: 0.5rem;
     flex-wrap: wrap;
     margin-top: 1rem;
 }
@@ -1446,48 +1477,84 @@ body:hover .cursor-outline {
    Engineering Philosophy Section
    ========================================= */
 .alt-bg {
-    background-color: #0b0b0b;
-    /* Slightly lighter/different dark */
+    background: linear-gradient(180deg, var(--bg-primary) 0%, rgba(0, 173, 216, 0.03) 50%, var(--bg-primary) 100%);
+    border-top: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border-color);
 }
 
 .philosophy-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 30px;
-    margin-top: 40px;
+    gap: 2rem;
 }
 
+/* Philosophy cards share the same design tokens as skill-cards */
 .philosophy-card {
-    background: rgba(255, 255, 255, 0.03);
+    background: rgba(26, 26, 26, 0.4);
+    backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.05);
-    padding: 30px;
+    padding: 2.5rem 2rem;
     border-radius: 16px;
-    transition: transform 0.3s ease, border-color 0.3s ease;
+    transition: all 0.4s ease;
     text-align: center;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Top gradient accent bar — same as skill-card */
+.philosophy-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, var(--accent-color), var(--accent-secondary));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s ease;
+}
+
+/* Reflection sweep — same as skill-card */
+.philosophy-card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, transparent 40%, rgba(255, 255, 255, 0.05) 50%, transparent 60%);
+    transform: translateX(-100%);
+    transition: transform 0.6s;
 }
 
 .philosophy-card:hover {
     transform: translateY(-5px);
     border-color: var(--accent-color);
-    background: rgba(255, 255, 255, 0.05);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
 }
 
-.philo-icon {
-    font-size: 2.5rem;
-    color: var(--accent-color);
-    margin-bottom: 20px;
-    opacity: 0.9;
+.philosophy-card:hover::before {
+    transform: scaleX(1);
+}
+
+.philosophy-card:hover::after {
+    transform: translateX(100%);
 }
 
 .philosophy-card h3 {
-    font-size: 1.4rem;
-    margin-bottom: 15px;
+    font-size: 1.2rem;
+    margin-bottom: 0.75rem;
     color: var(--text-primary);
 }
 
 .philosophy-card p {
     color: var(--text-secondary);
-    font-size: 0.95rem;
+    font-size: 0.92rem;
     line-height: 1.6;
 }
 
@@ -1573,56 +1640,318 @@ body:hover .cursor-outline {
 }
 
 /* =========================================
-   Impact Metrics Section
+   Expertise Module — Unified Section
    ========================================= */
-.metrics-section {
-    padding: 60px 0;
-    background: linear-gradient(180deg, var(--bg-primary) 0%, rgba(0, 173, 216, 0.04) 50%, var(--bg-primary) 100%);
-    border-top: 1px solid rgba(255, 255, 255, 0.04);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+
+/* Section-level modifier: extra bottom padding for the dashboard */
+.expertise-module {
+    padding-bottom: 5rem;
 }
 
-.metrics-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 2px;
+/* Eyebrow label above the section title */
+.expertise-eyebrow {
+    display: block;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--accent-color);
+    margin-bottom: 0.6rem;
+    opacity: 0.85;
 }
 
-.metric-card {
+/* Centered header block */
+.expertise-header {
     text-align: center;
-    padding: 40px 20px;
-    position: relative;
-    transition: background 0.3s;
+    margin-bottom: 3.5rem;
 }
 
-.metric-card::after {
+.expertise-header .section-title {
+    margin-bottom: 0.75rem;
+}
+
+.expertise-header .section-subtitle {
+    margin-bottom: 0;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* =========================================
+   Impact Dashboard — Sub-panel
+   Inherits: --accent-color, --card-radius,
+             --glass-bg, --glass-border
+   ========================================= */
+.impact-dashboard {
+    margin-top: 4rem;
+    background: rgba(0, 173, 216, 0.03);
+    border: 1px solid rgba(0, 173, 216, 0.12);
+    border-radius: 20px;
+    padding: 2.5rem 2rem;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Subtle top accent line — same gradient as skill-card::before */
+.impact-dashboard::before {
     content: '';
     position: absolute;
-    right: 0;
-    top: 20%;
-    height: 60%;
-    width: 1px;
-    background: rgba(255, 255, 255, 0.06);
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent-color), var(--accent-secondary));
+    border-radius: 20px 20px 0 0;
 }
 
-.metric-card:last-child::after {
-    display: none;
+/* Dashboard header row */
+.dashboard-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
 }
 
-.metric-card:hover {
-    background: rgba(0, 173, 216, 0.04);
-    border-radius: 12px;
+.dashboard-label {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--accent-color);
+    white-space: nowrap;
+    opacity: 0.9;
 }
 
-.metric-value {
+.dashboard-divider {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, rgba(0, 173, 216, 0.3), transparent);
+}
+
+/* 4-column grid — matches skills-grid breakpoints */
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+}
+
+/* =========================================
+   Dashboard Card
+   Shares: border-radius, box-shadow, hover
+   tokens with .skill-card
+   ========================================= */
+.dashboard-card {
+    background: rgba(26, 26, 26, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 16px;
+    /* same as --card-radius on skill-card */
+    padding: 1.5rem 1rem;
+    text-align: center;
+    transition: all 0.4s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Shared reflection sweep — same as .skill-card::after */
+.dashboard-card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, transparent 40%, rgba(255, 255, 255, 0.04) 50%, transparent 60%);
+    transform: translateX(-100%);
+    transition: transform 0.6s;
+    pointer-events: none;
+}
+
+.dashboard-card:hover::after {
+    transform: translateX(100%);
+}
+
+.dashboard-card:hover {
+    transform: translateY(-5px);
+    /* same lift as .skill-card:hover */
+    border-color: var(--accent-color);
+    box-shadow: 0 12px 30px -10px rgba(0, 173, 216, 0.25);
+}
+
+/* Glow pulse after counter finishes */
+.dashboard-card.counted {
+    animation: dashboard-card-glow 0.6s ease forwards;
+}
+
+@keyframes dashboard-card-glow {
+    0% {
+        box-shadow: 0 0 0 rgba(0, 173, 216, 0);
+    }
+
+    50% {
+        box-shadow: 0 0 20px rgba(0, 173, 216, 0.4);
+    }
+
+    100% {
+        box-shadow: 0 12px 30px -10px rgba(0, 173, 216, 0.2);
+    }
+}
+
+.dashboard-card-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+/* =========================================
+   SVG Arc / Gauge Chart
+   ========================================= */
+.arc-chart-wrap {
+    position: relative;
+    width: 110px;
+    height: 70px;
+    /* half-circle viewport */
+    flex-shrink: 0;
+}
+
+.arc-chart {
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+}
+
+/* Track (background arc) */
+.arc-track {
+    fill: none;
+    stroke: rgba(255, 255, 255, 0.06);
+    stroke-width: 8;
+    stroke-linecap: round;
+}
+
+/* Fill (animated arc) */
+.arc-fill {
+    fill: none;
+    stroke: url(#arcGradient);
+    stroke-width: 8;
+    stroke-linecap: round;
+    transition: stroke-dasharray 0.05s linear;
+    /* JS drives this via setAttribute */
+}
+
+/* Fallback solid color if SVG gradient not supported */
+.arc-fill {
+    stroke: var(--accent-color);
+}
+
+/* Numeric value centered below the arc */
+.arc-value {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
     display: flex;
     align-items: baseline;
-    justify-content: center;
-    gap: 2px;
-    margin-bottom: 12px;
+    gap: 1px;
     line-height: 1;
 }
 
+/* Reuse existing .metric-number + .metric-prefix tokens */
+.arc-value .metric-number {
+    font-size: clamp(1.4rem, 2.5vw, 1.9rem);
+    font-weight: 800;
+    background: linear-gradient(90deg, var(--accent-color), var(--accent-secondary));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: -1px;
+    font-variant-numeric: tabular-nums;
+}
+
+.arc-value .metric-prefix {
+    font-size: clamp(0.8rem, 1.5vw, 1rem);
+    font-weight: 700;
+    color: var(--accent-color);
+    opacity: 0.85;
+    /* Override transparent fill from .metric-number gradient */
+    -webkit-text-fill-color: var(--accent-color);
+}
+
+/* =========================================
+   Dashboard Card Info Block
+   ========================================= */
+.dashboard-card-info {
+    text-align: center;
+}
+
+/* Same hierarchy as .metric-label */
+.dashboard-metric-label {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 4px;
+    letter-spacing: 0.3px;
+}
+
+/* Same hierarchy as .metric-sub */
+.dashboard-metric-sub {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    line-height: 1.4;
+    max-width: 130px;
+    margin: 0 auto;
+}
+
+/* =========================================
+   Light Mode Overrides — Dashboard
+   ========================================= */
+body.light-mode .impact-dashboard {
+    background: rgba(0, 173, 216, 0.04);
+    border-color: rgba(0, 173, 216, 0.18);
+}
+
+body.light-mode .dashboard-card {
+    background: #ffffff;
+    border-color: rgba(0, 0, 0, 0.07);
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+}
+
+body.light-mode .dashboard-card:hover {
+    border-color: var(--accent-color);
+    box-shadow: 0 12px 30px -10px rgba(0, 173, 216, 0.2);
+}
+
+body.light-mode .arc-track {
+    stroke: rgba(0, 0, 0, 0.08);
+}
+
+/* =========================================
+   Responsive — Dashboard Grid
+   ========================================= */
+@media (max-width: 900px) {
+    .dashboard-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 480px) {
+    .dashboard-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+    }
+
+    .impact-dashboard {
+        padding: 1.75rem 1rem;
+    }
+
+    .arc-chart-wrap {
+        width: 90px;
+        height: 58px;
+    }
+}
+
+/* =========================================
+   Legacy metric tokens (kept for compat)
+   ========================================= */
 .metric-number {
     font-size: clamp(2.8rem, 5vw, 4rem);
     font-weight: 800;
@@ -1640,49 +1969,4 @@ body:hover .cursor-outline {
     color: var(--accent-color);
     opacity: 0.8;
     margin-bottom: 4px;
-}
-
-.metric-label {
-    font-size: 1rem;
-    font-weight: 600;
-    color: var(--text-primary);
-    margin-bottom: 6px;
-    letter-spacing: 0.5px;
-}
-
-.metric-sub {
-    font-size: 0.8rem;
-    color: var(--text-secondary);
-    max-width: 160px;
-    margin: 0 auto;
-    line-height: 1.4;
-}
-
-/* Animate in */
-.metric-card.counted .metric-number {
-    animation: metric-glow 0.5s ease forwards;
-}
-
-@keyframes metric-glow {
-    0% {
-        filter: brightness(1);
-    }
-
-    50% {
-        filter: brightness(1.5) drop-shadow(0 0 8px var(--accent-color));
-    }
-
-    100% {
-        filter: brightness(1);
-    }
-}
-
-@media (max-width: 600px) {
-    .metrics-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    .metric-card::after {
-        display: none;
-    }
 }
