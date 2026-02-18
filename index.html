@@ -55,14 +55,14 @@
             <div class="container hero-container">
                 <div class="hero-content">
                     <span class="subtitle" data-i18n="hero_subtitle">Senior Software Engineer</span>
-                    <h1 class="title" data-i18n="hero_title">Architecting <span class="highlight">Resilient</span>
-                        Distributed Systems</h1>
+                    <h1 class="title" data-i18n="hero_title">Engineering <span class="highlight">Scalable</span>
+                        Software Solutions</h1>
                     <p class="description" data-i18n="hero_desc">
                         Seasoned engineer crafting top-tier software solutions. Focused on delivering high-value
                         products through technical excellence and collaborative teamwork.
                     </p>
                     <div class="cta-buttons">
-                        <a href="#projects" class="btn primary" data-i18n="btn_projects">View Architectures</a>
+                        <a href="#projects" class="btn primary" data-i18n="btn_projects">View Solutions</a>
                         <a href="#contact" class="btn secondary" data-i18n="btn_contact">Let's Talk</a>
                     </div>
                 </div>
@@ -96,12 +96,12 @@
                     <div class="skill-card">
                         <i class="fas fa-server"></i>
                         <h3 data-i18n="exp_infra">Infrastructure</h3>
-                        <p data-i18n="exp_infra_desc">Kubernetes, Docker, Terraform, AWS/GCP.</p>
+                        <p data-i18n="exp_infra_desc">AWS (EC2, ECS, Lambda), GCP, Docker, CI/CD Pipelines.</p>
                     </div>
                     <div class="skill-card">
                         <i class="fas fa-database"></i>
                         <h3 data-i18n="exp_data">Data Consistency</h3>
-                        <p data-i18n="exp_data_desc">Distributed Transactions (Saga), PostgreSQL, Redis, Kafka.</p>
+                        <p data-i18n="exp_data_desc">Distributed Transactions (Saga), PostgreSQL, Redis, RabbitMQ.</p>
                     </div>
                 </div>
             </div>
@@ -290,23 +290,84 @@
                         </div>
                     </article>
 
-                    <!-- Feature Project: Scaling -->
+                    <!-- Feature Project: Serverless Pipeline (Replaces K8s) -->
                     <article class="project-card">
                         <div class="project-image-container">
-                            <img src="assets/images/project_k8s.png" alt="Kubernetes Autoscaler" class="project-img">
+                            <!-- Using cloud icon as placeholder if image missing, or reusing k8s placeholder style -->
+                            <div
+                                style="width:100%; height:100%; display:flex; align-items:center; justify-content:center; background:#1a1a1a;">
+                                <i class="fas fa-cloud" style="font-size: 3rem; color: var(--accent-color);"></i>
+                            </div>
                         </div>
                         <div class="project-content">
                             <div class="project-header">
-                                <span class="project-tag">DevOps</span>
+                                <span class="project-tag">Cloud Native</span>
                             </div>
-                            <h3 class="project-title" data-i18n="proj_k8s_title">K8s Autoscaler Controller</h3>
-                            <p class="project-desc" data-i18n="proj_k8s_desc">
-                                Custom Controller para Kubernetes que escala pods basado en métricas de latencia de cola
-                                personalizadas, reduciendo costos de infraestructura en un 30%.
+                            <h3 class="project-title" data-i18n="proj_serverless_title">Serverless Data Pipeline</h3>
+                            <p class="project-desc" data-i18n="proj_serverless_desc">
+                                Event processing architecture using AWS Lambda and RabbitMQ to handle non-blocking
+                                asynchronous tasks.
                             </p>
                             <div class="tech-stack-mini">
-                                <span>Go Client-go</span>
-                                <span>Kubernetes API</span>
+                                <span>AWS Lambda</span>
+                                <span>RabbitMQ</span>
+                                <span>Terraform</span>
+                            </div>
+                            <div class="project-links">
+                                <a href="#" class="btn-link"><i class="fab fa-github"></i> Código</a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- New Generic Project: Chat Engine -->
+                    <article class="project-card">
+                        <div class="project-image-container">
+                            <div
+                                style="width:100%; height:100%; display:flex; align-items:center; justify-content:center; background:#1a1a1a;">
+                                <i class="fas fa-comments" style="font-size: 3rem; color: var(--accent-secondary);"></i>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <div class="project-header">
+                                <span class="project-tag">Real-time</span>
+                            </div>
+                            <h3 class="project-title" data-i18n="proj_chat_title">Real-time Notification Engine</h3>
+                            <p class="project-desc" data-i18n="proj_chat_desc">
+                                Scalable WebSocket server utilizing Redis Pub/Sub for instant messaging across
+                                distributed instances.
+                            </p>
+                            <div class="tech-stack-mini">
+                                <span>WebSockets</span>
+                                <span>Redis Pub/Sub</span>
+                                <span>Go</span>
+                            </div>
+                            <div class="project-links">
+                                <a href="#" class="btn-link"><i class="fab fa-github"></i> Código</a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- New Generic Project: Inventory -->
+                    <article class="project-card">
+                        <div class="project-image-container">
+                            <div
+                                style="width:100%; height:100%; display:flex; align-items:center; justify-content:center; background:#1a1a1a;">
+                                <i class="fas fa-boxes" style="font-size: 3rem; color: var(--text-secondary);"></i>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <div class="project-header">
+                                <span class="project-tag">Backend Logic</span>
+                            </div>
+                            <h3 class="project-title" data-i18n="proj_inventory_title">Inventory Management API</h3>
+                            <p class="project-desc" data-i18n="proj_inventory_desc">
+                                ACID-compliant inventory system with optimistic locking to handle high concurrency
+                                without overselling.
+                            </p>
+                            <div class="tech-stack-mini">
+                                <span>PostgreSQL</span>
+                                <span>ACID</span>
+                                <span>Concurrency</span>
                             </div>
                             <div class="project-links">
                                 <a href="#" class="btn-link"><i class="fab fa-github"></i> Código</a>
@@ -335,8 +396,7 @@
 
     <footer class="footer">
         <div class="container">
-            <p data-i18n="footer_text">&copy; 2024 Senior Software Engineer Portfolio. Built with Go patterns in mind.
-            </p>
+            <p data-i18n="footer_text">Made with ❤️ by jcmexdev</p>
         </div>
     </footer>
     <script src="script.js"></script>
