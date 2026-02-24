@@ -135,4 +135,74 @@ document.addEventListener('DOMContentLoaded', async () => {
             header.style.boxShadow = 'none';
         }
     });
+
+    // --- Code Block Enhancements ---
+    function setupCodeBlocks() {
+        const preBlocks = document.querySelectorAll('pre');
+        
+        preBlocks.forEach(pre => {
+            // Avoid double wrapping if script runs twice
+            if (pre.parentElement.classList.contains('code-block-wrapper')) return;
+            if (pre.classList.contains('mermaid')) return; // Don't wrap mermaid charts
+
+            const code = pre.querySelector('code');
+            if (!code) return;
+
+            // Create wrapper
+            const wrapper = document.createElement('div');
+            wrapper.className = 'code-block-wrapper';
+
+            // Identify language
+            let lang = 'code';
+            const langClass = Array.from(code.classList).find(c => c.startsWith('language-'));
+            if (langClass) {
+                lang = langClass.replace('language-', '');
+            } else if (code.className) {
+                lang = code.className;
+            }
+
+            // Create header
+            const header = document.createElement('div');
+            header.className = 'code-header';
+            header.innerHTML = `
+                <div class="code-lang">
+                    <i class="fas fa-code"></i>
+                    <span>${lang}</span>
+                </div>
+                <button class="copy-btn" title="Copy to clipboard">
+                    <i class="far fa-copy"></i>
+                    <span>Copy</span>
+                </button>
+            `;
+
+            // Setup Copy Logic
+            const copyBtn = header.querySelector('.copy-btn');
+            copyBtn.addEventListener('click', async () => {
+                const text = code.innerText;
+                try {
+                    await navigator.clipboard.writeText(text);
+                    
+                    // Success feedback
+                    copyBtn.classList.add('copied');
+                    copyBtn.innerHTML = '<i class="fas fa-check"></i> <span>Copied!</span>';
+                    
+                    setTimeout(() => {
+                        copyBtn.classList.remove('copied');
+                        copyBtn.innerHTML = '<i class="far fa-copy"></i> <span>Copy</span>';
+                    }, 2000);
+                } catch (err) {
+                    console.error('Failed to copy: ', err);
+                    copyBtn.innerHTML = '<i class="fas fa-times"></i> <span>Error</span>';
+                }
+            });
+
+            // Re-organize DOM
+            pre.parentNode.insertBefore(wrapper, pre);
+            wrapper.appendChild(header);
+            wrapper.appendChild(pre);
+        });
+    }
+
+    // Run setup
+    setupCodeBlocks();
 });

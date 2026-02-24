@@ -1,0 +1,261 @@
+/* ── Code Blocks Premium Styling (Fresh & Colorful V2) ──────────────── */
+
+:root {
+    --code-bg: rgba(20, 20, 20, 0.8);
+    --code-border: rgba(255, 255, 255, 0.1);
+    --code-accent-gradient: linear-gradient(135deg, #00ADD8, #BD93F9, #FF79C6);
+}
+
+/* Base container with Glassmorphism */
+.code-block-wrapper {
+    position: relative;
+    margin: 2.5rem 0;
+    border-radius: 16px;
+    background: var(--code-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--code-border);
+    overflow: hidden;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* Subtle glow effect */
+.code-block-wrapper::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 16px;
+    padding: 2px;
+    /* Border thickness */
+    background: var(--code-accent-gradient);
+    -webkit-mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+    mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0.4;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+}
+
+.code-block-wrapper:hover {
+    transform: translateY(-5px) scale(1.01);
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6);
+}
+
+.code-block-wrapper:hover::after {
+    opacity: 1;
+}
+
+/* Code Header: Colorful & Clean */
+.code-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.85rem 1.5rem;
+    background: rgba(255, 255, 255, 0.03);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.code-lang {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-weight: 800;
+    background: var(--code-accent-gradient);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+.copy-btn {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #fff;
+    padding: 0.4rem 0.9rem;
+    border-radius: 8px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.copy-btn:hover {
+    background: var(--code-accent-gradient);
+    border-color: transparent;
+    transform: scale(1.05);
+}
+
+.copy-btn.copied {
+    background: #00ff88;
+    color: #000;
+}
+
+/* Typography & Spacing */
+.code-block-wrapper pre {
+    margin: 0 !important;
+    padding: 1.5rem !important;
+    background: transparent !important;
+}
+
+.code-block-wrapper code {
+    font-family: 'JetBrains Mono', 'Fira Code', monospace;
+    font-size: 0.95rem;
+    line-height: 1.7;
+    background: transparent !important;
+    color: #e6edf3;
+}
+
+/* ── Vibrant Syntax Highlighting Core ── */
+
+.hljs-keyword,
+.hljs-selector-tag {
+    color: #ff79c6;
+    font-weight: bold;
+}
+
+/* Pink */
+.hljs-string,
+.hljs-doctag {
+    color: #f1fa8c;
+}
+
+/* Yellow */
+.hljs-title,
+.hljs-section,
+.hljs-selector-id {
+    color: #50fa7b;
+}
+
+/* Green */
+.hljs-variable,
+.hljs-template-variable {
+    color: #8be9fd;
+}
+
+/* Cyan */
+.hljs-function {
+    color: #bd93f9;
+}
+
+/* Purple */
+.hljs-number,
+.hljs-literal {
+    color: #ffb86c;
+}
+
+/* Orange */
+.hljs-comment,
+.hljs-quote {
+    color: #6272a4;
+    font-style: italic;
+}
+
+/* Muted Blue */
+.hljs-attr,
+.hljs-attribute {
+    color: #8be9fd;
+}
+
+.hljs-params {
+    color: #f8f8f2;
+}
+
+.hljs-type {
+    color: #ff79c6;
+}
+
+.hljs-built_in {
+    color: #bd93f9;
+    font-style: italic;
+}
+
+/* Scrollbar */
+.code-block-wrapper pre::-webkit-scrollbar {
+    height: 10px;
+}
+
+.code-block-wrapper pre::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    border: 3px solid transparent;
+    background-clip: padding-box;
+}
+
+.code-block-wrapper pre::-webkit-scrollbar-thumb:hover {
+    background: var(--code-accent-gradient);
+}
+
+/* Light Mode: Clean & Fresh */
+body.light-mode {
+    --code-bg: rgba(255, 255, 255, 0.9);
+    --code-border: rgba(0, 0, 0, 0.08);
+}
+
+body.light-mode .code-block-wrapper {
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+}
+
+body.light-mode .code-block-wrapper code {
+    color: #24292f;
+}
+
+body.light-mode .hljs-keyword {
+    color: #d73a49;
+}
+
+body.light-mode .hljs-string {
+    color: #032f62;
+}
+
+body.light-mode .hljs-title {
+    color: #6f42c1;
+}
+
+body.light-mode .hljs-variable {
+    color: #e36209;
+}
+
+body.light-mode .hljs-number {
+    color: #005cc5;
+}
+
+body.light-mode .hljs-comment {
+    color: #6a737d;
+}
+
+body.light-mode .code-header {
+    background: rgba(0, 0, 0, 0.02);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+body.light-mode .copy-btn {
+    background: rgba(0, 0, 0, 0.05);
+    border-color: rgba(0, 0, 0, 0.1);
+    color: #4b5563;
+}
+
+body.light-mode .copy-btn:hover {
+    background: var(--code-accent-gradient);
+    border-color: transparent;
+    color: #fff;
+}
+
+/* Inline code adjustment */
+p code {
+    background: rgba(0, 173, 216, 0.08);
+    color: var(--accent-color);
+    padding: 0.2rem 0.5rem;
+    border-radius: 6px;
+    font-weight: 600;
+}
