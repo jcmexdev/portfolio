@@ -51,7 +51,7 @@
     </script>
 </head>
 
-<body>
+<body data-page="index">
     <header class="header">
         <nav class="navbar">
             <a href="#" class="logo">Sr<span class="highlight">Engineer</span><span class="dot">.</span></a>
@@ -189,8 +189,10 @@
                                     </div>
                                 </div>
                                 <div class="dashboard-card-info">
-                                    <p class="dashboard-metric-label">Latency Reduction</p>
-                                    <p class="dashboard-metric-sub">Payment systems at Mercado Libre</p>
+                                    <p class="dashboard-metric-label" data-i18n="metric_latency_label">Latency Reduction
+                                    </p>
+                                    <p class="dashboard-metric-sub" data-i18n="metric_latency_sub">Payment systems at
+                                        Mercado Libre</p>
                                 </div>
                             </div>
                         </div>
@@ -210,8 +212,10 @@
                                     </div>
                                 </div>
                                 <div class="dashboard-card-info">
-                                    <p class="dashboard-metric-label">MXN Processed Daily</p>
-                                    <p class="dashboard-metric-sub">High-volume transaction systems</p>
+                                    <p class="dashboard-metric-label" data-i18n="metric_volume_label">MXN Processed
+                                        Daily</p>
+                                    <p class="dashboard-metric-sub" data-i18n="metric_volume_sub">High-volume
+                                        transaction systems</p>
                                 </div>
                             </div>
                         </div>
@@ -230,8 +234,10 @@
                                     </div>
                                 </div>
                                 <div class="dashboard-card-info">
-                                    <p class="dashboard-metric-label">Requests Per Second</p>
-                                    <p class="dashboard-metric-sub">Peak throughput handled</p>
+                                    <p class="dashboard-metric-label" data-i18n="metric_rps_label">Requests Per Second
+                                    </p>
+                                    <p class="dashboard-metric-sub" data-i18n="metric_rps_sub">Peak throughput handled
+                                    </p>
                                 </div>
                             </div>
                         </div>
@@ -250,8 +256,10 @@
                                     </div>
                                 </div>
                                 <div class="dashboard-card-info">
-                                    <p class="dashboard-metric-label">Years of Experience</p>
-                                    <p class="dashboard-metric-sub">Senior-level engineering</p>
+                                    <p class="dashboard-metric-label" data-i18n="metric_years_label">Years of Experience
+                                    </p>
+                                    <p class="dashboard-metric-sub" data-i18n="metric_years_sub">Senior-level
+                                        engineering</p>
                                 </div>
                             </div>
                         </div>
@@ -721,6 +729,8 @@
         </div>
     </div>
 
+    <script src="locales/common.js"></script>
+    <script src="locales/index.js"></script>
     <script src="script.js"></script>
     <script>
         // ── Theme Toggle ───────────────────────────────────────────
