@@ -440,15 +440,20 @@ service Order {
 
                             Note over C,P: Happy Path
                             C->>O: POST /orders
+                            O->>O: Create Order (Pending)
+                            O-->>C: 201 Created
+                            Note over O,P: Asynchronous Saga Execution
                             O->>I: Reserve Stock (gRPC)
                             I-->>O: Success
                             O->>P: Charge Payment (gRPC)
                             P-->>O: Success
-                            O->>O: Confirm Order
-                            O-->>C: 201 Created
+                            O->>O: Update Order (Confirmed)
 
                             Note over C,P: Compensation Path (Failure at Payment)
                             C->>O: POST /orders
+                            O->>O: Create Order (Pending)
+                            O-->>C: 201 Created
+                            Note over O,P: Asynchronous Saga Execution
                             O->>I: Reserve Stock (gRPC)
                             I-->>O: Success
                             O->>P: Charge Payment (gRPC)
@@ -457,8 +462,7 @@ service Order {
                             Note left of O: Rollback Started
                             O->>I: Release Stock (Compensate)
                             I-->>O: Confirmed
-                            O->>O: Cancel Order
-                            O-->>C: 500 Internal Error (Saga Failed)
+                            O->>O: Update Order (Cancelled)
                         </div>
                     </div>
                 </section>
