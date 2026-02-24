@@ -139,14 +139,30 @@
 
 
         .mermaid-container {
-            background: #fff;
-            padding: 2rem;
+            position: relative;
+            background: #0d1117;
+            /* GitHub dark background */
+            border: 1px solid #30363d;
+            /* GitHub border color */
             border-radius: 16px;
             margin: 3rem 0;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
             overflow: hidden;
+            height: 600px;
+        }
+
+        .mermaid {
+            width: 100%;
+            height: 100%;
             display: flex;
             justify-content: center;
+            align-items: center;
+        }
+
+        .mermaid svg {
+            width: 100% !important;
+            height: 100% !important;
+            max-width: none !important;
         }
 
         .back-link {
@@ -188,18 +204,54 @@
 
 
         body.light-mode .mermaid-container {
+            background: #ffffff;
+            border-color: #d0d7de;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
         }
     </style>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/svg-pan-zoom@3.6.1/dist/svg-pan-zoom.min.js"></script>
     <script type="module">
         import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+        const mermaidSavedTheme = localStorage.getItem('theme');
+        const mermaidPrefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
+        const mermaidIsLight = mermaidSavedTheme ? mermaidSavedTheme === 'light' : mermaidPrefersLight;
+
         mermaid.initialize({
-            startOnLoad: true,
-            theme: 'default',
+            startOnLoad: false,
+            theme: mermaidIsLight ? 'default' : 'dark',
             securityLevel: 'loose',
-            fontFamily: 'Inter'
+            fontFamily: 'Inter',
+            themeVariables: mermaidIsLight ? {} : {
+                // Approximate GitHub Dark variables
+                background: '#0d1117',
+                primaryColor: '#1f6feb',
+                primaryTextColor: '#c9d1d9',
+                primaryBorderColor: '#30363d',
+                lineColor: '#8b949e',
+                secondaryColor: '#238636',
+                tertiaryColor: '#283036'
+            }
         });
+
+        mermaid.run({
+            querySelector: '.mermaid'
+        }).then(() => {
+            const svgs = document.querySelectorAll('.mermaid svg');
+            svgs.forEach(svg => {
+                svgPanZoom(svg, {
+                    zoomEnabled: true,
+                    controlIconsEnabled: true,
+                    fit: true,
+                    center: true,
+                    minZoom: 0.5,
+                    maxZoom: 10
+                });
+                svg.style.cursor = 'grab';
+                svg.addEventListener('mousedown', () => svg.style.cursor = 'grabbing');
+                svg.addEventListener('mouseup', () => svg.style.cursor = 'grab');
+            });
+        }).catch(err => console.error(err));
 
         // Initialize Highlight.js
         hljs.highlightAll();
