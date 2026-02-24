@@ -262,11 +262,11 @@
                 <span></span>
             </div>
             <ul class="nav-links" id="nav-links">
-                <li><a href="../index.html#hero">Home</a></li>
-                <li><a href="../index.html#expertise">Expertise</a></li>
-                <li><a href="../index.html#experience">Experience</a></li>
-                <li><a href="../index.html#projects">Projects</a></li>
-                <li><a href="../index.html#contact">Contact</a></li>
+                <li><a href="../index.html#hero" data-i18n="nav_home">Home</a></li>
+                <li><a href="../index.html#expertise" data-i18n="nav_expertise">Expertise</a></li>
+                <li><a href="../index.html#experience" data-i18n="nav_experience">Experience</a></li>
+                <li><a href="../index.html#projects" data-i18n="nav_projects">Projects</a></li>
+                <li><a href="../index.html#contact" data-i18n="nav_contact">Contact</a></li>
                 <li>
                     <div class="lang-dropdown">
                         <button id="lang-btn" class="lang-btn" aria-label="Select Language">
@@ -294,7 +294,7 @@
 
     <main class="container">
         <article class="blog-post-content">
-            <a href="../index.html#projects" class="back-link">
+            <a href="../index.html#projects" class="back-link" data-i18n="blog_back">
                 <i class="fas fa-arrow-left"></i> Volver al Portafolio
             </a>
 
@@ -304,10 +304,11 @@
                     <span class="blog-tag">Go</span>
                     <span class="blog-tag">Case Study</span>
                 </div>
-                <h1 class="blog-title">Mastering Distributed Consistency: Building a Saga Orchestrator in Go</h1>
+                <h1 class="blog-title" data-i18n="blog_saga_title">Mastering Distributed Consistency: Building a Saga
+                    Orchestrator in Go</h1>
                 <div class="blog-meta">
-                    <span><i class="far fa-calendar-alt"></i> Febrero 2026</span>
-                    <span><i class="far fa-clock"></i> 8 min read</span>
+                    <span data-i18n="blog_saga_date"><i class="far fa-calendar-alt"></i> Febrero 2026</span>
+                    <span data-i18n="blog_saga_read"><i class="far fa-clock"></i> 8 min read</span>
                 </div>
 
                 <div class="blog-hero-image">
@@ -318,40 +319,48 @@
 
             <div class="blog-body">
                 <section>
-                    <h2>The Problem: When ACID Isn't Enough</h2>
-                    <p>En el mundo de las aplicaciones monolíticas, mantener la consistencia de los datos es sencillo:
+                    <h2 data-i18n="blog_saga_prob_title">The Problem: When ACID Isn't Enough</h2>
+                    <p data-i18n="blog_saga_prob_p1">En el mundo de las aplicaciones monolíticas, mantener la
+                        consistencia de los datos es sencillo:
                         confiamos en las transacciones ACID. Sin embargo, al movernos a <strong>Microservicios</strong>,
                         la "T" de ACID (Transacciones) se convierte en una pesadilla distribuida.</p>
 
-                    <p>Imagina un flujo de e-commerce:</p>
+                    <p data-i18n="blog_saga_prob_p2">Imagina un flujo de e-commerce:</p>
                     <ol>
-                        <li><strong>Order Service</strong> crea una orden.</li>
-                        <li><strong>Inventory Service</strong> reserva el stock.</li>
-                        <li><strong>Payment Service</strong> realiza el cobro al cliente.</li>
+                        <li data-i18n="blog_saga_prob_li1"><strong>Order Service</strong> crea una orden.</li>
+                        <li data-i18n="blog_saga_prob_li2"><strong>Inventory Service</strong> reserva el stock.</li>
+                        <li data-i18n="blog_saga_prob_li3"><strong>Payment Service</strong> realiza el cobro al cliente.
+                        </li>
                     </ol>
 
-                    <p>Si el pago falla, pero el stock ya ha sido reservado, nos enfrentamos a una "Reserva Zombie". El
+                    <p data-i18n="blog_saga_prob_p3">Si el pago falla, pero el stock ya ha sido reservado, nos
+                        enfrentamos a una "Reserva Zombie". El
                         tradicional <strong>Two-Phase Commit (2PC)</strong> es demasiado lento y crea un acoplamiento
                         fuerte, lo que lo hace inadecuado para entornos de nube de gran escala.</p>
                 </section>
 
                 <section>
-                    <h2>The Solution: The Saga Pattern</h2>
-                    <p>Para solucionar esto, implementé el <strong>Saga Pattern</strong>. Una Saga es una secuencia de
+                    <h2 data-i18n="blog_saga_sol_title">The Solution: The Saga Pattern</h2>
+                    <p data-i18n="blog_saga_sol_p1">Para solucionar esto, implementé el <strong>Saga Pattern</strong>.
+                        Una Saga es una secuencia de
                         transacciones locales. Cada paso tiene una <strong>Transacción de Compensación</strong>
                         correspondiente para deshacer los cambios si un paso posterior falla.</p>
 
-                    <h3>¿Por qué Orquestación sobre Coreografía?</h3>
-                    <p>Si bien la Coreografía (basada en eventos) es altamente desacoplada, puede llevar a "Flujos
+                    <h3 data-i18n="blog_saga_sol_h3">¿Por qué Orquestación sobre Coreografía?</h3>
+                    <p data-i18n="blog_saga_sol_p2">Si bien la Coreografía (basada en eventos) es altamente desacoplada,
+                        puede llevar a "Flujos
                         Spaghetti" donde rastrear el estado de una transacción se vuelve casi imposible. Elegí
                         <strong>Orquestación</strong>:
                     </p>
                     <ul>
-                        <li><strong>Lógica centralizada</strong>: Más fácil de mantener y razonar sobre flujos de
+                        <li data-i18n="blog_saga_sol_li1"><strong>Lógica centralizada</strong>: Más fácil de mantener y
+                            razonar sobre flujos de
                             negocio complejos.</li>
-                        <li><strong>Visibilidad del estado</strong>: El Orquestador sabe exactamente dónde está la
+                        <li data-i18n="blog_saga_sol_li2"><strong>Visibilidad del estado</strong>: El Orquestador sabe
+                            exactamente dónde está la
                             transacción en cualquier momento.</li>
-                        <li><strong>Debugging simplificado</strong>: El manejo de errores está consolidado en un solo
+                        <li data-i18n="blog_saga_sol_li3"><strong>Debugging simplificado</strong>: El manejo de errores
+                            está consolidado en un solo
                             lugar.</li>
                     </ul>
                 </section>
@@ -360,7 +369,11 @@
                     <h2>Tech Stack Decisions</h2>
 
                     <h3>gRPC: Contract-First Performance</h3>
-                    <p>La comunicación interna se basa en <strong>gRPC</strong> y <strong>Protocol Buffers</strong>.
+                    <h2 data-i18n="blog_saga_tech_title">Tech Stack Decisions</h2>
+
+                    <h3 data-i18n="blog_saga_tech_grpc_h3">gRPC: Contract-First Performance</h3>
+                    <p data-i18n="blog_saga_tech_grpc_p1">La comunicación interna se basa en <strong>gRPC</strong> y
+                        <strong>Protocol Buffers</strong>.
                         Comparado con REST/JSON, gRPC ofrece serialización binaria y un tipado fuerte.</p>
 
                     <pre><code class="language-protobuf">// order.proto snippet
@@ -372,15 +385,17 @@ service Order {
   rpc UpdateOrderStatus(UpdateOrderStatusRequest) returns (UpdateOrderStatusResponse);
 }</code></pre>
 
-                    <h3>Redis: The Idempotency Shield</h3>
-                    <p>Para lograr semántica de "exactamente una vez", cada paso está protegido por una <strong>Capa de
+                    <h3 data-i18n="blog_saga_tech_redis_h3">Redis: The Idempotency Shield</h3>
+                    <p data-i18n="blog_saga_tech_redis_p1">Para lograr semántica de "exactamente una vez", cada paso
+                        está protegido por una <strong>Capa de
                             Idempotencia</strong>. Redis actúa como un bloqueo distribuido, evitando que un reintento
                         procese el mismo pago dos veces.</p>
                 </section>
 
                 <section>
-                    <h2>Challenges & Lessons: The Art of Rollback</h2>
-                    <p>El mayor desafío fue manejar las <strong>Transacciones de Compensación</strong>. Si un paso
+                    <h2 data-i18n="blog_saga_challenge_title">Challenges & Lessons: The Art of Rollback</h2>
+                    <p data-i18n="blog_saga_challenge_p1">El mayor desafío fue manejar las <strong>Transacciones de
+                            Compensación</strong>. Si un paso
                         falla, el Orquestador debe activar los rollbacks en orden <strong>LIFO (Last-In,
                             First-Out)</strong>.</p>
 
@@ -395,7 +410,7 @@ service Order {
                 </section>
 
                 <section>
-                    <h2>Transaction Flow</h2>
+                    <h2 data-i18n="blog_saga_flow_title">Transaction Flow</h2>
                     <div class="mermaid-container">
                         <div class="mermaid">
                             sequenceDiagram
@@ -430,8 +445,9 @@ service Order {
                 </section>
 
                 <section>
-                    <h2>Final Thoughts</h2>
-                    <p>Construir este Orquestador de Sagas reforzó un principio clave de la ingeniería de backend:
+                    <h2 data-i18n="blog_saga_final_title">Final Thoughts</h2>
+                    <p data-i18n="blog_saga_final_p1">Construir este Orquestador de Sagas reforzó un principio clave de
+                        la ingeniería de backend:
                         <strong>La consistencia no es algo dado; es una decisión de diseño.</strong>
                     </p>
                 </section>
@@ -451,9 +467,9 @@ service Order {
             <div class="footer-col" style="text-align: left;">
                 <h4>Quick Links</h4>
                 <ul class="footer-links">
-                    <li><a href="../index.html#hero">Home</a></li>
-                    <li><a href="../index.html#projects">Projects</a></li>
-                    <li><a href="../index.html#contact">Contact</a></li>
+                    <li><a href="../index.html#hero" data-i18n="nav_home">Home</a></li>
+                    <li><a href="../index.html#projects" data-i18n="nav_projects">Projects</a></li>
+                    <li><a href="../index.html#contact" data-i18n="nav_contact">Contact</a></li>
                 </ul>
             </div>
             <div class="footer-col" style="text-align: left;">
@@ -467,7 +483,7 @@ service Order {
             </div>
         </div>
         <div class="footer-bottom">
-            <p>&copy; 2026 Juan Carlos Garcia. Todos los derechos reservados.</p>
+            <p data-i18n="footer_copy">&copy; 2026 Juan Carlos Garcia. Todos los derechos reservados.</p>
         </div>
     </footer>
 
