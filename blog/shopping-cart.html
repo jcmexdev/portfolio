@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Shopping Cart App in React Native | Case Study</title>
+    <meta name="description"
+        content="A deep dive into building a fast, native-feeling shopping cart application using React Native, Expo, and AsyncStorage for local persistence.">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://jcmexdev.github.io/portfolio/blog/shopping-cart.html">
+    <meta property="og:title" content="Building a Simple Shopping Cart App in React Native">
+    <meta property="og:description"
+        content="Exploring the implementation of a high-fidelity mobile shopping companion using React Native.">
+    <meta property="og:image" content="https://jcmexdev.github.io/portfolio/assets/images/avatar.png">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://jcmexdev.github.io/portfolio/blog/shopping-cart.html">
+    <meta property="twitter:title" content="Building a Simple Shopping Cart App in React Native">
+    <meta property="twitter:description"
+        content="Exploring the implementation of a high-fidelity mobile shopping companion using React Native.">
+    <meta property="twitter:image" content="https://jcmexdev.github.io/portfolio/assets/images/avatar.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../code-styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+        integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://t.contentsquare.net/uxa/b4c4b2b1bf890.js"></script>
+    <style>
+        .blog-post-content {
+            padding-top: 120px;
+            max-width: 850px;
+            margin: 0 auto;
+        }
+
+        .blog-header {
+            margin-bottom: 4rem;
+            text-align: left;
+        }
+
+        .blog-title {
+            font-size: 3.5rem;
+            line-height: 1.1;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            letter-spacing: -1px;
+            background: linear-gradient(90deg, var(--accent-color), var(--accent-secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .blog-meta {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .blog-body section {
+            margin-bottom: 3rem;
+        }
+
+        .blog-body h2 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-primary);
+            position: relative;
+            display: inline-block;
+        }
+
+        .blog-body h2::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background: var(--accent-color);
+            border-radius: 2px;
+        }
+
+        .blog-body h3 {
+            font-size: 1.4rem;
+            margin: 2rem 0 1rem;
+            color: var(--accent-color);
+        }
+
+        .blog-body p {
+            font-size: 1.15rem;
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+        }
+
+        .blog-body strong {
+            color: var(--text-primary);
+        }
+
+        .blog-body ul,
+        .blog-body ol {
+            margin-bottom: 1.5rem;
+            padding-left: 1.5rem;
+            color: var(--text-secondary);
+        }
+
+        .blog-body li {
+            margin-bottom: 0.75rem;
+            font-size: 1.1rem;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--accent-color);
+            margin-bottom: 2rem;
+            font-weight: 600;
+            transition: transform 0.3s ease;
+        }
+
+        .back-link:hover {
+            transform: translateX(-5px);
+        }
+
+        .tech-tags-inline {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+        }
+
+        .tech-tag {
+            background: rgba(0, 173, 216, 0.1);
+            color: var(--accent-color);
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            border: 1px solid rgba(0, 173, 216, 0.2);
+        }
+
+        .app-gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .app-gallery-grid img {
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease;
+        }
+
+        .app-gallery-grid img:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 173, 216, 0.2);
+        }
+
+        /* Light Mode Adjustments */
+        body.light-mode .blog-body p,
+        body.light-mode .blog-body li {
+            color: #4b5563;
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script>
+        // Initialize Highlight.js
+        document.addEventListener('DOMContentLoaded', (event) => {
+            hljs.highlightAll();
+        });
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "headline": "Building a Simple Shopping Cart App in React Native",
+      "image": "https://jcmexdev.github.io/portfolio/assets/images/avatar.png",
+      "author": {
+        "@type": "Person",
+        "name": "Juan Carlos Garcia",
+        "url": "https://jcmexdev.github.io/portfolio/"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Juan Carlos Garcia Portfolio",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://jcmexdev.github.io/portfolio/assets/images/avatar.png"
+        }
+      },
+      "datePublished": "2026-02-24",
+      "description": "Exploring the implementation of a high-fidelity mobile shopping companion using React Native."
+    }
+    </script>
+</head>
+
+<body data-page="cart">
+    <header class="header">
+        <nav class="navbar">
+            <a href="../index.html" class="logo">Sr<span class="highlight">Engineer</span><span class="dot">.</span></a>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-links" id="nav-links">
+                <li><a href="../index.html#projects" data-i18n="nav_projects">Projects</a></li>
+                <li>
+                    <div class="lang-dropdown">
+                        <button id="lang-btn" class="lang-btn" aria-label="Select Language">
+                            <span id="current-flag">🇺🇸</span> <svg class="arrow-icon"
+                                xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="M6 9l6 6 6-6" />
+                            </svg>
+                        </button>
+                        <ul class="lang-menu" id="lang-menu">
+                            <li data-lang="en">🇺🇸 English</li>
+                            <li data-lang="es">🇲🇽 Español</li>
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                        <span class="toggle-icon">🌙</span>
+                    </button>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="container">
+        <article class="blog-post-content">
+            <a href="../index.html#projects" class="back-link"><i class="fas fa-arrow-left"></i> <span
+                    data-i18n="blog_back_link">Back to Projects</span></a>
+
+            <header class="blog-header">
+                <h1 class="blog-title" data-i18n="blog_cart_title">Simple Shopping Cart App</h1>
+                <div class="tech-tags-inline">
+                    <span class="tech-tag">React Native</span>
+                    <span class="tech-tag">Expo SDK 54</span>
+                    <span class="tech-tag">AsyncStorage</span>
+                </div>
+                <div class="blog-meta">
+                    <span><i class="far fa-calendar"></i> Feb 24, 2026</span>
+                    <span><i class="far fa-clock"></i> 5 min read</span>
+                </div>
+            </header>
+
+            <div class="blog-body">
+                <section>
+                    <h2 data-i18n="blog_cart_overview_title">Project Description</h2>
+                    <p data-i18n="blog_cart_overview_p1"><strong>Simple Shopping Cart</strong> is a mobile application
+                        developed with React Native and Expo, designed to offer an intuitive, fast, and fluid experience
+                        in managing purchases and product catalogs.</p>
+                    <p data-i18n="blog_cart_overview_p2">The main objective of the application is to facilitate the
+                        creation and administration of detailed shopping lists for users, while allowing them to keep a
+                        record of different stores and products assigned to them. This lays the groundwork for future
+                        price comparison implementations, providing a comprehensive tool to optimize day-to-day
+                        shopping.</p>
+                    <p data-i18n="blog_cart_overview_p3">The application stands out for its minimalist design,
+                        prioritizing a clean interface with graphical components based on "chips", a focus on clear
+                        typography, support for a Dark Mode visual environment, and fluid interactions.</p>
+                    <div class="blog-hero-image"
+                        style="max-width: 400px; margin: 3rem auto; box-shadow: 0 20px 40px rgba(0,0,0,0.5);">
+                        <img src="../assets/videos/shopping-cart-demo.webp" alt="Shopping Cart Application Demo Video"
+                            class="hero-img">
+                    </div>
+                </section>
+
+                <section>
+                    <h2 data-i18n="blog_cart_features_title">Main Features</h2>
+                    <ul>
+                        <li data-i18n="blog_cart_feat_1"><strong>Cart Management:</strong> Creation, visualization, and
+                            organization of multiple shopping lists. On the main screen, users can check key information
+                            such as the title, date, and total cost of the cart.</li>
+                        <li data-i18n="blog_cart_feat_2"><strong>Product Details:</strong> Detailed visualization of
+                            items included in each cart, specifying the name, price, unit quantity, and accumulated
+                            cost.</li>
+                        <li data-i18n="blog_cart_feat_3"><strong>Dynamic Actions (Touch Interactions):</strong>
+                            Incorporation of swipeable panels on interface cards, allowing for agile and intuitive
+                            editing or deletion actions.</li>
+                        <li data-i18n="blog_cart_feat_4"><strong>Store Directory:</strong> Dedicated functionality to
+                            register and manage various establishments and branches. This contextualizes the catalog for
+                            advanced economic comparison features.</li>
+                        <li data-i18n="blog_cart_feat_5"><strong>Integrated Catalog:</strong> Interface designated to
+                            group, list, and edit products and their global characteristics directly in the application.
+                        </li>
+                        <li data-i18n="blog_cart_feat_6"><strong>Local Persistent Storage:</strong> Use of AsyncStorage
+                            for local saving of all information (carts, stores, and products), allowing an immediate
+                            response and an experience free of latencies tied to web connectivity.</li>
+                        <li data-i18n="blog_cart_feat_7"><strong>Complementary Native Modules:</strong> Integration of
+                            direct accessibility to the image roll and photo camera thanks to native submodules,
+                            enriching the way data is visualized.</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h2 data-i18n="blog_cart_tech_title">Technologies and Libraries Used</h2>
+
+                    <h3 data-i18n="blog_cart_tech_rn_h3">Core Framework</h3>
+                    <p data-i18n="blog_cart_tech_rn_p1"><strong>React Native (v0.81)</strong> along with <strong>Expo
+                            (SDK 54)</strong>. The project is built leveraging the New Architecture available.</p>
+
+                    <h3 data-i18n="blog_cart_tech_nav_h3">Routing & Data Control</h3>
+                    <p data-i18n="blog_cart_tech_nav_p1"><strong>React Navigation</strong> implementing both Bottom Tabs
+                        and standard Native Stack. <strong>AsyncStorage</strong> is used for cellular-level structural
+                        persistence.</p>
+
+                    <h3 data-i18n="blog_cart_tech_ui_h3">Interactivity, Gestures & Specialized Interfaces</h3>
+                    <p data-i18n="blog_cart_tech_ui_p1"><strong>React Native Gesture Handler</strong> in conjunction
+                        with Animatable utilities for fine-tuning component movement. <strong>Expo Camera</strong> and
+                        <strong>Expo Image Picker</strong> are used for specialized interfaces.
+                    </p>
+                </section>
+
+
+
+                <section>
+                    <h2 data-i18n="blog_cart_gallery_title">App Gallery</h2>
+                    <div class="app-gallery-grid">
+                        <img src="../assets/images/simple-shopping-cart/cart_screen_1.jpg" alt="Shopping Cart Screen 1">
+                        <img src="../assets/images/simple-shopping-cart/cart_screen_2.jpg" alt="Shopping Cart Screen 2">
+                        <img src="../assets/images/simple-shopping-cart/cart_screen_3.jpg" alt="Shopping Cart Screen 3">
+                        <img src="../assets/images/simple-shopping-cart/cart_screen_4.jpg" alt="Shopping Cart Screen 4">
+                        <img src="../assets/images/simple-shopping-cart/cart_screen_5.jpg" alt="Shopping Cart Screen 5">
+                        <img src="../assets/images/simple-shopping-cart/cart_screen_6.jpg" alt="Shopping Cart Screen 6">
+                    </div>
+                </section>
+
+                <section>
+                    <h2 data-i18n="blog_cart_arch_title">Architectural Style and Optimizations</h2>
+                    <p data-i18n="blog_cart_arch_p1">The project is designed keeping in mind fundamentals of
+                        "high-fidelity" user experience and mobile retention. The navigation is divided in such a way
+                        that all process flows predictably forward.</p>
+                    <p data-i18n="blog_cart_arch_p2">Graphically, everything has been structured into components and
+                        strict abstraction styles in `StyleSheet` to safeguard the maximum sustained display rate the
+                        smart device can reach. All visual styles follow a premium narrative free of inconsistencies and
+                        assist first-time users through text helpers for preliminary filling of empty information lists,
+                        paired with validations for assertive data entry.</p>
+                </section>
+
+
+            </div>
+        </article>
+    </main>
+
+    <footer class="footer">
+        <div class="container footer-container">
+            <div class="footer-col" style="text-align: left;">
+                <a href="../index.html" class="logo footer-logo">Sr<span class="highlight">Engineer</span><span
+                        class="dot">.</span></a>
+                <p class="footer-desc" data-i18n="footer_desc">
+                    Senior Software Engineer focused on distributed systems and high-concurrency architectures.
+                </p>
+            </div>
+            <div class="footer-col" style="text-align: left;">
+                <h4 data-i18n="footer_links">Quick Links</h4>
+                <ul class="footer-links">
+                    <li><a href="../index.html#hero" data-i18n="nav_home">Home</a></li>
+                    <li><a href="../index.html#projects" data-i18n="nav_projects">Projects</a></li>
+                    <li><a href="../index.html#contact" data-i18n="nav_contact">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-col" style="text-align: left;">
+                <h4 data-i18n="footer_social">Connect</h4>
+                <div class="social-links footer-socials">
+                    <a href="https://www.linkedin.com/in/juan-carlos-garcia-esquivel" title="LinkedIn"><i
+                            class="fab fa-linkedin"></i></a>
+                    <a href="https://github.com/jcmexdev" title="GitHub"><i class="fab fa-github"></i></a>
+                    <a href="mailto:email@example.com" title="Email"><i class="fas fa-envelope"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p data-i18n="footer_copy">&copy; 2026 Juan Carlos Garcia. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Custom Cursor -->
+    <div class="cursor-dot" id="cursorDot"></div>
+    <div class="cursor-outline" id="cursorOutline"></div>
+
+    <!-- Terminal Trigger Button -->
+    <div class="terminal-trigger" id="terminalTrigger" title="Open Terminal">
+        <i class="fas fa-terminal"></i>
+        <span class="tt">&gt;_ open terminal</span>
+    </div>
+
+    <!-- Terminal Overlay & Window -->
+    <div class="terminal-overlay" id="terminalOverlay">
+        <div class="terminal-window">
+            <div class="terminal-header">
+                <div class="terminal-buttons">
+                    <span class="close-btn" id="terminalClose"></span>
+                    <span class="minimize-btn"></span>
+                    <span class="maximize-btn"></span>
+                </div>
+                <span class="terminal-title">jcmexdev — portfolio — bash</span>
+            </div>
+            <div class="terminal-body" id="terminalBody">
+                <div class="output system">Welcome to jcmexdev's portfolio terminal v2.0</div>
+                <div class="output system">Type <span class="cmd">help</span> to see available commands.</div>
+                <br>
+                <div class="input-line">
+                    <span class="prompt">jcmexdev@portfolio:~$</span>
+                    <input type="text" id="terminalInput" autofocus autocomplete="off" spellcheck="false"
+                        placeholder="type a command...">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../locales/common.js"></script>
+    <script src="../locales/index.js"></script>
+    <script src="../script.js"></script>
+</body>
+
+</html>
