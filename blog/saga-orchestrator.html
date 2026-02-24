@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saga Orchestrator Case Study | Senior Backend Engineer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+        integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        .blog-post-content {
+            padding-top: 120px;
+            max-width: 850px;
+            margin: 0 auto;
+        }
+
+        .blog-header {
+            margin-bottom: 4rem;
+            text-align: left;
+        }
+
+        .blog-title {
+            font-size: 3.5rem;
+            line-height: 1.1;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            letter-spacing: -1px;
+            background: linear-gradient(90deg, var(--accent-color), var(--accent-secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .blog-meta {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .blog-body section {
+            margin-bottom: 3rem;
+        }
+
+        .blog-body h2 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-primary);
+            position: relative;
+            display: inline-block;
+        }
+
+        .blog-body h2::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background: var(--accent-color);
+            border-radius: 2px;
+        }
+
+        .blog-body h3 {
+            font-size: 1.4rem;
+            margin: 2rem 0 1rem;
+            color: var(--accent-color);
+        }
+
+        .blog-body p {
+            font-size: 1.15rem;
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+        }
+
+        .blog-body strong {
+            color: var(--text-primary);
+        }
+
+        .blog-body ul,
+        .blog-body ol {
+            margin-bottom: 1.5rem;
+            padding-left: 1.5rem;
+            color: var(--text-secondary);
+        }
+
+        .blog-body li {
+            margin-bottom: 0.75rem;
+            font-size: 1.1rem;
+        }
+
+        code {
+            background: rgba(0, 173, 216, 0.1);
+            color: var(--accent-color);
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.9em;
+        }
+
+        pre {
+            background: var(--bg-secondary);
+            padding: 1.5rem;
+            border-radius: 12px;
+            overflow-x: auto;
+            border: 1px solid var(--glass-border);
+            margin: 2rem 0;
+            position: relative;
+        }
+
+        pre code {
+            background: none;
+            padding: 0;
+            color: var(--text-primary);
+            font-size: 0.95rem;
+        }
+
+        .mermaid-container {
+            background: #fff;
+            padding: 2rem;
+            border-radius: 16px;
+            margin: 3rem 0;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--accent-color);
+            margin-bottom: 2rem;
+            font-weight: 600;
+            transition: transform 0.3s ease;
+        }
+
+        .back-link:hover {
+            transform: translateX(-5px);
+        }
+
+        .blog-tags {
+            display: flex;
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .blog-tag {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 0.3rem 0.8rem;
+            border-radius: 100px;
+            background: rgba(0, 173, 216, 0.15);
+            color: var(--accent-color);
+            font-weight: 700;
+        }
+
+        /* Light Mode Adjustments */
+        body.light-mode .blog-body p,
+        body.light-mode .blog-body li {
+            color: #4b5563;
+        }
+
+        body.light-mode pre {
+            background: #f8f9fa;
+        }
+
+        body.light-mode .mermaid-container {
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        }
+    </style>
+    <script type="module">
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'default',
+            securityLevel: 'loose',
+            fontFamily: 'Inter'
+        });
+    </script>
+</head>
+
+<body>
+    <header class="header">
+        <nav class="navbar">
+            <a href="../index.html" class="logo">Sr<span class="highlight">Engineer</span><span class="dot">.</span></a>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-links" id="nav-links">
+                <li><a href="../index.html#hero">Home</a></li>
+                <li><a href="../index.html#expertise">Expertise</a></li>
+                <li><a href="../index.html#experience">Experience</a></li>
+                <li><a href="../index.html#projects">Projects</a></li>
+                <li><a href="../index.html#contact">Contact</a></li>
+                <li>
+                    <div class="lang-dropdown">
+                        <button id="lang-btn" class="lang-btn" aria-label="Select Language">
+                            <span id="current-flag">🇲🇽</span> <svg class="arrow-icon"
+                                xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="M6 9l6 6 6-6" />
+                            </svg>
+                        </button>
+                        <ul class="lang-menu" id="lang-menu">
+                            <li data-lang="en">🇺🇸 English</li>
+                            <li data-lang="es">🇲🇽 Español</li>
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                        <span class="toggle-icon">🌙</span>
+                    </button>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="container">
+        <article class="blog-post-content">
+            <a href="../index.html#projects" class="back-link">
+                <i class="fas fa-arrow-left"></i> Volver al Portafolio
+            </a>
+
+            <header class="blog-header">
+                <div class="blog-tags">
+                    <span class="blog-tag">Distributed Systems</span>
+                    <span class="blog-tag">Go</span>
+                    <span class="blog-tag">Case Study</span>
+                </div>
+                <h1 class="blog-title">Mastering Distributed Consistency: Building a Saga Orchestrator in Go</h1>
+                <div class="blog-meta">
+                    <span><i class="far fa-calendar-alt"></i> Febrero 2026</span>
+                    <span><i class="far fa-clock"></i> 8 min read</span>
+                </div>
+            </header>
+
+            <div class="blog-body">
+                <section>
+                    <h2>The Problem: When ACID Isn't Enough</h2>
+                    <p>En el mundo de las aplicaciones monolíticas, mantener la consistencia de los datos es sencillo:
+                        confiamos en las transacciones ACID. Sin embargo, al movernos a <strong>Microservicios</strong>,
+                        la "T" de ACID (Transacciones) se convierte en una pesadilla distribuida.</p>
+
+                    <p>Imagina un flujo de e-commerce:</p>
+                    <ol>
+                        <li><strong>Order Service</strong> crea una orden.</li>
+                        <li><strong>Inventory Service</strong> reserva el stock.</li>
+                        <li><strong>Payment Service</strong> realiza el cobro al cliente.</li>
+                    </ol>
+
+                    <p>Si el pago falla, pero el stock ya ha sido reservado, nos enfrentamos a una "Reserva Zombie". El
+                        tradicional <strong>Two-Phase Commit (2PC)</strong> es demasiado lento y crea un acoplamiento
+                        fuerte, lo que lo hace inadecuado para entornos de nube de gran escala.</p>
+                </section>
+
+                <section>
+                    <h2>The Solution: The Saga Pattern</h2>
+                    <p>Para solucionar esto, implementé el <strong>Saga Pattern</strong>. Una Saga es una secuencia de
+                        transacciones locales. Cada paso tiene una <strong>Transacción de Compensación</strong>
+                        correspondiente para deshacer los cambios si un paso posterior falla.</p>
+
+                    <h3>¿Por qué Orquestación sobre Coreografía?</h3>
+                    <p>Si bien la Coreografía (basada en eventos) es altamente desacoplada, puede llevar a "Flujos
+                        Spaghetti" donde rastrear el estado de una transacción se vuelve casi imposible. Elegí
+                        <strong>Orquestación</strong>:
+                    </p>
+                    <ul>
+                        <li><strong>Lógica centralizada</strong>: Más fácil de mantener y razonar sobre flujos de
+                            negocio complejos.</li>
+                        <li><strong>Visibilidad del estado</strong>: El Orquestador sabe exactamente dónde está la
+                            transacción en cualquier momento.</li>
+                        <li><strong>Debugging simplificado</strong>: El manejo de errores está consolidado en un solo
+                            lugar.</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h2>Tech Stack Decisions</h2>
+
+                    <h3>gRPC: Contract-First Performance</h3>
+                    <p>La comunicación interna se basa en <strong>gRPC</strong> y <strong>Protocol Buffers</strong>.
+                        Comparado con REST/JSON, gRPC ofrece serialización binaria y un tipado fuerte.</p>
+
+                    <pre><code class="language-protobuf">// order.proto snippet
+service Order {
+  // Initiates a new purchase flow and starts the orchestration saga.
+  rpc CreateOrder(CreateOrderRequest) returns (CreateOrderResponse);
+  
+  // Updates internal status during the Saga lifecycle.
+  rpc UpdateOrderStatus(UpdateOrderStatusRequest) returns (UpdateOrderStatusResponse);
+}</code></pre>
+
+                    <h3>Redis: The Idempotency Shield</h3>
+                    <p>Para lograr semántica de "exactamente una vez", cada paso está protegido por una <strong>Capa de
+                            Idempotencia</strong>. Redis actúa como un bloqueo distribuido, evitando que un reintento
+                        procese el mismo pago dos veces.</p>
+                </section>
+
+                <section>
+                    <h2>Challenges & Lessons: The Art of Rollback</h2>
+                    <p>El mayor desafío fue manejar las <strong>Transacciones de Compensación</strong>. Si un paso
+                        falla, el Orquestador debe activar los rollbacks en orden <strong>LIFO (Last-In,
+                            First-Out)</strong>.</p>
+
+                    <pre><code class="language-go">func (o *Orchestrator) rollback(ctx context.Context, steps []Step) {
+    for i := len(steps) - 1; i >= 0; i-- {
+        step := steps[i]
+        if err := step.Compensate(ctx); err != nil {
+            slog.ErrorContext(ctx, "CRITICAL: compensation failed", "step", step.Name())
+        }
+    }
+}</code></pre>
+                </section>
+
+                <section>
+                    <h2>Transaction Flow</h2>
+                    <div class="mermaid-container">
+                        <div class="mermaid">
+                            sequenceDiagram
+                            participant C as Client
+                            participant O as Order Orchestrator
+                            participant I as Inventory
+                            participant P as Payment
+
+                            Note over C,P: Happy Path
+                            C->>O: POST /orders
+                            O->>I: Reserve Stock (gRPC)
+                            I-->>O: Success
+                            O->>P: Charge Payment (gRPC)
+                            P-->>O: Success
+                            O->>O: Confirm Order
+                            O-->>C: 201 Created
+
+                            Note over C,P: Compensation Path (Failure at Payment)
+                            C->>O: POST /orders
+                            O->>I: Reserve Stock (gRPC)
+                            I-->>O: Success
+                            O->>P: Charge Payment (gRPC)
+                            P-->>O: Payment Failed!
+
+                            Note left of O: Rollback Started
+                            O->>I: Release Stock (Compensate)
+                            I-->>O: Confirmed
+                            O->>O: Cancel Order
+                            O-->>C: 500 Internal Error (Saga Failed)
+                        </div>
+                    </div>
+                </section>
+
+                <section>
+                    <h2>Final Thoughts</h2>
+                    <p>Construir este Orquestador de Sagas reforzó un principio clave de la ingeniería de backend:
+                        <strong>La consistencia no es algo dado; es una decisión de diseño.</strong>
+                    </p>
+                </section>
+            </div>
+        </article>
+    </main>
+
+    <footer class="footer">
+        <div class="container footer-container">
+            <div class="footer-col" style="text-align: left;">
+                <a href="../index.html" class="logo footer-logo">Sr<span class="highlight">Engineer</span><span
+                        class="dot">.</span></a>
+                <p class="footer-desc">
+                    Senior Software Engineer enfocado en sistemas distribuidos y arquitecturas de alta concurrencia.
+                </p>
+            </div>
+            <div class="footer-col" style="text-align: left;">
+                <h4>Quick Links</h4>
+                <ul class="footer-links">
+                    <li><a href="../index.html#hero">Home</a></li>
+                    <li><a href="../index.html#projects">Projects</a></li>
+                    <li><a href="../index.html#contact">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-col" style="text-align: left;">
+                <h4>Connect</h4>
+                <div class="social-links footer-socials">
+                    <a href="https://www.linkedin.com/in/juan-carlos-garcia-esquivel" title="LinkedIn"><i
+                            class="fab fa-linkedin"></i></a>
+                    <a href="https://github.com/jcmexdev" title="GitHub"><i class="fab fa-github"></i></a>
+                    <a href="mailto:email@example.com" title="Email"><i class="fas fa-envelope"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Juan Carlos Garcia. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- Custom Cursor -->
+    <div class="cursor-dot" id="cursorDot"></div>
+    <div class="cursor-outline" id="cursorOutline"></div>
+
+    <!-- Terminal Trigger Button -->
+    <div class="terminal-trigger" id="terminalTrigger" title="Open Terminal">
+        <i class="fas fa-terminal"></i>
+        <span class="tt">&gt;_ open terminal</span>
+    </div>
+
+    <!-- Terminal Overlay & Window -->
+    <div class="terminal-overlay" id="terminalOverlay">
+        <div class="terminal-window">
+            <div class="terminal-header">
+                <div class="terminal-buttons">
+                    <span class="close-btn" id="terminalClose"></span>
+                    <span class="minimize-btn"></span>
+                    <span class="maximize-btn"></span>
+                </div>
+                <span class="terminal-title">jcmexdev — portfolio — bash</span>
+            </div>
+            <div class="terminal-body" id="terminalBody">
+                <div class="output system">Welcome to jcmexdev's portfolio terminal v2.0</div>
+                <div class="output system">Type <span class="cmd">help</span> to see available commands.</div>
+                <br>
+                <div class="input-line">
+                    <span class="prompt">jcmexdev@portfolio:~$</span>
+                    <input type="text" id="terminalInput" autofocus autocomplete="off" spellcheck="false"
+                        placeholder="type a command...">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../script.js"></script>
+    <script>
+        // ── Theme Toggle Logic ───────────────────────────────────────────
+        const themeToggle = document.getElementById('themeToggle');
+        const toggleIcon = themeToggle.querySelector('.toggle-icon');
+
+        function applyTheme(isLight) {
+            document.body.classList.toggle('light-mode', isLight);
+            toggleIcon.textContent = isLight ? '☀️' : '🌙';
+        }
+
+        const savedTheme = localStorage.getItem('theme');
+        const prefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
+        applyTheme(savedTheme ? savedTheme === 'light' : prefersLight);
+
+        themeToggle.addEventListener('click', () => {
+            const isLight = !document.body.classList.contains('light-mode');
+            applyTheme(isLight);
+            localStorage.setItem('theme', isLight ? 'light' : 'dark');
+        });
+
+        // ── Custom Cursor Logic ──────────────────────────────────────────
+        const dot = document.getElementById('cursorDot');
+        const outline = document.getElementById('cursorOutline');
+        if (window.matchMedia('(pointer: fine)').matches) {
+            document.body.style.cursor = 'none';
+            let outlineX = 0, outlineY = 0;
+            window.addEventListener('mousemove', e => {
+                dot.style.left = e.clientX + 'px';
+                dot.style.top = e.clientY + 'px';
+                outlineX += (e.clientX - outlineX) * 0.15;
+                outlineY += (e.clientY - outlineY) * 0.15;
+                outline.style.left = outlineX + 'px';
+                outline.style.top = outlineY + 'px';
+            });
+            document.querySelectorAll('a, button, .terminal-trigger').forEach(el => {
+                el.addEventListener('mouseenter', () => outline.classList.add('hover'));
+                el.addEventListener('mouseleave', () => outline.classList.remove('hover'));
+            });
+        }
+
+        // ── Terminal Trigger ─────────────────────────────────────────
+        const trigger = document.getElementById('terminalTrigger');
+        const overlay = document.getElementById('terminalOverlay');
+        const closeBtn = document.getElementById('terminalClose');
+        const input = document.getElementById('terminalInput');
+
+        trigger.addEventListener('click', () => {
+            overlay.classList.add('active');
+            setTimeout(() => input.focus(), 300);
+        });
+
+        closeBtn.addEventListener('click', () => {
+            overlay.classList.remove('active');
+        });
+    </script>
+</body>
+
+</html>
