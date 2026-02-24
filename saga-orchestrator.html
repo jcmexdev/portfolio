@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saga Orchestrator Case Study | Senior Backend Engineer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --bg-page: #0f172a;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --accent: #38bdf8;
+            --card-bg: #1e293b;
+        }
+
+        body {
+            background-color: var(--bg-page);
+            color: var(--text-main);
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+
+        .back-nav {
+            padding: 2rem 0;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        .blog-header {
+            margin-bottom: 3rem;
+        }
+
+        .blog-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(90deg, #fff, var(--accent));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .blog-content h2 {
+            font-size: 1.8rem;
+            margin-top: 2.5rem;
+            color: var(--accent);
+        }
+
+        .blog-content h3 {
+            font-size: 1.4rem;
+            margin-top: 2rem;
+            color: #fff;
+        }
+
+        .blog-content p {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+        }
+
+        code {
+            background: #000;
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            font-family: 'Courier New', Courier, monospace;
+            color: var(--accent);
+        }
+
+        pre {
+            background: #000;
+            padding: 1.5rem;
+            border-radius: 8px;
+            overflow-x: auto;
+            border: 1px solid #334155;
+            margin: 1.5rem 0;
+        }
+
+        pre code {
+            background: none;
+            padding: 0;
+            color: #e2e8f0;
+        }
+
+        .mermaid {
+            background: white;
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 2rem 0;
+            text-align: center;
+        }
+
+        .btn-back {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 500;
+            transition: transform 0.2s;
+        }
+
+        .btn-back:hover {
+            transform: translateX(-5px);
+        }
+
+        footer {
+            margin-top: 5rem;
+            padding-bottom: 3rem;
+            border-top: 1px solid #334155;
+            padding-top: 2rem;
+            text-align: center;
+            color: var(--text-muted);
+        }
+
+        .tag {
+            background: rgba(56, 189, 248, 0.1);
+            color: var(--accent);
+            padding: 0.25rem 0.75rem;
+            border-radius: 99px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            margin-right: 0.5rem;
+        }
+    </style>
+    <script type="module">
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+        mermaid.initialize({ startOnLoad: true, theme: 'dark' });
+    </script>
+</head>
+
+<body>
+    <div class="back-nav">
+        <div class="container">
+            <a href="index.html#projects" class="btn-back">
+                <i class="fas fa-arrow-left"></i> Back to Portfolio
+            </a>
+        </div>
+    </div>
+
+    <article class="container blog-content">
+        <header class="blog-header">
+            <span class="tag">Case Study</span>
+            <span class="tag">Golang</span>
+            <span class="tag">Distributed Systems</span>
+            <h1>Mastering Distributed Consistency: Building a Saga Orchestrator in Go</h1>
+            <p>February 2026 • 8 min read</p>
+        </header>
+
+        <section>
+            <h2>The Problem: When ACID Isn't Enough</h2>
+            <p>In the world of monolithic applications, maintaining data consistency is straightforward: we rely on ACID
+                transactions. However, as we move to <strong>Microservices</strong>, the "T" in ACID (Transactions)
+                becomes a distributed nightmare.</p>
+
+            <p>Imagine an e-commerce flow:
+            <ol>
+                <li><strong>Order Service</strong> creates an order.</li>
+                <li><strong>Inventory Service</strong> reserves stock.</li>
+                <li><strong>Payment Service</strong> charges the customer.</li>
+            </ol>
+            </p>
+
+            <p>If the payment fails, but the stock is already reserved, we face a "Zombie Reservation." Traditional
+                <strong>Two-Phase Commit (2PC)</strong> is too slow and creates tight coupling, making it unsuitable for
+                high-scale cloud environments.</p>
+        </section>
+
+        <section>
+            <h2>The Solution: The Saga Pattern</h2>
+            <p>To solve this, I implemented the <strong>Saga Pattern</strong>. A Saga is a sequence of local
+                transactions. Each step has a corresponding <strong>Compensating Transaction</strong> to undo changes if
+                a subsequent step fails.</p>
+
+            <h3>Why Orchestration over Choreography?</h3>
+            <p>While Choreography (event-driven) is highly decoupled, it can lead to "Spaghetti Flows" where tracing a
+                transaction's state becomes nearly impossible. I chose <strong>Orchestration</strong>:</p>
+            <ul>
+                <li><strong>Centralized logic</strong>: Easier to maintain and reason about complex business workflows.
+                </li>
+                <li><strong>State visibility</strong>: The Orchestrator knows exactly where the transaction is at any
+                    time.</li>
+                <li><strong>Simpler debugging</strong>: Error handling is consolidated in one place.</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Tech Stack Decisions</h2>
+
+            <h3>gRPC: Contract-First Performance</h3>
+            <p>Internal communication relies on <strong>gRPC</strong> and <strong>Protocol Buffers</strong>. Compared to
+                REST/JSON, gRPC offers binary serialization and strong typing.</p>
+
+            <pre><code class="language-protobuf">// order.proto snippet
+service Order {
+  // Initiates a new purchase flow and starts the orchestration saga.
+  rpc CreateOrder(CreateOrderRequest) returns (CreateOrderResponse);
+  
+  // Updates internal status during the Saga lifecycle.
+  rpc UpdateOrderStatus(UpdateOrderStatusRequest) returns (UpdateOrderStatusResponse);
+}</code></pre>
+
+            <h3>Redis: The Idempotency Shield</h3>
+            <p>To achieve "exactly-once" semantics, every step is guarded by an <strong>Idempotency Layer</strong>.
+                Redis acts as a distributed lock, preventing a retry from processing the same payment twice.</p>
+        </section>
+
+        <section>
+            <h2>Challenges & Lessons: The Art of Rollback</h2>
+            <p>The biggest challenge was handling <strong>Compensating Transactions</strong>. If a step fails, the
+                Orchestrator must trigger rollbacks in <strong>LIFO (Last-In, First-Out)</strong> order.</p>
+
+            <pre><code class="language-go">func (o *Orchestrator) rollback(ctx context.Context, steps []Step) {
+    for i := len(steps) - 1; i >= 0; i-- {
+        step := steps[i]
+        if err := step.Compensate(ctx); err != nil {
+            slog.ErrorContext(ctx, "CRITICAL: compensation failed", "step", step.Name())
+        }
+    }
+}</code></pre>
+        </section>
+
+        <section>
+            <h2>Transaction Flow</h2>
+            <div class="mermaid">
+                sequenceDiagram
+                participant C as Client
+                participant O as Order Orchestrator
+                participant I as Inventory
+                participant P as Payment
+
+                Note over C,P: Happy Path
+                C->>O: POST /orders
+                O->>I: Reserve Stock (gRPC)
+                I-->>O: Success
+                O->>P: Charge Payment (gRPC)
+                P-->>O: Success
+                O->>O: Confirm Order
+                O-->>C: 201 Created
+
+                Note over C,P: Compensation Path (Failure at Payment)
+                C->>O: POST /orders
+                O->>I: Reserve Stock (gRPC)
+                I-->>O: Success
+                O->>P: Charge Payment (gRPC)
+                P-->>O: Payment Failed!
+
+                Note left of O: Rollback Started
+                O->>I: Release Stock (Compensate)
+                I-->>O: Confirmed
+                O->>O: Cancel Order
+                O-->>C: 500 Internal Error (Saga Failed)
+            </div>
+        </section>
+
+        <section>
+            <h2>Final Thoughts</h2>
+            <p>Building this Saga Orchestrator reinforced a key principle of backend engineering: <strong>Consistency is
+                    not a given; it's a design choice.</strong></p>
+        </section>
+    </article>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Juan Carlos Garcia • Built with Go & Passion</p>
+        </div>
+    </footer>
+</body>
+
+</html>
