@@ -205,4 +205,50 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     // Run setup
     setupCodeBlocks();
+
+    // ── Experience Section: Scroll-Reveal + Metric Counters ──────────
+    function easeOutQuart(t) { return 1 - Math.pow(1 - t, 4); }
+
+    function animateExpCounter(el) {
+        const target = parseInt(el.dataset.target, 10);
+        const suffix = el.dataset.suffix || '';
+        const duration = 1400;
+        const start = performance.now();
+
+        function step(now) {
+            const elapsed = Math.min(now - start, duration);
+            const progress = easeOutQuart(elapsed / duration);
+            el.textContent = Math.round(target * progress) + suffix;
+            if (elapsed < duration) requestAnimationFrame(step);
+        }
+        requestAnimationFrame(step);
+    }
+
+    const expItems = document.querySelectorAll('.exp-reveal');
+    if (expItems.length) {
+        const expObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) return;
+
+                const item = entry.target;
+                item.classList.add('is-visible');
+
+                // Animate numeric counter
+                item.querySelectorAll('.exp-metric-number').forEach(el => {
+                    animateExpCounter(el);
+                });
+
+                // Animate progress bar fill
+                item.querySelectorAll('.exp-metric-bar-fill').forEach(bar => {
+                    const w = bar.dataset.width || '0';
+                    // Small delay so the card animation plays first
+                    setTimeout(() => { bar.style.width = w + '%'; }, 200);
+                });
+
+                expObserver.unobserve(item);
+            });
+        }, { threshold: 0.25 });
+
+        expItems.forEach(item => expObserver.observe(item));
+    }
 });
