@@ -186,7 +186,101 @@ permalink: "cv.html"
         </div>
     </main>
     {% include "partials/footer.njk" %}
+
+    <!-- Custom Cursor -->
+    <div class="cursor-dot" id="cursorDot"></div>
+    <div class="cursor-outline" id="cursorOutline"></div>
+
+    <!-- Terminal Trigger Button -->
+    <div class="terminal-trigger" id="terminalTrigger" title="Open Terminal">
+        <i class="fas fa-terminal"></i>
+        <span class="tt">&gt;_ open terminal</span>
+    </div>
+
+    <!-- Terminal Overlay & Window -->
+    <div class="terminal-overlay" id="terminalOverlay">
+        <div class="terminal-window">
+            <div class="terminal-header">
+                <div class="terminal-buttons">
+                    <span class="close-btn" id="terminalClose"></span>
+                    <span class="minimize-btn"></span>
+                    <span class="maximize-btn"></span>
+                </div>
+                <span class="terminal-title">jcmexdev — portfolio — bash</span>
+            </div>
+            <div class="terminal-body" id="terminalBody">
+                <div class="output system">Welcome to jcmexdev's portfolio terminal v2.0</div>
+                <div class="output system">Type <span class="cmd">help</span> to see available commands.</div>
+                <br>
+                <div class="input-line">
+                    <span class="prompt">jcmexdev@portfolio:~$</span>
+                    <input type="text" id="terminalInput" autofocus autocomplete="off" spellcheck="false"
+                        placeholder="type a command...">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="locales/common.js"></script>
+    <script src="locales/index.js"></script>
     <script src="script.js"></script>
+    <script>
+        // ── Theme Toggle Logic ───────────────────────────────────────────
+        const themeToggle = document.getElementById('themeToggle');
+        const toggleIcon = themeToggle.querySelector('.toggle-icon');
+
+        function applyTheme(isLight) {
+            document.body.classList.toggle('light-mode', isLight);
+            if (toggleIcon) toggleIcon.textContent = isLight ? '☀️' : '🌙';
+        }
+
+        const savedTheme = localStorage.getItem('theme');
+        const prefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
+        applyTheme(savedTheme ? savedTheme === 'light' : prefersLight);
+
+        if (themeToggle) {
+            themeToggle.addEventListener('click', () => {
+                const isLight = !document.body.classList.contains('light-mode');
+                applyTheme(isLight);
+                localStorage.setItem('theme', isLight ? 'light' : 'dark');
+            });
+        }
+
+        // ── Custom Cursor Logic ──────────────────────────────────────────
+        const dot = document.getElementById('cursorDot');
+        const outline = document.getElementById('cursorOutline');
+        if (window.matchMedia('(pointer: fine)').matches) {
+            document.body.style.cursor = 'none';
+            let outlineX = 0, outlineY = 0;
+            window.addEventListener('mousemove', e => {
+                dot.style.left = e.clientX + 'px';
+                dot.style.top = e.clientY + 'px';
+                outlineX += (e.clientX - outlineX) * 0.15;
+                outlineY += (e.clientY - outlineY) * 0.15;
+                outline.style.left = outlineX + 'px';
+                outline.style.top = outlineY + 'px';
+            });
+            document.querySelectorAll('a, button, .terminal-trigger').forEach(el => {
+                el.addEventListener('mouseenter', () => outline.classList.add('hover'));
+                el.addEventListener('mouseleave', () => outline.classList.remove('hover'));
+            });
+        }
+
+        // ── Terminal Trigger ─────────────────────────────────────────
+        const trigger = document.getElementById('terminalTrigger');
+        const overlay = document.getElementById('terminalOverlay');
+        const closeBtn = document.getElementById('terminalClose');
+        const input = document.getElementById('terminalInput');
+
+        trigger.addEventListener('click', () => {
+            overlay.classList.add('active');
+            setTimeout(() => input.focus(), 300);
+        });
+
+        closeBtn.addEventListener('click', () => {
+            overlay.classList.remove('active');
+        });
+    </script>
 </body>
 
 </html>
