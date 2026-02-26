@@ -48,7 +48,10 @@ body.light-mode .cv-document {
     font-size: 18pt;
     text-align: center;
     font-weight: 700;
-    margin-bottom: 0.25rem;
+    margin-top: 2rem;
+    /* Added to push name down */
+    margin-bottom: 0.75rem;
+    /* Increased from 0.25rem */
     font-family: 'Inter', sans-serif;
     /* Keep Name slightly modern but bold */
     letter-spacing: 1px;
@@ -59,7 +62,8 @@ body.light-mode .cv-document {
     font-size: 9pt;
     font-family: 'Inter', sans-serif;
     color: #333;
-    margin-bottom: 0.5rem;
+    margin-bottom: 1.5rem;
+    /* Increased from 0.5rem */
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -73,7 +77,8 @@ body.light-mode .cv-document {
 }
 
 .cv-summary {
-    margin-bottom: 1rem;
+    margin-bottom: 2rem;
+    /* Increased from 1rem */
     text-align: justify;
 }
 
