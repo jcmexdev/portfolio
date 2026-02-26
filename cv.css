@@ -1,0 +1,213 @@
+/*
+  cv.css - Styles specifically for the Harvard CV page
+*/
+
+.cv-main-wrapper {
+    padding-top: 120px;
+    padding-bottom: 80px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: var(--bg-color);
+    font-family: var(--font-main);
+}
+
+.cv-toolbar {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    width: 100%;
+    max-width: 800px;
+    /* same width as document */
+    justify-content: flex-end;
+    padding: 0 1rem;
+}
+
+/* The physical paper look */
+.cv-document {
+    background-color: #ffffff;
+    color: #000000;
+    width: 100%;
+    max-width: 850px;
+    font-family: 'Merriweather', 'Times New Roman', serif;
+    font-size: 10pt;
+    line-height: 1.45;
+    padding: 30px 50px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    border-radius: 4px;
+}
+
+body.light-mode .cv-document {
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    border: 1px solid #eaeaea;
+}
+
+/* Typography Overrides inside the document */
+.cv-document h1 {
+    font-size: 18pt;
+    text-align: center;
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+    font-family: 'Inter', sans-serif;
+    /* Keep Name slightly modern but bold */
+    letter-spacing: 1px;
+}
+
+.cv-contact-info {
+    text-align: center;
+    font-size: 9pt;
+    font-family: 'Inter', sans-serif;
+    color: #333;
+    margin-bottom: 0.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.cv-contact-info span:not(:last-child)::after {
+    content: " | ";
+    margin-left: 0.5rem;
+    color: #999;
+}
+
+.cv-summary {
+    margin-bottom: 1rem;
+    text-align: justify;
+}
+
+.cv-section {
+    margin-bottom: 1rem;
+}
+
+.cv-section-title {
+    font-family: 'Inter', sans-serif;
+    font-size: 11pt;
+    font-weight: 600;
+    text-transform: uppercase;
+    border-bottom: 1px solid #000;
+    padding-bottom: 4px;
+    margin-bottom: 0.5rem;
+    letter-spacing: 0.5px;
+}
+
+.cv-experience-item {
+    margin-bottom: 0.75rem;
+}
+
+.cv-exp-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 0.25rem;
+}
+
+.cv-exp-left strong {
+    font-family: 'Inter', sans-serif;
+    font-size: 11pt;
+}
+
+.cv-role {
+    font-style: italic;
+    margin-left: 0.25rem;
+}
+
+.cv-exp-right {
+    text-align: right;
+    font-size: 9.5pt;
+    white-space: nowrap;
+}
+
+.cv-bullets {
+    margin: 0;
+    padding-left: 1.25rem;
+}
+
+.cv-bullets.cv-clean li {
+    margin-bottom: 0.25rem;
+}
+
+.cv-bullets li {
+    margin-bottom: 0.2rem;
+    text-align: justify;
+}
+
+/* Print Styles */
+@media print {
+
+    html,
+    body {
+        background: #fff !important;
+        height: auto !important;
+        min-height: auto !important;
+        overflow: visible !important;
+    }
+
+    .header,
+    .footer,
+    .cv-toolbar,
+    .terminal-trigger {
+        display: none !important;
+    }
+
+    .cv-main-wrapper {
+        padding: 0 !important;
+        background: transparent !important;
+        display: block !important;
+        height: auto !important;
+        min-height: auto !important;
+        overflow: visible !important;
+        margin: 0 !important;
+    }
+
+    .cv-document {
+        box-shadow: none !important;
+        border: none !important;
+        padding: 0.5cm 1cm !important;
+        max-width: none !important;
+        color: #000 !important;
+        display: block !important;
+        height: auto !important;
+        overflow: visible !important;
+        margin: 0 !important;
+        zoom: 0.82;
+        /* Uniformly scales down to fit on A4 without squishing CSS values manually */
+    }
+
+    .cv-section {
+        /* Allow sections to split across pages in the middle */
+        page-break-inside: auto;
+        break-inside: auto;
+    }
+
+    .cv-experience-item {
+        /* Keep individual jobs/items intact on the same page */
+        page-break-inside: avoid;
+        break-inside: avoid;
+    }
+
+    @page {
+        margin: 0;
+    }
+}
+
+/* Mobile responsiveness for reading */
+@media screen and (max-width: 768px) {
+    .cv-document {
+        padding: 30px 20px;
+        border-radius: 0;
+    }
+
+    .cv-exp-header {
+        flex-direction: column;
+    }
+
+    .cv-exp-right {
+        text-align: left;
+        color: #555;
+        font-size: 9.5pt;
+        margin-top: 0.25rem;
+        margin-bottom: 0.5rem;
+    }
+}

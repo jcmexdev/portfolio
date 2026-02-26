@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Juan Carlos Garcia | Curriculum Vitae</title>
+    <meta name="description" content="Harvard format Resume / CV of Juan Carlos Garcia, Senior Software Engineer.">
+    <meta name="author" content="Juan Carlos Garcia">
+
+    <!-- Fonts (Inter for UI, Merriweather for the CV itself to give a classic Harvard look) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Merriweather:ital,wght@0,300;0,400;0,700;1,400&display=swap"
+        rel="stylesheet">
+
+    <!-- External Styles -->
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="cv.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+        integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body data-page="cv">
+    <header class="header">
+        <nav class="navbar">
+            <a href="index.html" class="logo">Sr<span class="highlight">Engineer</span><span class="dot">.</span></a>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-links" id="nav-links">
+                <li><a href="index.html#hero" data-i18n="nav_home">Home</a></li>
+                <li><a href="index.html#expertise" data-i18n="nav_expertise">Expertise</a></li>
+                <li><a href="index.html#experience" data-i18n="nav_experience">Experience</a></li>
+                <li><a href="index.html#projects" data-i18n="nav_projects">Projects</a></li>
+                <li><a href="cv.html" class="active" data-i18n="nav_resume">Resume</a></li>
+                <li><a href="index.html#contact" data-i18n="nav_contact">Contact</a></li>
+                <li>
+                    <div class="lang-dropdown">
+                        <button id="lang-btn" class="lang-btn" aria-label="Select Language">
+                            <span id="current-flag">🇺🇸</span> <svg class="arrow-icon"
+                                xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="M6 9l6 6 6-6" />
+                            </svg>
+                        </button>
+                        <ul class="lang-menu" id="lang-menu">
+                            <li data-lang="en">🇺🇸 English</li>
+                            <li data-lang="es">🇲🇽 Español</li>
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                        <span class="toggle-icon">🌙</span>
+                    </button>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    <main class="cv-main-wrapper">
+        <div class="cv-toolbar">
+            <button onclick="window.print()" class="btn secondary cv-print-btn">
+                <i class="fas fa-print"></i> Print
+            </button>
+        </div>
+
+        <!-- The actual Harvard format document -->
+        <div class="cv-document">
+
+            <header class="cv-doc-header">
+                <h1>JUAN CARLOS GARCIA ESQUIVEL</h1>
+                <div class="cv-contact-info">
+                    <span><i class="fab fa-linkedin" style="margin-right: 4px;"></i>
+                        juan-carlos-garcia-esquivel</span>
+                    <span><i class="fab fa-github" style="margin-right: 4px;"></i> @jcmexdev</span>
+                    <span><i class="fas fa-phone-alt" style="margin-right: 4px;"></i> +52 554-021-4954</span>
+                    <span><i class="fas fa-envelope" style="margin-right: 4px;"></i>
+                        carlos.garcia.esquivel@live.com.mx</span>
+                </div>
+            </header>
+
+            <div class="cv-summary">
+                <p>Seasoned software engineer with a strong track record in crafting, building, and upkeeping top-tier
+                    software solutions. My dedication revolves around ensuring the consistent delivery of high-value
+                    products, achieved through a blend of technical prowess, effective communication, and collaborative
+                    teamwork.</p>
+            </div>
+
+            <section class="cv-section">
+                <h2 class="cv-section-title">EXPERIENCE</h2>
+
+                <div class="cv-experience-item">
+                    <div class="cv-exp-header">
+                        <div class="cv-exp-left">
+                            <strong>MERCADO LIBRE</strong> <span class="cv-role">Senior Software Engineer</span>
+                        </div>
+                        <div class="cv-exp-right">
+                            Ciudad de México, México | May 2025 – Present
+                        </div>
+                    </div>
+                    <ul class="cv-bullets">
+                        <li>Construction of high volume payment systems (credit cards and funding), processing
+                            approximately MXN $400M daily.</li>
+                        <li>Design and implementation of backend solutions in Go, contributing to key technical
+                            decisions.</li>
+                        <li>Writing documentation for technical specifications, validation, and production readiness.
+                        </li>
+                        <li>Optimization of transaction processing, achieving a ~75% reduction in average execution
+                            time.</li>
+                        <li>Improvement of CI/CD pipelines by designing a test matrix with full traceability.</li>
+                        <li>Increased observability and cost efficiency through the analysis of logs and traces.</li>
+                        <li>Working with asynchronous architectures using SQS and Kinesis.</li>
+                        <li>Performing code reviews and applying engineering standards.</li>
+                    </ul>
+                </div>
+
+                <div class="cv-experience-item">
+                    <div class="cv-exp-header">
+                        <div class="cv-exp-left">
+                            <strong>DEUNA</strong> <span class="cv-role">Tech Lead</span>
+                        </div>
+                        <div class="cv-exp-right">
+                            Remote from México | Apr 2024 – Present
+                        </div>
+                    </div>
+                    <ul class="cv-bullets">
+                        <li>Optimized critical payment operations by implementing asynchronous and sequential
+                            transaction processing, impacting 80% of transactions and reducing processing errors by 40%.
+                        </li>
+                        <li>Improved high-volume task processing by developing Go services that handle 60-70% of
+                            transactions, reducing execution time by 45% (from ~2.2s to ~1.2s per transaction) and
+                            ensuring sequential processing of refunds and captures.</li>
+                        <li>Increased system reliability through E2E automation, achieving a 90% reduction in fraud API
+                            response failures and increasing test coverage by 40% in critical areas of the application.
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="cv-experience-item">
+                    <div class="cv-exp-header">
+                        <div class="cv-exp-left">
+                            <strong>99MINUTOS</strong> <span class="cv-role">Sr Software Engineer | Tech Lead</span>
+                        </div>
+                        <div class="cv-exp-right">
+                            Remote from México | Sep 2021 – Dec 2024
+                        </div>
+                    </div>
+                    <ul class="cv-bullets">
+                        <li>Optimized critical operations, impacting 30% of services and cutting response time from
+                            ~2.2s to ~1.2s by decoupling modules into microservices (Go, Node, PHP).</li>
+                        <li>Enhanced software quality with TDD and Hexagonal Architecture, reducing production errors by
+                            90%.</li>
+                        <li>Led the integration of new features into multiple engineering team workflows.</li>
+                        <li>Improved system maintainability and collaboration by implementing C4 architecture
+                            documentation.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="cv-section">
+                <h2 class="cv-section-title">TECHNICAL SKILLS</h2>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; margin-top: 0.25rem;">
+                    <div>
+                        <strong>Languages & Frameworks:</strong><br>
+                        Golang, JavaScript / Node.js, React Js/Native, PHP / Laravel, TypeScript
+                    </div>
+                    <div>
+                        <strong>Architecture:</strong><br>
+                        Microservices, Domain Driven Design, API REST, Hexagonal Architecture
+                    </div>
+                    <div>
+                        <strong>Databases & Cloud:</strong><br>
+                        SQL & NoSQL, AWS, Docker
+                    </div>
+                    <div>
+                        <strong>Practices:</strong><br>
+                        Agile & Scrum Methodologies, Test Driven Development, Design Patterns
+                    </div>
+                </div>
+            </section>
+
+            <section class="cv-section">
+                <h2 class="cv-section-title">SOFT SKILLS</h2>
+                <div style="text-align: justify; margin-top: 0.25rem;">
+                    Task Prioritization & Estimation, Lifelong Learning & Positive Mindset, Effective Time Management,
+                    Adaptability & Change Management, Clear and Assertive Communication, Team Collaboration &
+                    Integration, Mentorship & Knowledge Sharing, Problem-Solving & Critical Thinking, Resilience &
+                    Stress Management.
+                </div>
+            </section>
+
+            <section class="cv-section">
+                <h2 class="cv-section-title">EDUCATION</h2>
+                <div class="cv-experience-item">
+                    <div class="cv-exp-header">
+                        <div class="cv-exp-left">
+                            <strong>UNIVERSIDAD POLITÉCNICA DEL VALLE DE TOLUCA</strong>
+                            <br>
+                            <span class="cv-role">Bachelor's degree - Software Engineer</span>
+                        </div>
+                        <div class="cv-exp-right">
+                            Toluca, México <br> May 2017
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="cv-section">
+                <h2 class="cv-section-title">CONTRIBUTIONS</h2>
+                <p>Actively contributing to open-source communities, sharing expertise in Go, JavaScript, and Laravel
+                    through discussions, documentation, and hands-on guidance to support developer growth in backend,
+                    testing, and architecture.</p>
+            </section>
+
+        </div>
+    </main>
+    <footer class="footer">
+        <div class="container footer-container">
+            <div class="footer-col">
+                <a href="index.html" class="logo footer-logo">Sr<span class="highlight">Engineer</span><span
+                        class="dot">.</span></a>
+                <p class="footer-desc" data-i18n="footer_desc">
+                    Senior Software Engineer focused on distributed systems and high-concurrency architectures.
+                </p>
+            </div>
+            <div class="footer-col">
+                <h4 data-i18n="footer_links">Quick Links</h4>
+                <ul class="footer-links">
+                    <li><a href="index.html#hero" data-i18n="nav_home">Home</a></li>
+                    <li><a href="index.html#projects" data-i18n="nav_projects">Projects</a></li>
+                    <li><a href="index.html#contact" data-i18n="nav_contact">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4 data-i18n="footer_social">Connect</h4>
+                <div class="social-links footer-socials">
+                    <a href="https://www.linkedin.com/in/juan-carlos-garcia-esquivel" title="LinkedIn"><i
+                            class="fab fa-linkedin"></i></a>
+                    <a href="https://github.com/jcmexdev" title="GitHub"><i class="fab fa-github"></i></a>
+                    <a href="mailto:carlos.garcia.esquivel@live.com.mx" title="Email"><i
+                            class="fas fa-envelope"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p data-i18n="footer_copy">&copy; 2026 Juan Carlos Garcia. All rights reserved.</p>
+        </div>
+    </footer>
+    <script src="script.js"></script>
+</body>
+
+</html>
