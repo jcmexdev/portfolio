@@ -1,18 +1,18 @@
     <header class="header">
         <nav class="navbar">
-            <a href="index.html" class="logo">Sr<span class="highlight">Engineer</span><span class="dot">.</span></a>
+            <a href="{{ base_url | default('') }}index.html" class="logo">Sr<span class="highlight">Engineer</span><span class="dot">.</span></a>
             <div class="hamburger" id="hamburger">
                 <span></span>
                 <span></span>
                 <span></span>
             </div>
             <ul class="nav-links" id="nav-links">
-                <li><a href="index.html#hero" data-i18n="nav_home">Home</a></li>
-                <li><a href="index.html#expertise" data-i18n="nav_expertise">Expertise</a></li>
-                <li><a href="index.html#experience" data-i18n="nav_experience">Experience</a></li>
-                <li><a href="index.html#projects" data-i18n="nav_projects">Projects</a></li>
-                <li><a href="cv.html" data-i18n="nav_resume">Resume</a></li>
-                <li><a href="index.html#contact" data-i18n="nav_contact">Contact</a></li>
+                <li><a href="{{ base_url | default('') }}index.html#hero" data-i18n="nav_home">Home</a></li>
+                <li><a href="{{ base_url | default('') }}index.html#expertise" data-i18n="nav_expertise">Expertise</a></li>
+                <li><a href="{{ base_url | default('') }}index.html#experience" data-i18n="nav_experience">Experience</a></li>
+                <li><a href="{{ base_url | default('') }}index.html#projects" data-i18n="nav_projects">Projects</a></li>
+                <li><a href="{{ base_url | default('') }}cv.html" data-i18n="nav_resume">Resume</a></li>
+                <li><a href="{{ base_url | default('') }}index.html#contact" data-i18n="nav_contact">Contact</a></li>
                 <li>
                     <div class="lang-dropdown">
                         <button id="lang-btn" class="lang-btn" aria-label="Select Language">
