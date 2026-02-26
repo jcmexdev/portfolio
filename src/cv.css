@@ -70,6 +70,11 @@ body.light-mode .cv-document {
     gap: 0.5rem;
 }
 
+.cv-contact-info i {
+    font-size: 1.25em;
+    vertical-align: middle;
+}
+
 .cv-contact-info span:not(:last-child)::after {
     content: " | ";
     margin-left: 0.5rem;

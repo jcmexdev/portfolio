@@ -42,17 +42,17 @@ permalink: "cv.html"
                 <h1>JUAN CARLOS GARCIA ESQUIVEL</h1>
                 <div class="cv-contact-info">
                     <span><i class="fab fa-linkedin" style="margin-right: 4px;"></i>
-                        juan-carlos-garcia-esquivel</span>
-                    <span><i class="fab fa-github" style="margin-right: 4px;"></i> @jcmexdev</span>
+                        <a href="https://www.linkedin.com/in/juan-carlos-garcia-esquivel" target="_blank"
+                            style="color: inherit; text-decoration: none;">linkedin.com/in/juan-carlos-garcia-esquivel</a></span>
+                    <span><i class="fab fa-github" style="margin-right: 4px;"></i> <a href="https://github.com/jcmexdev"
+                            target="_blank" style="color: inherit; text-decoration: none;">@jcmexdev</a></span>
                     <span><i class="fas fa-phone-alt" style="margin-right: 4px;"></i> +52 554-021-4954</span>
-                    <span><i class="fas fa-envelope" style="margin-right: 4px;"></i>
-                        carlos.garcia.esquivel@live.com.mx</span>
                 </div>
             </header>
 
             <div class="cv-summary">
-                <p>Seasoned software engineer with a strong track record in crafting, building, and upkeeping top-tier
-                    software solutions. My dedication revolves around ensuring the consistent delivery of high-value
+                <p>Seasoned software engineer with a strong track record in crafting, building, and maintaining top tier
+                    software solutions. My dedication revolves around ensuring the consistent delivery of high value
                     products, achieved through a blend of technical prowess, effective communication, and collaborative
                     teamwork.</p>
             </div>
@@ -70,18 +70,22 @@ permalink: "cv.html"
                         </div>
                     </div>
                     <ul class="cv-bullets">
-                        <li>Construction of high volume payment systems (credit cards and funding), processing
+                        <li>Engineered high volume payment systems (credit cards and funding), processing
                             approximately MXN $400M daily.</li>
-                        <li>Design and implementation of backend solutions in Go, contributing to key technical
+                        <li>Designed and implemented backend solutions in Go, contributing to critical technical
                             decisions.</li>
-                        <li>Writing documentation for technical specifications, validation, and production readiness.
+                        <li>Authored comprehensive technical documentation for specifications, validation, and
+                            production readiness.
                         </li>
-                        <li>Optimization of transaction processing, achieving a ~75% reduction in average execution
+                        <li>Optimized transaction processing, achieving a ~75% reduction in average execution
                             time.</li>
-                        <li>Improvement of CI/CD pipelines by designing a test matrix with full traceability.</li>
-                        <li>Increased observability and cost efficiency through the analysis of logs and traces.</li>
-                        <li>Working with asynchronous architectures using SQS and Kinesis.</li>
-                        <li>Performing code reviews and applying engineering standards.</li>
+                        <li>Improved CI/CD pipelines by designing a comprehensive test matrix ensuring full
+                            traceability.</li>
+                        <li>Enhanced observability and cost-efficiency through deep analysis of logs and distributed
+                            traces.</li>
+                        <li>Architected and maintained highly asynchronous processing pipelines utilizing AWS SQS and
+                            Kinesis.</li>
+                        <li>Enforced engineering standards through rigorous peer code reviews.</li>
                     </ul>
                 </div>
 
@@ -98,11 +102,11 @@ permalink: "cv.html"
                         <li>Optimized critical payment operations by implementing asynchronous and sequential
                             transaction processing, impacting 80% of transactions and reducing processing errors by 40%.
                         </li>
-                        <li>Improved high-volume task processing by developing Go services that handle 60-70% of
-                            transactions, reducing execution time by 45% (from ~2.2s to ~1.2s per transaction) and
+                        <li>Streamlined high-volume task processing by developing Go services that handle 60-70% of
+                            transactions, decreasing execution time by 45% (from ~2.2s to ~1.2s per transaction) while
                             ensuring sequential processing of refunds and captures.</li>
-                        <li>Increased system reliability through E2E automation, achieving a 90% reduction in fraud API
-                            response failures and increasing test coverage by 40% in critical areas of the application.
+                        <li>Elevated system reliability via E2E test automation, achieving a 90% reduction in fraud API
+                            response failures and expanding test coverage by 40% in critical application areas.
                         </li>
                     </ul>
                 </div>
@@ -117,12 +121,14 @@ permalink: "cv.html"
                         </div>
                     </div>
                     <ul class="cv-bullets">
-                        <li>Optimized critical operations, impacting 30% of services and cutting response time from
-                            ~2.2s to ~1.2s by decoupling modules into microservices (Go, Node, PHP).</li>
-                        <li>Enhanced software quality with TDD and Hexagonal Architecture, reducing production errors by
+                        <li>Optimized critical operations across 30% of core services, slashing response times from
+                            ~2.2s to ~1.2s by strategically decoupling modules into microservices (Go, Node, PHP).</li>
+                        <li>Enforced software quality standards utilizing TDD and Hexagonal Architecture, decreasing
+                            production errors by
                             90%.</li>
-                        <li>Led the integration of new features into multiple engineering team workflows.</li>
-                        <li>Improved system maintainability and collaboration by implementing C4 architecture
+                        <li>Spearheaded the integration of new features seamlessly across multiple engineering team
+                            workflows.</li>
+                        <li>Boosted system maintainability and cross-team collaboration by architecting C4 model
                             documentation.</li>
                     </ul>
                 </div>
@@ -133,11 +139,11 @@ permalink: "cv.html"
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; margin-top: 0.25rem;">
                     <div>
                         <strong>Languages & Frameworks:</strong><br>
-                        Golang, JavaScript / Node.js, React Js/Native, PHP / Laravel, TypeScript
+                        Golang, JavaScript / Node.js, React / React Native, PHP / Laravel, TypeScript
                     </div>
                     <div>
                         <strong>Architecture:</strong><br>
-                        Microservices, Domain Driven Design, API REST, Hexagonal Architecture
+                        Microservices, Domain Driven Design, RESTful APIs, Hexagonal Architecture
                     </div>
                     <div>
                         <strong>Databases & Cloud:</strong><br>
@@ -225,6 +231,16 @@ permalink: "cv.html"
     <script src="locales/index.js"></script>
     <script src="script.js"></script>
     <script>
+        // ── PDF Download Name Logic ──────────────────────────────────────
+        let originalTitle = document.title;
+        window.addEventListener("beforeprint", () => {
+            originalTitle = document.title;
+            document.title = "CV - Juan Carlos Garcia Esquivel - Senior Software Engineer";
+        });
+        window.addEventListener("afterprint", () => {
+            document.title = originalTitle;
+        });
+
         // ── Theme Toggle Logic ───────────────────────────────────────────
         const themeToggle = document.getElementById('themeToggle');
         const toggleIcon = themeToggle.querySelector('.toggle-icon');
