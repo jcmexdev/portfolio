@@ -1,3 +1,6 @@
+---
+permalink: "index.html"
+---
 <!DOCTYPE html>
 <html lang="es">
 
@@ -52,45 +55,7 @@
 </head>
 
 <body data-page="index">
-    <header class="header">
-        <nav class="navbar">
-            <a href="#" class="logo">Sr<span class="highlight">Engineer</span><span class="dot">.</span></a>
-            <div class="hamburger" id="hamburger">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-            <ul class="nav-links" id="nav-links">
-                <li><a href="#hero" data-i18n="nav_home">Home</a></li>
-                <li><a href="#expertise" data-i18n="nav_expertise">Expertise</a></li>
-                <li><a href="#experience" data-i18n="nav_experience">Experience</a></li>
-                <li><a href="#projects" data-i18n="nav_projects">Projects</a></li>
-                <li><a href="cv.html" data-i18n="nav_resume">Resume</a></li>
-                <li><a href="#contact" data-i18n="nav_contact">Contact</a></li>
-                <li>
-                    <div class="lang-dropdown">
-                        <button id="lang-btn" class="lang-btn" aria-label="Select Language">
-                            <span id="current-flag">🇺🇸</span> <svg class="arrow-icon"
-                                xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24"
-                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round">
-                                <path d="M6 9l6 6 6-6" />
-                            </svg>
-                        </button>
-                        <ul class="lang-menu" id="lang-menu">
-                            <li data-lang="en">🇺🇸 English</li>
-                            <li data-lang="es">🇲🇽 Español</li>
-                        </ul>
-                    </div>
-                </li>
-                <li>
-                    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
-                        <span class="toggle-icon">🌙</span>
-                    </button>
-                </li>
-            </ul>
-        </nav>
-    </header>
+    {% include "partials/header.njk" %}
 
     <main>
         <section id="hero" class="hero">
@@ -664,37 +629,7 @@
         </section>
     </main>
 
-    <footer class="footer">
-        <div class="container footer-container">
-            <div class="footer-col">
-                <a href="#" class="logo footer-logo">Sr<span class="highlight">Engineer</span><span
-                        class="dot">.</span></a>
-                <p class="footer-desc" data-i18n="footer_desc">
-                    Senior Software Engineer focused on distributed systems and high-concurrency architectures.
-                </p>
-            </div>
-            <div class="footer-col">
-                <h4 data-i18n="footer_links">Quick Links</h4>
-                <ul class="footer-links">
-                    <li><a href="#hero" data-i18n="nav_home">Home</a></li>
-                    <li><a href="#projects" data-i18n="nav_projects">Projects</a></li>
-                    <li><a href="#contact" data-i18n="nav_contact">Contact</a></li>
-                </ul>
-            </div>
-            <div class="footer-col">
-                <h4 data-i18n="footer_social">Connect</h4>
-                <div class="social-links footer-socials">
-                    <a href="https://www.linkedin.com/in/juan-carlos-garcia-esquivel" title="LinkedIn"><i
-                            class="fab fa-linkedin"></i></a>
-                    <a href="https://github.com/jcmexdev" title="GitHub"><i class="fab fa-github"></i></a>
-                    <a href="mailto:email@example.com" title="Email"><i class="fas fa-envelope"></i></a>
-                </div>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p data-i18n="footer_copy">&copy; 2026 Juan Carlos Garcia. All rights reserved.</p>
-        </div>
-    </footer>
+    {% include "partials/footer.njk" %}
     <!-- Custom Cursor -->
     <div class="cursor-dot" id="cursorDot"></div>
     <div class="cursor-outline" id="cursorOutline"></div>
