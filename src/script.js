@@ -1,54 +1,11 @@
 const translations = {}; // Will be populated dynamically
 
 document.addEventListener('DOMContentLoaded', async () => {
-    // --- i18n Logic ---
-    const page = document.body.dataset.page || 'index';
-    let currentLang = localStorage.getItem('lang') || 'en';
+    // --- UI Logic ---
     const langBtn = document.getElementById('lang-btn');
-    const currentFlag = document.getElementById('current-flag');
-    const langOptions = document.querySelectorAll('.lang-menu li');
-    const elementsToTranslate = document.querySelectorAll('[data-i18n]');
-
-    const updateLanguage = (lang) => {
-        const commonData = window.i18n_common || {};
-        const pageData = window[`i18n_${page}`] || {};
-        
-        translations[lang] = {
-            ...(commonData[lang] || {}),
-            ...(pageData[lang] || {})
-        };
-
-        elementsToTranslate.forEach(element => {
-            const key = element.getAttribute('data-i18n');
-            if (translations[lang] && translations[lang][key]) {
-                const translation = translations[lang][key];
-                element.innerHTML = translation;
-            }
-        });
-
-        // Update Button Flag
-        if (currentFlag) {
-            currentFlag.innerHTML = lang === 'en' ? '🇺🇸' : '🇲🇽';
-        }
-        
-        document.documentElement.lang = lang;
-        localStorage.setItem('lang', lang);
-        currentLang = lang;
-    };
-
-    // Initialize Language
-    updateLanguage(currentLang);
-
-    // Dropdown Handler (Click on Options)
-    langOptions.forEach(option => {
-        option.addEventListener('click', async () => {
-             const selectedLang = option.getAttribute('data-lang');
-             await updateLanguage(selectedLang);
-        });
-    });
+    const langDropdown = document.querySelector('.lang-dropdown');
     
     // Mobile Touch Support for Dropdown (Toggle class)
-    const langDropdown = document.querySelector('.lang-dropdown');
     if (langBtn) {
         langBtn.addEventListener('click', (e) => {
             if (window.matchMedia('(hover: none)').matches) {

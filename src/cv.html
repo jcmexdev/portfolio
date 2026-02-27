@@ -1,5 +1,9 @@
 ---
-permalink: "cv.html"
+pagination:
+  data: site.languages
+  size: 1
+  alias: lang
+permalink: "{{ lang.prefix }}cv.html"
 ---
 <!DOCTYPE html>
 <html lang="en">
@@ -19,8 +23,8 @@ permalink: "cv.html"
         rel="stylesheet">
 
     <!-- External Styles -->
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="cv.css">
+    <link rel="stylesheet" href="{{ lang.base_url }}style.css">
+    <link rel="stylesheet" href="{{ lang.base_url }}cv.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
         integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -227,9 +231,7 @@ permalink: "cv.html"
         </div>
     </div>
 
-    <script src="locales/common.js"></script>
-    <script src="locales/index.js"></script>
-    <script src="script.js"></script>
+    <script src="{{ lang.base_url }}script.js"></script>
     <script>
         // ── PDF Download Name Logic ──────────────────────────────────────
         let originalTitle = document.title;

@@ -3,20 +3,18 @@
             <div class="footer-col">
                 <a href="{{ base_url | default('') }}index.html" class="logo footer-logo">Sr<span class="highlight">Engineer</span><span
                         class="dot">.</span></a>
-                <p class="footer-desc" data-i18n="footer_desc">
-                    Senior Software Engineer focused on distributed systems and high-concurrency architectures.
-                </p>
+                <p class="footer-desc" data-i18n="footer_desc">{{ locales[lang.code].footer_desc | safe }}</p>
             </div>
             <div class="footer-col">
-                <h4 data-i18n="footer_links">Quick Links</h4>
+                <h4 data-i18n="footer_links">{{ locales[lang.code].footer_links | safe }}</h4>
                 <ul class="footer-links">
-                    <li><a href="{{ base_url | default('') }}index.html#hero" data-i18n="nav_home">Home</a></li>
-                    <li><a href="{{ base_url | default('') }}index.html#projects" data-i18n="nav_projects">Projects</a></li>
-                    <li><a href="{{ base_url | default('') }}index.html#contact" data-i18n="nav_contact">Contact</a></li>
+                    <li><a href="{{ base_url | default('') }}index.html#hero" data-i18n="nav_home">{{ locales[lang.code].nav_home | safe }}</a></li>
+                    <li><a href="{{ base_url | default('') }}index.html#projects" data-i18n="nav_projects">{{ locales[lang.code].nav_projects | safe }}</a></li>
+                    <li><a href="{{ base_url | default('') }}index.html#contact" data-i18n="nav_contact">{{ locales[lang.code].nav_contact | safe }}</a></li>
                 </ul>
             </div>
             <div class="footer-col">
-                <h4 data-i18n="footer_social">Connect</h4>
+                <h4 data-i18n="footer_social">{{ locales[lang.code].footer_social | safe }}</h4>
                 <div class="social-links footer-socials">
                     <a href="https://www.linkedin.com/in/juan-carlos-garcia-esquivel" title="LinkedIn"><i
                             class="fab fa-linkedin"></i></a>
@@ -26,6 +24,6 @@
             </div>
         </div>
         <div class="footer-bottom">
-            <p data-i18n="footer_copy">&copy; 2026 Juan Carlos Garcia. All rights reserved.</p>
+            <p data-i18n="footer_copy">{{ locales[lang.code].footer_copy | safe }}</p>
         </div>
     </footer>

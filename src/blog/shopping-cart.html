@@ -1,5 +1,9 @@
 ---
-permalink: "blog/shopping-cart.html"
+pagination:
+  data: site.languages
+  size: 1
+  alias: lang
+permalink: "{{ lang.prefix }}blog/shopping-cart.html"
 base_url: "../"
 ---
 <!DOCTYPE html>
@@ -31,7 +35,7 @@ base_url: "../"
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="{{ lang.base_url }}../style.css">
     <link rel="stylesheet" href="../code-styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
         integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
@@ -218,10 +222,10 @@ base_url: "../"
     <main class="container">
         <article class="blog-post-content">
             <a href="../index.html#projects" class="back-link"><i class="fas fa-arrow-left"></i> <span
-                    data-i18n="blog_back_link">Back to Projects</span></a>
+                    data-i18n="blog_back_link">{{ locales[lang.code].blog_back_link | safe }}</span></a>
 
             <header class="blog-header">
-                <h1 class="blog-title" data-i18n="blog_cart_title">Simple Shopping Cart App</h1>
+                <h1 class="blog-title" data-i18n="blog_cart_title">{{ locales[lang.code].blog_cart_title | safe }}</h1>
                 <div class="tech-tags-inline">
                     <span class="tech-tag">React Native</span>
                     <span class="tech-tag">Expo SDK 54</span>
@@ -235,95 +239,63 @@ base_url: "../"
 
             <div class="blog-body">
                 <section>
-                    <h2 data-i18n="blog_cart_overview_title">Project Description</h2>
-                    <p data-i18n="blog_cart_overview_p1"><strong>Simple Shopping Cart</strong> is a mobile application
-                        developed with React Native and Expo, designed to offer an intuitive, fast, and fluid experience
-                        in managing purchases and product catalogs.</p>
-                    <p data-i18n="blog_cart_overview_p2">The main objective of the application is to facilitate the
-                        creation and administration of detailed shopping lists for users, while allowing them to keep a
-                        record of different stores and products assigned to them. This lays the groundwork for future
-                        price comparison implementations, providing a comprehensive tool to optimize day-to-day
-                        shopping.</p>
-                    <p data-i18n="blog_cart_overview_p3">The application stands out for its minimalist design,
-                        prioritizing a clean interface with graphical components based on "chips", a focus on clear
-                        typography, support for a Dark Mode visual environment, and fluid interactions.</p>
+                    <h2 data-i18n="blog_cart_overview_title">{{ locales[lang.code].blog_cart_overview_title | safe }}
+                    </h2>
+                    <p data-i18n="blog_cart_overview_p1">{{ locales[lang.code].blog_cart_overview_p1 | safe }}</p>
+                    <p data-i18n="blog_cart_overview_p2">{{ locales[lang.code].blog_cart_overview_p2 | safe }}</p>
+                    <p data-i18n="blog_cart_overview_p3">{{ locales[lang.code].blog_cart_overview_p3 | safe }}</p>
                     <div class="blog-hero-image"
                         style="max-width: 400px; margin: 3rem auto; box-shadow: 0 20px 40px rgba(0,0,0,0.5);">
-                        <img src="../assets/videos/shopping-cart-demo.webp" alt="Shopping Cart Application Demo Video"
+                        <img src="{{ lang.base_url }}../assets/videos/shopping-cart-demo.webp" alt="Shopping Cart Application Demo Video"
                             class="hero-img">
                     </div>
                 </section>
 
                 <section>
-                    <h2 data-i18n="blog_cart_features_title">Main Features</h2>
+                    <h2 data-i18n="blog_cart_features_title">{{ locales[lang.code].blog_cart_features_title | safe }}
+                    </h2>
                     <ul>
-                        <li data-i18n="blog_cart_feat_1"><strong>Cart Management:</strong> Creation, visualization, and
-                            organization of multiple shopping lists. On the main screen, users can check key information
-                            such as the title, date, and total cost of the cart.</li>
-                        <li data-i18n="blog_cart_feat_2"><strong>Product Details:</strong> Detailed visualization of
-                            items included in each cart, specifying the name, price, unit quantity, and accumulated
-                            cost.</li>
-                        <li data-i18n="blog_cart_feat_3"><strong>Dynamic Actions (Touch Interactions):</strong>
-                            Incorporation of swipeable panels on interface cards, allowing for agile and intuitive
-                            editing or deletion actions.</li>
-                        <li data-i18n="blog_cart_feat_4"><strong>Store Directory:</strong> Dedicated functionality to
-                            register and manage various establishments and branches. This contextualizes the catalog for
-                            advanced economic comparison features.</li>
-                        <li data-i18n="blog_cart_feat_5"><strong>Integrated Catalog:</strong> Interface designated to
-                            group, list, and edit products and their global characteristics directly in the application.
-                        </li>
-                        <li data-i18n="blog_cart_feat_6"><strong>Local Persistent Storage:</strong> Use of AsyncStorage
-                            for local saving of all information (carts, stores, and products), allowing an immediate
-                            response and an experience free of latencies tied to web connectivity.</li>
-                        <li data-i18n="blog_cart_feat_7"><strong>Complementary Native Modules:</strong> Integration of
-                            direct accessibility to the image roll and photo camera thanks to native submodules,
-                            enriching the way data is visualized.</li>
+                        <li data-i18n="blog_cart_feat_1">{{ locales[lang.code].blog_cart_feat_1 | safe }}</li>
+                        <li data-i18n="blog_cart_feat_2">{{ locales[lang.code].blog_cart_feat_2 | safe }}</li>
+                        <li data-i18n="blog_cart_feat_3">{{ locales[lang.code].blog_cart_feat_3 | safe }}</li>
+                        <li data-i18n="blog_cart_feat_4">{{ locales[lang.code].blog_cart_feat_4 | safe }}</li>
+                        <li data-i18n="blog_cart_feat_5">{{ locales[lang.code].blog_cart_feat_5 | safe }}</li>
+                        <li data-i18n="blog_cart_feat_6">{{ locales[lang.code].blog_cart_feat_6 | safe }}</li>
+                        <li data-i18n="blog_cart_feat_7">{{ locales[lang.code].blog_cart_feat_7 | safe }}</li>
                     </ul>
                 </section>
 
                 <section>
-                    <h2 data-i18n="blog_cart_tech_title">Technologies and Libraries Used</h2>
+                    <h2 data-i18n="blog_cart_tech_title">{{ locales[lang.code].blog_cart_tech_title | safe }}</h2>
 
-                    <h3 data-i18n="blog_cart_tech_rn_h3">Core Framework</h3>
-                    <p data-i18n="blog_cart_tech_rn_p1"><strong>React Native (v0.81)</strong> along with <strong>Expo
-                            (SDK 54)</strong>. The project is built leveraging the New Architecture available.</p>
+                    <h3 data-i18n="blog_cart_tech_rn_h3">{{ locales[lang.code].blog_cart_tech_rn_h3 | safe }}</h3>
+                    <p data-i18n="blog_cart_tech_rn_p1">{{ locales[lang.code].blog_cart_tech_rn_p1 | safe }}</p>
 
-                    <h3 data-i18n="blog_cart_tech_nav_h3">Routing & Data Control</h3>
-                    <p data-i18n="blog_cart_tech_nav_p1"><strong>React Navigation</strong> implementing both Bottom Tabs
-                        and standard Native Stack. <strong>AsyncStorage</strong> is used for cellular-level structural
-                        persistence.</p>
+                    <h3 data-i18n="blog_cart_tech_nav_h3">{{ locales[lang.code].blog_cart_tech_nav_h3 | safe }}</h3>
+                    <p data-i18n="blog_cart_tech_nav_p1">{{ locales[lang.code].blog_cart_tech_nav_p1 | safe }}</p>
 
-                    <h3 data-i18n="blog_cart_tech_ui_h3">Interactivity, Gestures & Specialized Interfaces</h3>
-                    <p data-i18n="blog_cart_tech_ui_p1"><strong>React Native Gesture Handler</strong> in conjunction
-                        with Animatable utilities for fine-tuning component movement. <strong>Expo Camera</strong> and
-                        <strong>Expo Image Picker</strong> are used for specialized interfaces.
-                    </p>
+                    <h3 data-i18n="blog_cart_tech_ui_h3">{{ locales[lang.code].blog_cart_tech_ui_h3 | safe }}</h3>
+                    <p data-i18n="blog_cart_tech_ui_p1">{{ locales[lang.code].blog_cart_tech_ui_p1 | safe }}</p>
                 </section>
 
 
 
                 <section>
-                    <h2 data-i18n="blog_cart_gallery_title">App Gallery</h2>
+                    <h2 data-i18n="blog_cart_gallery_title">{{ locales[lang.code].blog_cart_gallery_title | safe }}</h2>
                     <div class="app-gallery-grid">
-                        <img src="../assets/images/simple-shopping-cart/cart_screen_1.jpg" alt="Shopping Cart Screen 1">
-                        <img src="../assets/images/simple-shopping-cart/cart_screen_2.jpg" alt="Shopping Cart Screen 2">
-                        <img src="../assets/images/simple-shopping-cart/cart_screen_3.jpg" alt="Shopping Cart Screen 3">
-                        <img src="../assets/images/simple-shopping-cart/cart_screen_4.jpg" alt="Shopping Cart Screen 4">
-                        <img src="../assets/images/simple-shopping-cart/cart_screen_5.jpg" alt="Shopping Cart Screen 5">
-                        <img src="../assets/images/simple-shopping-cart/cart_screen_6.jpg" alt="Shopping Cart Screen 6">
+                        <img src="{{ lang.base_url }}../assets/images/simple-shopping-cart/cart_screen_1.jpg" alt="Shopping Cart Screen 1">
+                        <img src="{{ lang.base_url }}../assets/images/simple-shopping-cart/cart_screen_2.jpg" alt="Shopping Cart Screen 2">
+                        <img src="{{ lang.base_url }}../assets/images/simple-shopping-cart/cart_screen_3.jpg" alt="Shopping Cart Screen 3">
+                        <img src="{{ lang.base_url }}../assets/images/simple-shopping-cart/cart_screen_4.jpg" alt="Shopping Cart Screen 4">
+                        <img src="{{ lang.base_url }}../assets/images/simple-shopping-cart/cart_screen_5.jpg" alt="Shopping Cart Screen 5">
+                        <img src="{{ lang.base_url }}../assets/images/simple-shopping-cart/cart_screen_6.jpg" alt="Shopping Cart Screen 6">
                     </div>
                 </section>
 
                 <section>
-                    <h2 data-i18n="blog_cart_arch_title">Architectural Style and Optimizations</h2>
-                    <p data-i18n="blog_cart_arch_p1">The project is designed keeping in mind fundamentals of
-                        "high-fidelity" user experience and mobile retention. The navigation is divided in such a way
-                        that all process flows predictably forward.</p>
-                    <p data-i18n="blog_cart_arch_p2">Graphically, everything has been structured into components and
-                        strict abstraction styles in `StyleSheet` to safeguard the maximum sustained display rate the
-                        smart device can reach. All visual styles follow a premium narrative free of inconsistencies and
-                        assist first-time users through text helpers for preliminary filling of empty information lists,
-                        paired with validations for assertive data entry.</p>
+                    <h2 data-i18n="blog_cart_arch_title">{{ locales[lang.code].blog_cart_arch_title | safe }}</h2>
+                    <p data-i18n="blog_cart_arch_p1">{{ locales[lang.code].blog_cart_arch_p1 | safe }}</p>
+                    <p data-i18n="blog_cart_arch_p2">{{ locales[lang.code].blog_cart_arch_p2 | safe }}</p>
                 </section>
 
 
@@ -367,9 +339,7 @@ base_url: "../"
         </div>
     </div>
 
-    <script src="../locales/common.js"></script>
-    <script src="../locales/cart.js"></script>
-    <script src="../script.js"></script>
+    <script src="{{ lang.base_url }}../script.js"></script>
 </body>
 
 </html>

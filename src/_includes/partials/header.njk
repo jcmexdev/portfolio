@@ -7,16 +7,16 @@
                 <span></span>
             </div>
             <ul class="nav-links" id="nav-links">
-                <li><a href="{{ base_url | default('') }}index.html#hero" data-i18n="nav_home">Home</a></li>
-                <li><a href="{{ base_url | default('') }}index.html#expertise" data-i18n="nav_expertise">Expertise</a></li>
-                <li><a href="{{ base_url | default('') }}index.html#experience" data-i18n="nav_experience">Experience</a></li>
-                <li><a href="{{ base_url | default('') }}index.html#projects" data-i18n="nav_projects">Projects</a></li>
+                <li><a href="{{ base_url | default('') }}index.html#hero" data-i18n="nav_home">{{ locales[lang.code].nav_home | safe }}</a></li>
+                <li><a href="{{ base_url | default('') }}index.html#expertise" data-i18n="nav_expertise">{{ locales[lang.code].nav_expertise | safe }}</a></li>
+                <li><a href="{{ base_url | default('') }}index.html#experience" data-i18n="nav_experience">{{ locales[lang.code].nav_experience | safe }}</a></li>
+                <li><a href="{{ base_url | default('') }}index.html#projects" data-i18n="nav_projects">{{ locales[lang.code].nav_projects | safe }}</a></li>
                 <li><a href="{{ base_url | default('') }}cv.html" data-i18n="nav_resume">Resume</a></li>
-                <li><a href="{{ base_url | default('') }}index.html#contact" data-i18n="nav_contact">Contact</a></li>
+                <li><a href="{{ base_url | default('') }}index.html#contact" data-i18n="nav_contact">{{ locales[lang.code].nav_contact | safe }}</a></li>
                 <li>
                     <div class="lang-dropdown">
                         <button id="lang-btn" class="lang-btn" aria-label="Select Language">
-                            <span id="current-flag">🇺🇸</span> <svg class="arrow-icon"
+                            <span id="current-flag">{% if lang.code == 'en' %}🇺🇸{% else %}🇲🇽{% endif %}</span> <svg class="arrow-icon"
                                 xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24"
                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                 stroke-linejoin="round">
@@ -24,8 +24,8 @@
                             </svg>
                         </button>
                         <ul class="lang-menu" id="lang-menu">
-                            <li data-lang="en">🇺🇸 English</li>
-                            <li data-lang="es">🇲🇽 Español</li>
+                            <li><a href="{{ base_url | default('/') }}en/index.html" style="text-decoration:none; color:inherit;">🇺🇸 English</a></li>
+                            <li><a href="{{ base_url | default('/') }}index.html" style="text-decoration:none; color:inherit;">🇲🇽 Español</a></li>
                         </ul>
                     </div>
                 </li>

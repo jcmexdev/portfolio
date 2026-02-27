@@ -1,5 +1,9 @@
 ---
-permalink: "blog/saga-orchestrator.html"
+pagination:
+  data: site.languages
+  size: 1
+  alias: lang
+permalink: "{{ lang.prefix }}blog/saga-orchestrator.html"
 base_url: "../"
 ---
 <!DOCTYPE html>
@@ -31,7 +35,7 @@ base_url: "../"
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="{{ lang.base_url }}../style.css">
     <link rel="stylesheet" href="../code-styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
         integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
@@ -290,78 +294,62 @@ base_url: "../"
 
     <main class="container">
         <article class="blog-post-content">
-            <a href="../index.html#projects" class="back-link" data-i18n="blog_back">
-                <i class="fas fa-arrow-left"></i> Volver al Portafolio
-            </a>
+            <a href="../index.html#projects" class="back-link" data-i18n="blog_back">{{ locales[lang.code].blog_back |
+                safe }}</a>
 
             <header class="blog-header">
                 <div class="blog-tags">
-                    <span class="blog-tag" data-i18n="blog_tag_dist">Distributed Systems</span>
-                    <span class="blog-tag" data-i18n="blog_tag_go">Go</span>
-                    <span class="blog-tag" data-i18n="blog_tag_case">Case Study</span>
+                    <span class="blog-tag" data-i18n="blog_tag_dist">{{ locales[lang.code].blog_tag_dist | safe
+                        }}</span>
+                    <span class="blog-tag" data-i18n="blog_tag_go">{{ locales[lang.code].blog_tag_go | safe }}</span>
+                    <span class="blog-tag" data-i18n="blog_tag_case">{{ locales[lang.code].blog_tag_case | safe
+                        }}</span>
                 </div>
-                <h1 class="blog-title" data-i18n="blog_saga_title">Mastering Distributed Consistency: Building a Saga
-                    Orchestrator in Go</h1>
+                <h1 class="blog-title" data-i18n="blog_saga_title">{{ locales[lang.code].blog_saga_title | safe }}</h1>
                 <div class="blog-meta">
-                    <span data-i18n="blog_saga_date"><i class="far fa-calendar-alt"></i> February 2026</span>
-                    <span data-i18n="blog_saga_read"><i class="far fa-clock"></i> 8 min read</span>
+                    <span data-i18n="blog_saga_date">{{ locales[lang.code].blog_saga_date | safe }}</span>
+                    <span data-i18n="blog_saga_read">{{ locales[lang.code].blog_saga_read | safe }}</span>
                 </div>
 
                 <div class="blog-hero-image">
-                    <img src="../assets/images/blog/saga-hero.png" alt="Saga Orchestration Architecture Hero"
+                    <img src="{{ lang.base_url }}../assets/images/blog/saga-hero.png" alt="Saga Orchestration Architecture Hero"
                         class="hero-img">
                 </div>
             </header>
 
             <div class="blog-body">
                 <section>
-                    <h2 data-i18n="blog_saga_prob_title">The Problem: When ACID Isn't Enough</h2>
-                    <p data-i18n="blog_saga_prob_p1">In the world of monolithic applications, maintaining data
-                        consistency is straightforward: we rely on ACID transactions. However, when moving to
-                        <strong>Microservices</strong>, the "T" in ACID (Transactions) becomes a distributed nightmare.
-                    </p>
+                    <h2 data-i18n="blog_saga_prob_title">{{ locales[lang.code].blog_saga_prob_title | safe }}</h2>
+                    <p data-i18n="blog_saga_prob_p1">{{ locales[lang.code].blog_saga_prob_p1 | safe }}</p>
 
-                    <p data-i18n="blog_saga_prob_p2">Imagine an e-commerce flow:</p>
+                    <p data-i18n="blog_saga_prob_p2">{{ locales[lang.code].blog_saga_prob_p2 | safe }}</p>
                     <ol>
-                        <li data-i18n="blog_saga_prob_li1"><strong>Order Service</strong> creates an order.</li>
-                        <li data-i18n="blog_saga_prob_li2"><strong>Inventory Service</strong> reserves stock.</li>
-                        <li data-i18n="blog_saga_prob_li3"><strong>Payment Service</strong> charges the customer.</li>
+                        <li data-i18n="blog_saga_prob_li1">{{ locales[lang.code].blog_saga_prob_li1 | safe }}</li>
+                        <li data-i18n="blog_saga_prob_li2">{{ locales[lang.code].blog_saga_prob_li2 | safe }}</li>
+                        <li data-i18n="blog_saga_prob_li3">{{ locales[lang.code].blog_saga_prob_li3 | safe }}</li>
                     </ol>
 
-                    <p data-i18n="blog_saga_prob_p3">If payment fails, but stock has already been reserved, we face a
-                        "Zombie Reservation". Traditional <strong>Two-Phase Commit (2PC)</strong> is too slow and
-                        creates tight coupling, making it unsuitable for large-scale cloud environments.</p>
+                    <p data-i18n="blog_saga_prob_p3">{{ locales[lang.code].blog_saga_prob_p3 | safe }}</p>
                 </section>
 
                 <section>
-                    <h2 data-i18n="blog_saga_sol_title">The Solution: The Saga Pattern</h2>
-                    <p data-i18n="blog_saga_sol_p1">To solve this, I implemented the <strong>Saga Pattern</strong>. A
-                        Saga is a sequence of local transactions. Each step has a corresponding <strong>Compensating
-                            Transaction</strong> to undo changes if a subsequent step fails.</p>
+                    <h2 data-i18n="blog_saga_sol_title">{{ locales[lang.code].blog_saga_sol_title | safe }}</h2>
+                    <p data-i18n="blog_saga_sol_p1">{{ locales[lang.code].blog_saga_sol_p1 | safe }}</p>
 
-                    <h3 data-i18n="blog_saga_sol_h3">Why Orchestration over Choreography?</h3>
-                    <p data-i18n="blog_saga_sol_p2">While Choreography (event-based) is highly decoupled, it can lead to
-                        "Spaghetti Flows" where tracking transaction state becomes almost impossible. I chose
-                        <strong>Orchestration</strong>:
-                    </p>
+                    <h3 data-i18n="blog_saga_sol_h3">{{ locales[lang.code].blog_saga_sol_h3 | safe }}</h3>
+                    <p data-i18n="blog_saga_sol_p2">{{ locales[lang.code].blog_saga_sol_p2 | safe }}</p>
                     <ul>
-                        <li data-i18n="blog_saga_sol_li1"><strong>Centralized Logic</strong>: Easier to maintain and
-                            reason about complex business flows.</li>
-                        <li data-i18n="blog_saga_sol_li2"><strong>State Visibility</strong>: The Orchestrator knows
-                            exactly where the transaction is at any moment.</li>
-                        <li data-i18n="blog_saga_sol_li3"><strong>Simplified Debugging</strong>: Error handling is
-                            consolidated in one place.</li>
+                        <li data-i18n="blog_saga_sol_li1">{{ locales[lang.code].blog_saga_sol_li1 | safe }}</li>
+                        <li data-i18n="blog_saga_sol_li2">{{ locales[lang.code].blog_saga_sol_li2 | safe }}</li>
+                        <li data-i18n="blog_saga_sol_li3">{{ locales[lang.code].blog_saga_sol_li3 | safe }}</li>
                     </ul>
                 </section>
 
                 <section>
-                    <h2 data-i18n="blog_saga_tech_title">Tech Stack Decisions</h2>
+                    <h2 data-i18n="blog_saga_tech_title">{{ locales[lang.code].blog_saga_tech_title | safe }}</h2>
 
-                    <h3 data-i18n="blog_saga_tech_grpc_h3">gRPC: Contract-First Performance</h3>
-                    <p data-i18n="blog_saga_tech_grpc_p1">Internal communication is based on <strong>gRPC</strong> and
-                        <strong>Protocol Buffers</strong>. Compared to REST/JSON, gRPC offers binary serialization and
-                        strong typing.
-                    </p>
+                    <h3 data-i18n="blog_saga_tech_grpc_h3">{{ locales[lang.code].blog_saga_tech_grpc_h3 | safe }}</h3>
+                    <p data-i18n="blog_saga_tech_grpc_p1">{{ locales[lang.code].blog_saga_tech_grpc_p1 | safe }}</p>
 
                     <pre><code class="language-protobuf">// order.proto snippet
 service Order {
@@ -372,18 +360,14 @@ service Order {
   rpc UpdateOrderStatus(UpdateOrderStatusRequest) returns (UpdateOrderStatusResponse);
 }</code></pre>
 
-                    <h3 data-i18n="blog_saga_tech_redis_h3">Redis: The Idempotency Shield</h3>
-                    <p data-i18n="blog_saga_tech_redis_p1">To achieve "exactly-once" semantics, each step is protected
-                        by an <strong>Idempotency Layer</strong>. Redis acts as a distributed lock, preventing a retry
-                        from processing the same payment twice.</p>
+                    <h3 data-i18n="blog_saga_tech_redis_h3">{{ locales[lang.code].blog_saga_tech_redis_h3 | safe }}</h3>
+                    <p data-i18n="blog_saga_tech_redis_p1">{{ locales[lang.code].blog_saga_tech_redis_p1 | safe }}</p>
                 </section>
 
                 <section>
-                    <h2 data-i18n="blog_saga_challenge_title">Challenges & Lessons: The Art of Rollback</h2>
-                    <p data-i18n="blog_saga_challenge_p1">The biggest challenge was handling <strong>Compensating
-                            Transactions</strong>. If a step fails, the Orchestrator must trigger rollbacks in
-                        <strong>LIFO (Last-In, First-Out)</strong> order.
-                    </p>
+                    <h2 data-i18n="blog_saga_challenge_title">{{ locales[lang.code].blog_saga_challenge_title | safe }}
+                    </h2>
+                    <p data-i18n="blog_saga_challenge_p1">{{ locales[lang.code].blog_saga_challenge_p1 | safe }}</p>
 
                     <pre><code class="language-go">func (o *Orchestrator) rollback(ctx context.Context, steps []Step) {
     for i := len(steps) - 1; i >= 0; i-- {
@@ -396,7 +380,7 @@ service Order {
                 </section>
 
                 <section>
-                    <h2 data-i18n="blog_saga_flow_title">Transaction Flow</h2>
+                    <h2 data-i18n="blog_saga_flow_title">{{ locales[lang.code].blog_saga_flow_title | safe }}</h2>
                     <div class="mermaid-container">
                         <div class="mermaid">
                             sequenceDiagram
@@ -435,9 +419,8 @@ service Order {
                 </section>
 
                 <section>
-                    <h2 data-i18n="blog_saga_final_title">Final Thoughts</h2>
-                    <p data-i18n="blog_saga_final_p1">Building this Saga Orchestrator reinforced a key backend
-                        engineering principle: <strong>Consistency is not a given; it's a design decision.</strong></p>
+                    <h2 data-i18n="blog_saga_final_title">{{ locales[lang.code].blog_saga_final_title | safe }}</h2>
+                    <p data-i18n="blog_saga_final_p1">{{ locales[lang.code].blog_saga_final_p1 | safe }}</p>
                 </section>
             </div>
         </article>
@@ -479,9 +462,7 @@ service Order {
         </div>
     </div>
 
-    <script src="../locales/common.js"></script>
-    <script src="../locales/saga.js"></script>
-    <script src="../script.js"></script>
+    <script src="{{ lang.base_url }}../script.js"></script>
     <script>
         // ── Theme Toggle Logic ───────────────────────────────────────────
         const themeToggle = document.getElementById('themeToggle');

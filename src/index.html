@@ -1,5 +1,9 @@
 ---
-permalink: "index.html"
+pagination:
+  data: site.languages
+  size: 1
+  alias: lang
+permalink: "{{ lang.prefix }}index.html"
 ---
 <!DOCTYPE html>
 <html lang="es">
@@ -33,7 +37,7 @@ permalink: "index.html"
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="{{ lang.base_url }}style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
         integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -61,16 +65,15 @@ permalink: "index.html"
         <section id="hero" class="hero">
             <div class="container hero-container">
                 <div class="hero-content">
-                    <span class="subtitle" data-i18n="hero_subtitle">Senior Software Engineer</span>
-                    <h1 class="title" data-i18n="hero_title">Engineering <span class="highlight">Scalable</span>
-                        Software Solutions</h1>
-                    <p class="description" data-i18n="hero_desc">
-                        Seasoned engineer crafting top-tier software solutions. Focused on delivering high-value
-                        products through technical excellence and collaborative teamwork.
-                    </p>
+                    <span class="subtitle" data-i18n="hero_subtitle">{{ locales[lang.code].hero_subtitle | safe
+                        }}</span>
+                    <h1 class="title" data-i18n="hero_title">{{ locales[lang.code].hero_title | safe }}</h1>
+                    <p class="description" data-i18n="hero_desc">{{ locales[lang.code].hero_desc | safe }}</p>
                     <div class="cta-buttons">
-                        <a href="#projects" class="btn primary" data-i18n="btn_projects">View Solutions</a>
-                        <a href="#contact" class="btn secondary" data-i18n="btn_contact">Let's Talk</a>
+                        <a href="#projects" class="btn primary" data-i18n="btn_projects">{{
+                            locales[lang.code].btn_projects | safe }}</a>
+                        <a href="#contact" class="btn secondary" data-i18n="btn_contact">{{
+                            locales[lang.code].btn_contact | safe }}</a>
                     </div>
                 </div>
                 <div class="hero-image">
@@ -80,7 +83,7 @@ permalink: "index.html"
                         <div class="ring ring-3"></div>
                         <div class="floating-icon icon-go"><i class="fa-brands fa-golang"></i></div>
                         <div class="floating-icon icon-cloud"><i class="fa-solid fa-cloud"></i></div>
-                        <img src="assets/images/avatar.png" alt="Senior Software Engineer Avatar" class="avatar-img">
+                        <img src="{{ lang.base_url }}assets/images/avatar.png" alt="Senior Software Engineer Avatar" class="avatar-img">
                     </div>
                 </div>
             </div>
@@ -95,9 +98,10 @@ permalink: "index.html"
                 <!-- Section Header -->
                 <div class="expertise-header">
                     <span class="expertise-eyebrow">What I bring to the table</span>
-                    <h2 class="section-title" data-i18n="sect_expertise">Core Expertise</h2>
-                    <p class="section-subtitle" data-i18n="sect_expertise_sub">Engineering excellence across the full
-                        backend stack — from system design to production observability.</p>
+                    <h2 class="section-title" data-i18n="sect_expertise">{{ locales[lang.code].sect_expertise | safe }}
+                    </h2>
+                    <p class="section-subtitle" data-i18n="sect_expertise_sub">{{ locales[lang.code].sect_expertise_sub
+                        | safe }}</p>
                 </div>
 
                 <!-- Skill Cards Grid -->
@@ -106,29 +110,29 @@ permalink: "index.html"
                         <div class="skill-icon-wrap">
                             <i class="fas fa-cubes"></i>
                         </div>
-                        <h3 data-i18n="exp_system_design">System Design</h3>
-                        <p data-i18n="exp_system_design_desc">Microservices, Event-Driven Architecture, CQRS.</p>
+                        <h3 data-i18n="exp_system_design">{{ locales[lang.code].exp_system_design | safe }}</h3>
+                        <p data-i18n="exp_system_design_desc">{{ locales[lang.code].exp_system_design_desc | safe }}</p>
                     </div>
                     <div class="skill-card">
                         <div class="skill-icon-wrap">
                             <i class="fab fa-golang"></i>
                         </div>
-                        <h3 data-i18n="exp_golang">Golang Expert</h3>
-                        <p data-i18n="exp_golang_desc">Concurrency patterns, performance tuning, memory management.</p>
+                        <h3 data-i18n="exp_golang">{{ locales[lang.code].exp_golang | safe }}</h3>
+                        <p data-i18n="exp_golang_desc">{{ locales[lang.code].exp_golang_desc | safe }}</p>
                     </div>
                     <div class="skill-card">
                         <div class="skill-icon-wrap">
                             <i class="fas fa-server"></i>
                         </div>
-                        <h3 data-i18n="exp_infra">Infrastructure</h3>
-                        <p data-i18n="exp_infra_desc">AWS (EC2, ECS, Lambda), GCP, Docker, CI/CD Pipelines.</p>
+                        <h3 data-i18n="exp_infra">{{ locales[lang.code].exp_infra | safe }}</h3>
+                        <p data-i18n="exp_infra_desc">{{ locales[lang.code].exp_infra_desc | safe }}</p>
                     </div>
                     <div class="skill-card">
                         <div class="skill-icon-wrap">
                             <i class="fas fa-database"></i>
                         </div>
-                        <h3 data-i18n="exp_data">Data Consistency</h3>
-                        <p data-i18n="exp_data_desc">Distributed Transactions (Saga), PostgreSQL, Redis, RabbitMQ.</p>
+                        <h3 data-i18n="exp_data">{{ locales[lang.code].exp_data | safe }}</h3>
+                        <p data-i18n="exp_data_desc">{{ locales[lang.code].exp_data_desc | safe }}</p>
                     </div>
                 </div>
 
@@ -155,10 +159,10 @@ permalink: "index.html"
                                     </div>
                                 </div>
                                 <div class="dashboard-card-info">
-                                    <p class="dashboard-metric-label" data-i18n="metric_latency_label">Latency Reduction
-                                    </p>
-                                    <p class="dashboard-metric-sub" data-i18n="metric_latency_sub">Payment systems at
-                                        Mercado Libre</p>
+                                    <p class="dashboard-metric-label" data-i18n="metric_latency_label">{{
+                                        locales[lang.code].metric_latency_label | safe }}</p>
+                                    <p class="dashboard-metric-sub" data-i18n="metric_latency_sub">{{
+                                        locales[lang.code].metric_latency_sub | safe }}</p>
                                 </div>
                             </div>
                         </div>
@@ -178,10 +182,10 @@ permalink: "index.html"
                                     </div>
                                 </div>
                                 <div class="dashboard-card-info">
-                                    <p class="dashboard-metric-label" data-i18n="metric_volume_label">MXN Processed
-                                        Daily</p>
-                                    <p class="dashboard-metric-sub" data-i18n="metric_volume_sub">High-volume
-                                        transaction systems</p>
+                                    <p class="dashboard-metric-label" data-i18n="metric_volume_label">{{
+                                        locales[lang.code].metric_volume_label | safe }}</p>
+                                    <p class="dashboard-metric-sub" data-i18n="metric_volume_sub">{{
+                                        locales[lang.code].metric_volume_sub | safe }}</p>
                                 </div>
                             </div>
                         </div>
@@ -200,10 +204,10 @@ permalink: "index.html"
                                     </div>
                                 </div>
                                 <div class="dashboard-card-info">
-                                    <p class="dashboard-metric-label" data-i18n="metric_rps_label">Requests Per Second
-                                    </p>
-                                    <p class="dashboard-metric-sub" data-i18n="metric_rps_sub">Peak throughput handled
-                                    </p>
+                                    <p class="dashboard-metric-label" data-i18n="metric_rps_label">{{
+                                        locales[lang.code].metric_rps_label | safe }}</p>
+                                    <p class="dashboard-metric-sub" data-i18n="metric_rps_sub">{{
+                                        locales[lang.code].metric_rps_sub | safe }}</p>
                                 </div>
                             </div>
                         </div>
@@ -222,10 +226,10 @@ permalink: "index.html"
                                     </div>
                                 </div>
                                 <div class="dashboard-card-info">
-                                    <p class="dashboard-metric-label" data-i18n="metric_years_label">Years of Experience
-                                    </p>
-                                    <p class="dashboard-metric-sub" data-i18n="metric_years_sub">Senior-level
-                                        engineering</p>
+                                    <p class="dashboard-metric-label" data-i18n="metric_years_label">{{
+                                        locales[lang.code].metric_years_label | safe }}</p>
+                                    <p class="dashboard-metric-sub" data-i18n="metric_years_sub">{{
+                                        locales[lang.code].metric_years_sub | safe }}</p>
                                 </div>
                             </div>
                         </div>
@@ -240,10 +244,12 @@ permalink: "index.html"
         <section id="experience" class="section">
             <div class="container">
                 <div class="section-header">
-                    <span class="section-eyebrow" data-i18n="eyebrow_experience">Professional Journey</span>
-                    <h2 class="section-title" data-i18n="sect_experience">Professional Experience</h2>
-                    <p class="section-subtitle" data-i18n="sect_experience_sub">A track record of high-impact
-                        engineering at scale — from fintech to logistics.</p>
+                    <span class="section-eyebrow" data-i18n="eyebrow_experience">{{
+                        locales[lang.code].eyebrow_experience | safe }}</span>
+                    <h2 class="section-title" data-i18n="sect_experience">{{ locales[lang.code].sect_experience | safe
+                        }}</h2>
+                    <p class="section-subtitle" data-i18n="sect_experience_sub">{{
+                        locales[lang.code].sect_experience_sub | safe }}</p>
                 </div>
                 <div class="timeline">
 
@@ -258,7 +264,8 @@ permalink: "index.html"
                                 <div class="exp-metric-value">
                                     <span class="exp-metric-number" data-target="75" data-suffix="%">0%</span>
                                 </div>
-                                <span class="exp-metric-label" data-i18n="metric_latency_label">Latency Reduction</span>
+                                <span class="exp-metric-label" data-i18n="metric_latency_label">{{
+                                    locales[lang.code].metric_latency_label | safe }}</span>
                                 <div class="exp-metric-bar">
                                     <div class="exp-metric-bar-fill" data-width="75"></div>
                                 </div>
@@ -266,26 +273,27 @@ permalink: "index.html"
                             <div class="exp-details-col">
                                 <div class="tc-header">
                                     <div class="tc-meta">
-                                        <h3 class="tc-role" data-i18n="role_mercadolibre">Senior Software Engineer</h3>
+                                        <h3 class="tc-role" data-i18n="role_mercadolibre">{{
+                                            locales[lang.code].role_mercadolibre | safe }}</h3>
                                         <div class="tc-company-row">
                                             <span class="tc-company">Mercado Libre</span>
-                                            <span class="tc-location"><i class="fas fa-map-marker-alt"></i> México</span>
+                                            <span class="tc-location"><i class="fas fa-map-marker-alt"></i>
+                                                México</span>
                                         </div>
                                     </div>
                                     <div class="tc-badges">
-                                        <span class="tc-badge current" data-i18n="badge_current">Current</span>
-                                        <span class="tc-date" data-i18n="date_mercadolibre">May 2025 – Present</span>
+                                        <span class="tc-badge current" data-i18n="badge_current">{{
+                                            locales[lang.code].badge_current | safe }}</span>
+                                        <span class="tc-date" data-i18n="date_mercadolibre">{{
+                                            locales[lang.code].date_mercadolibre | safe }}</span>
                                     </div>
                                 </div>
-                                <p class="tc-desc" data-i18n="desc_mercadolibre">
-                                    Critical optimization in high-volume payment systems ($400M MXN daily). Reduced
-                                    execution time by <strong>75%</strong> and improved observability of distributed
-                                    transactions.
-                                </p>
+                                <p class="tc-desc" data-i18n="desc_mercadolibre">{{ locales[lang.code].desc_mercadolibre
+                                    | safe }}</p>
                                 <div class="tc-achievement">
                                     <i class="fas fa-bolt"></i>
-                                    <span data-i18n="ach_mercadolibre">Reduced payment execution latency by
-                                        <strong>75%</strong> across $400M MXN/day transaction volume</span>
+                                    <span data-i18n="ach_mercadolibre">{{ locales[lang.code].ach_mercadolibre | safe
+                                        }}</span>
                                 </div>
                                 <div class="tech-tags">
                                     <span>Go</span>
@@ -319,25 +327,23 @@ permalink: "index.html"
                             <div class="exp-details-col">
                                 <div class="tc-header">
                                     <div class="tc-meta">
-                                        <h3 class="tc-role" data-i18n="role_deuna">Technical Lead</h3>
+                                        <h3 class="tc-role" data-i18n="role_deuna">{{ locales[lang.code].role_deuna |
+                                            safe }}</h3>
                                         <div class="tc-company-row">
                                             <span class="tc-company">DEUNA</span>
-                                            <span class="tc-location"><i class="fas fa-map-marker-alt"></i> Ecuador</span>
+                                            <span class="tc-location"><i class="fas fa-map-marker-alt"></i>
+                                                Ecuador</span>
                                         </div>
                                     </div>
                                     <div class="tc-badges">
-                                        <span class="tc-date" data-i18n="date_deuna">Apr 2024 – May 2025</span>
+                                        <span class="tc-date" data-i18n="date_deuna">{{ locales[lang.code].date_deuna |
+                                            safe }}</span>
                                     </div>
                                 </div>
-                                <p class="tc-desc" data-i18n="desc_deuna">
-                                    Led implementation of asynchronous and sequential payments ensuring consistency.
-                                    Resolved critical integrations with Apple Pay and Kushki, and automated dev
-                                    environments with Docker.
-                                </p>
+                                <p class="tc-desc" data-i18n="desc_deuna">{{ locales[lang.code].desc_deuna | safe }}</p>
                                 <div class="tc-achievement">
                                     <i class="fas fa-bolt"></i>
-                                    <span data-i18n="ach_deuna">Integrated <strong>Apple Pay &amp; Kushki</strong> payment flows
-                                        with zero-downtime deployment strategy</span>
+                                    <span data-i18n="ach_deuna">{{ locales[lang.code].ach_deuna | safe }}</span>
                                 </div>
                                 <div class="tech-tags">
                                     <span>Go</span>
@@ -371,24 +377,24 @@ permalink: "index.html"
                             <div class="exp-details-col">
                                 <div class="tc-header">
                                     <div class="tc-meta">
-                                        <h3 class="tc-role" data-i18n="role_99_lead">Technical Lead</h3>
+                                        <h3 class="tc-role" data-i18n="role_99_lead">{{ locales[lang.code].role_99_lead
+                                            | safe }}</h3>
                                         <div class="tc-company-row">
                                             <span class="tc-company">99minutos.com</span>
-                                            <span class="tc-location"><i class="fas fa-map-marker-alt"></i> México</span>
+                                            <span class="tc-location"><i class="fas fa-map-marker-alt"></i>
+                                                México</span>
                                         </div>
                                     </div>
                                     <div class="tc-badges">
-                                        <span class="tc-date" data-i18n="date_99_lead">Jan 2023 – Apr 2024</span>
+                                        <span class="tc-date" data-i18n="date_99_lead">{{
+                                            locales[lang.code].date_99_lead | safe }}</span>
                                     </div>
                                 </div>
-                                <p class="tc-desc" data-i18n="desc_99_lead">
-                                    Strategic management and technical team growth. Architecture design on GCP focused
-                                    on logistics scalability.
+                                <p class="tc-desc" data-i18n="desc_99_lead">{{ locales[lang.code].desc_99_lead | safe }}
                                 </p>
                                 <div class="tc-achievement">
                                     <i class="fas fa-bolt"></i>
-                                    <span data-i18n="ach_99_lead">Scaled engineering team and GCP architecture to support
-                                        <strong>last-mile logistics</strong> at national scale</span>
+                                    <span data-i18n="ach_99_lead">{{ locales[lang.code].ach_99_lead | safe }}</span>
                                 </div>
                                 <div class="tech-tags">
                                     <span>GCP</span>
@@ -420,24 +426,24 @@ permalink: "index.html"
                             <div class="exp-details-col">
                                 <div class="tc-header">
                                     <div class="tc-meta">
-                                        <h3 class="tc-role" data-i18n="role_99_senior">Senior Software Engineer</h3>
+                                        <h3 class="tc-role" data-i18n="role_99_senior">{{
+                                            locales[lang.code].role_99_senior | safe }}</h3>
                                         <div class="tc-company-row">
                                             <span class="tc-company">99minutos.com</span>
-                                            <span class="tc-location"><i class="fas fa-map-marker-alt"></i> México</span>
+                                            <span class="tc-location"><i class="fas fa-map-marker-alt"></i>
+                                                México</span>
                                         </div>
                                     </div>
                                     <div class="tc-badges">
-                                        <span class="tc-date" data-i18n="date_99_senior">Aug 2021 – Mar 2023</span>
+                                        <span class="tc-date" data-i18n="date_99_senior">{{
+                                            locales[lang.code].date_99_senior | safe }}</span>
                                     </div>
                                 </div>
-                                <p class="tc-desc" data-i18n="desc_99_senior">
-                                    Core service development for last-mile logistics. Robust microservices implementation
-                                    in Go with high-throughput gRPC APIs.
-                                </p>
+                                <p class="tc-desc" data-i18n="desc_99_senior">{{ locales[lang.code].desc_99_senior |
+                                    safe }}</p>
                                 <div class="tc-achievement">
                                     <i class="fas fa-bolt"></i>
-                                    <span data-i18n="ach_99_senior">Built core <strong>gRPC microservices</strong> handling
-                                        real-time logistics routing for thousands of daily deliveries</span>
+                                    <span data-i18n="ach_99_senior">{{ locales[lang.code].ach_99_senior | safe }}</span>
                                 </div>
                                 <div class="tech-tags">
                                     <span>Go</span>
@@ -457,17 +463,19 @@ permalink: "index.html"
         <section id="projects" class="section">
             <div class="container">
                 <div class="section-header">
-                    <span class="section-eyebrow" data-i18n="eyebrow_projects">Selected Work</span>
-                    <h2 class="section-title" data-i18n="sect_projects">Architecture &amp; Projects</h2>
-                    <p class="section-subtitle" data-i18n="sect_projects_sub">Reference implementations and complex
-                        problem resolutions at production scale.</p>
+                    <span class="section-eyebrow" data-i18n="eyebrow_projects">{{ locales[lang.code].eyebrow_projects |
+                        safe }}</span>
+                    <h2 class="section-title" data-i18n="sect_projects">{{ locales[lang.code].sect_projects | safe }}
+                    </h2>
+                    <p class="section-subtitle" data-i18n="sect_projects_sub">{{ locales[lang.code].sect_projects_sub |
+                        safe }}</p>
                 </div>
                 <div class="projects-grid">
 
                     <!-- Feature Project: Saga Pattern -->
                     <article class="project-card featured">
                         <div class="project-image-container">
-                            <img src="assets/images/project_saga.png" alt="Saga Pattern Architecture"
+                            <img src="{{ lang.base_url }}assets/images/project_saga.png" alt="Saga Pattern Architecture"
                                 class="project-img">
                         </div>
                         <div class="project-content">
@@ -475,13 +483,10 @@ permalink: "index.html"
                                 <span class="project-tag">Distributed Systems</span>
                                 <span class="project-tag">Go</span>
                             </div>
-                            <h3 class="project-title" data-i18n="proj_saga_title">Orchestration-Based Saga Pattern</h3>
-                            <p class="project-desc" data-i18n="proj_saga_desc">
-                                Diseño e implementación de un orquestador para manejar transacciones distribuidas en un
-                                entorno de microservicios financieros.
-                                <strong>Challenge:</strong> Asegurar consistencia eventual sin bloqueo de recursos en
-                                bases de datos distribuidas.
-                            </p>
+                            <h3 class="project-title" data-i18n="proj_saga_title">{{ locales[lang.code].proj_saga_title
+                                | safe }}</h3>
+                            <p class="project-desc" data-i18n="proj_saga_desc">{{ locales[lang.code].proj_saga_desc |
+                                safe }}</p>
                             <div class="tech-stack-mini">
                                 <span><i class="fas fa-check"></i> RabbitMQ Streams</span>
                                 <span><i class="fas fa-check"></i> Idempotency Keys</span>
@@ -498,19 +503,17 @@ permalink: "index.html"
                     <!-- Feature Project: High Performance API -->
                     <article class="project-card">
                         <div class="project-image-container">
-                            <img src="assets/images/project_payment.png" alt="High Throughput Payment Gateway"
+                            <img src="{{ lang.base_url }}assets/images/project_payment.png" alt="High Throughput Payment Gateway"
                                 class="project-img">
                         </div>
                         <div class="project-content">
                             <div class="project-header">
                                 <span class="project-tag">High Performance</span>
                             </div>
-                            <h3 class="project-title" data-i18n="proj_payment_title">High-Throughput Payment Gateway
-                            </h3>
-                            <p class="project-desc" data-i18n="proj_payment_desc">
-                                Gateway de pagos capaz de manejar <strong>10k+ RPS</strong> con latencia sub-100ms.
-                                Implementado con Go routines y optimización de garbage collection.
-                            </p>
+                            <h3 class="project-title" data-i18n="proj_payment_title">{{
+                                locales[lang.code].proj_payment_title | safe }}</h3>
+                            <p class="project-desc" data-i18n="proj_payment_desc">{{
+                                locales[lang.code].proj_payment_desc | safe }}</p>
                             <div class="tech-stack-mini">
                                 <span>gRPC</span>
                                 <span>Redis Cluster</span>
@@ -535,11 +538,10 @@ permalink: "index.html"
                             <div class="project-header">
                                 <span class="project-tag">Cloud Native</span>
                             </div>
-                            <h3 class="project-title" data-i18n="proj_serverless_title">Serverless Data Pipeline</h3>
-                            <p class="project-desc" data-i18n="proj_serverless_desc">
-                                Event processing architecture using AWS Lambda and RabbitMQ to handle non-blocking
-                                asynchronous tasks.
-                            </p>
+                            <h3 class="project-title" data-i18n="proj_serverless_title">{{
+                                locales[lang.code].proj_serverless_title | safe }}</h3>
+                            <p class="project-desc" data-i18n="proj_serverless_desc">{{
+                                locales[lang.code].proj_serverless_desc | safe }}</p>
                             <div class="tech-stack-mini">
                                 <span>AWS Lambda</span>
                                 <span>RabbitMQ</span>
@@ -554,7 +556,7 @@ permalink: "index.html"
                     <!-- New Generic Project: Simple Shopping Cart -->
                     <article class="project-card">
                         <div class="project-image-container">
-                            <img src="assets/images/project_cart.png" alt="Simple Shopping Cart Architecture"
+                            <img src="{{ lang.base_url }}assets/images/project_cart.png" alt="Simple Shopping Cart Architecture"
                                 class="project-img">
                         </div>
                         <div class="project-content">
@@ -590,11 +592,10 @@ permalink: "index.html"
                             <div class="project-header">
                                 <span class="project-tag">Backend Logic</span>
                             </div>
-                            <h3 class="project-title" data-i18n="proj_inventory_title">Inventory Management API</h3>
-                            <p class="project-desc" data-i18n="proj_inventory_desc">
-                                ACID-compliant inventory system with optimistic locking to handle high concurrency
-                                without overselling.
-                            </p>
+                            <h3 class="project-title" data-i18n="proj_inventory_title">{{
+                                locales[lang.code].proj_inventory_title | safe }}</h3>
+                            <p class="project-desc" data-i18n="proj_inventory_desc">{{
+                                locales[lang.code].proj_inventory_desc | safe }}</p>
                             <div class="tech-stack-mini">
                                 <span>PostgreSQL</span>
                                 <span>ACID</span>
@@ -614,35 +615,34 @@ permalink: "index.html"
         <section id="philosophy" class="section alt-bg">
             <div class="container">
                 <div class="section-header">
-                    <span class="section-eyebrow" data-i18n="eyebrow_philosophy">Design Principles</span>
-                    <h2 class="section-title" data-i18n="sect_philosophy">Engineering Philosophy</h2>
-                    <p class="section-subtitle" data-i18n="sect_philosophy_sub">The values and principles that guide
-                        every technical decision I make.</p>
+                    <span class="section-eyebrow" data-i18n="eyebrow_philosophy">{{
+                        locales[lang.code].eyebrow_philosophy | safe }}</span>
+                    <h2 class="section-title" data-i18n="sect_philosophy">{{ locales[lang.code].sect_philosophy | safe
+                        }}</h2>
+                    <p class="section-subtitle" data-i18n="sect_philosophy_sub">{{
+                        locales[lang.code].sect_philosophy_sub | safe }}</p>
                 </div>
                 <div class="philosophy-grid">
                     <div class="philosophy-card">
                         <div class="skill-icon-wrap">
                             <i class="fas fa-drafting-compass"></i>
                         </div>
-                        <h3 data-i18n="philo_simple_title">Simplicity Over Complexity</h3>
-                        <p data-i18n="philo_simple_desc">Writing code that is easy to read, test, and maintain is harder
-                            than writing complex code. I strive for elegant simplicity.</p>
+                        <h3 data-i18n="philo_simple_title">{{ locales[lang.code].philo_simple_title | safe }}</h3>
+                        <p data-i18n="philo_simple_desc">{{ locales[lang.code].philo_simple_desc | safe }}</p>
                     </div>
                     <div class="philosophy-card">
                         <div class="skill-icon-wrap">
                             <i class="fas fa-network-wired"></i>
                         </div>
-                        <h3 data-i18n="philo_scale_title">Built for Scale</h3>
-                        <p data-i18n="philo_scale_desc">Systems should be designed to handle growth gracefully. I focus
-                            on stateless architectures and idempotency.</p>
+                        <h3 data-i18n="philo_scale_title">{{ locales[lang.code].philo_scale_title | safe }}</h3>
+                        <p data-i18n="philo_scale_desc">{{ locales[lang.code].philo_scale_desc | safe }}</p>
                     </div>
                     <div class="philosophy-card">
                         <div class="skill-icon-wrap">
                             <i class="fas fa-users-cog"></i>
                         </div>
-                        <h3 data-i18n="philo_mentor_title">Mentorship &amp; Culture</h3>
-                        <p data-i18n="philo_mentor_desc">Technology is built by people. I believe in fostering a culture
-                            of knowledge sharing and psychological safety.</p>
+                        <h3 data-i18n="philo_mentor_title">{{ locales[lang.code].philo_mentor_title | safe }}</h3>
+                        <p data-i18n="philo_mentor_desc">{{ locales[lang.code].philo_mentor_desc | safe }}</p>
                     </div>
                 </div>
             </div>
@@ -650,9 +650,8 @@ permalink: "index.html"
 
         <section id="contact" class="section">
             <div class="container tac">
-                <h2 class="section-title" data-i18n="sect_contact">Let's Talk Architecture?</h2>
-                <p data-i18n="contact_desc">Available for technical leadership roles and distributed systems consulting.
-                </p>
+                <h2 class="section-title" data-i18n="sect_contact">{{ locales[lang.code].sect_contact | safe }}</h2>
+                <p data-i18n="contact_desc">{{ locales[lang.code].contact_desc | safe }}</p>
                 <div class="social-links">
                     <a href="https://www.linkedin.com/in/juan-carlos-garcia-esquivel" title="LinkedIn"><i
                             class="fab fa-linkedin"></i></a>
@@ -698,9 +697,7 @@ permalink: "index.html"
         </div>
     </div>
 
-    <script src="locales/common.js"></script>
-    <script src="locales/index.js"></script>
-    <script src="script.js"></script>
+    <script src="{{ lang.base_url }}script.js"></script>
     <script>
         // ── Theme Toggle ───────────────────────────────────────────
         const themeToggle = document.getElementById('themeToggle');
