@@ -1,18 +1,18 @@
     <header class="header">
         <nav class="navbar">
-            <a href="{{ base_url | default('') }}index.html" class="logo">Sr<span class="highlight">Engineer</span><span class="dot">.</span></a>
+            <a href="{{ lang.base_url }}{{ lang.prefix }}index.html" class="logo">Sr<span class="highlight">Engineer</span><span class="dot">.</span></a>
             <div class="hamburger" id="hamburger">
                 <span></span>
                 <span></span>
                 <span></span>
             </div>
             <ul class="nav-links" id="nav-links">
-                <li><a href="{{ base_url | default('') }}index.html#hero" data-i18n="nav_home">{{ locales[lang.code].nav_home | safe }}</a></li>
-                <li><a href="{{ base_url | default('') }}index.html#expertise" data-i18n="nav_expertise">{{ locales[lang.code].nav_expertise | safe }}</a></li>
-                <li><a href="{{ base_url | default('') }}index.html#experience" data-i18n="nav_experience">{{ locales[lang.code].nav_experience | safe }}</a></li>
-                <li><a href="{{ base_url | default('') }}index.html#projects" data-i18n="nav_projects">{{ locales[lang.code].nav_projects | safe }}</a></li>
-                <li><a href="{{ base_url | default('') }}cv.html" data-i18n="nav_resume">Resume</a></li>
-                <li><a href="{{ base_url | default('') }}index.html#contact" data-i18n="nav_contact">{{ locales[lang.code].nav_contact | safe }}</a></li>
+                <li><a href="{{ lang.base_url }}{{ lang.prefix }}index.html#hero" data-i18n="nav_home">{{ locales[lang.code].nav_home | safe }}</a></li>
+                <li><a href="{{ lang.base_url }}{{ lang.prefix }}index.html#expertise" data-i18n="nav_expertise">{{ locales[lang.code].nav_expertise | safe }}</a></li>
+                <li><a href="{{ lang.base_url }}{{ lang.prefix }}index.html#experience" data-i18n="nav_experience">{{ locales[lang.code].nav_experience | safe }}</a></li>
+                <li><a href="{{ lang.base_url }}{{ lang.prefix }}index.html#projects" data-i18n="nav_projects">{{ locales[lang.code].nav_projects | safe }}</a></li>
+                <li><a href="{{ lang.base_url }}{{ lang.prefix }}cv.html" data-i18n="nav_resume">Resume</a></li>
+                <li><a href="{{ lang.base_url }}{{ lang.prefix }}index.html#contact" data-i18n="nav_contact">{{ locales[lang.code].nav_contact | safe }}</a></li>
                 <li>
                     <div class="lang-dropdown">
                         <button id="lang-btn" class="lang-btn" aria-label="Select Language">
@@ -24,8 +24,8 @@
                             </svg>
                         </button>
                         <ul class="lang-menu" id="lang-menu">
-                            <li><a href="{{ base_url | default('/') }}en/index.html" style="text-decoration:none; color:inherit;">🇺🇸 English</a></li>
-                            <li><a href="{{ base_url | default('/') }}index.html" style="text-decoration:none; color:inherit;">🇲🇽 Español</a></li>
+                            <li><a href="{{ lang.base_url }}en/index.html" style="text-decoration:none; color:inherit;">🇺🇸 English</a></li>
+                            <li><a href="{{ lang.base_url }}index.html" style="text-decoration:none; color:inherit;">🇲🇽 Español</a></li>
                         </ul>
                     </div>
                 </li>
